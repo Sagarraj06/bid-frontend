@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CreditBadge } from '@/components/CreditBadge';
 import { ArrowLeft, FileText, Download, Mail } from 'lucide-react';
+import { getReportsByUser } from '@/utils/reportStorage';
 
 const ReportHistory = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // Mock data - will be replaced with actual API call
-  const reports = [];
+  const reports = user ? getReportsByUser(user.email) : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -53,7 +53,7 @@ const ReportHistory = () => {
           </Card>
         ) : (
           <div className="space-y-4">
-            {reports.map((report: any) => (
+            {reports.map((report) => (
               <Card key={report.id}>
                 <CardHeader>
                   <div className="flex items-center justify-between">
@@ -64,11 +64,11 @@ const ReportHistory = () => {
                       </CardDescription>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" disabled>
                         <Download className="h-4 w-4 mr-2" />
                         Download
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" disabled>
                         <Mail className="h-4 w-4 mr-2" />
                         Resend Email
                       </Button>

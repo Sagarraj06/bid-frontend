@@ -193,6 +193,11 @@ export const generatePDF = async (
   const SAFE_BOTTOM = pageHeight - FOOTER_H - 8;
   let yPosition = SAFE_TOP;
 
+  // Helper function to check if a section should be included
+  const shouldIncludeSection = (sectionId: string): boolean => {
+    return filters.includeSections.includes(sectionId);
+  };
+
   const addNewPage = () => {
     doc.addPage();
     yPosition = SAFE_TOP;
@@ -311,10 +316,11 @@ export const generatePDF = async (
   doc.text(itemLines.slice(0, 3), pageWidth / 2, yPosition, { align: 'center' });
 
   // ============ PAGE 1: MISSED BUT WINNABLE - RECENT WINS ============
-  addNewPage();
-  addSectionHeader('Missed But Winnable - Market Intelligence', colors.darkBlue);
-  
-  const recentWins = reportData.data.missedButWinnable?.recentWins || [];
+  if (shouldIncludeSection('missedTenders')) {
+    addNewPage();
+    addSectionHeader('Missed But Winnable - Market Intelligence', colors.darkBlue);
+    
+    const recentWins = reportData.data.missedButWinnable?.recentWins || [];
   
   if (recentWins.length > 0) {
     doc.setFontSize(10);
@@ -436,10 +442,12 @@ export const generatePDF = async (
 
     yPosition = (doc as any).lastAutoTable.finalY + 8;
   }
+  }
 
   // ============ PAGE 2: AI-POWERED STRATEGIC INSIGHTS ============
-  addNewPage();
-  addSectionHeader('AI-Driven Intelligence & Strategy', colors.electricBlue);
+  if (shouldIncludeSection('buyerInsights')) {
+    addNewPage();
+    addSectionHeader('AI-Driven Intelligence & Strategy', colors.electricBlue);
 
   const ai = reportData.data.missedButWinnable?.ai;
 
@@ -544,7 +552,7 @@ export const generatePDF = async (
             4: { cellWidth: 26, halign: 'right' },
             5: { cellWidth: 22, halign: 'center', fontStyle: 'bold' }
           },
-          margin: { left: margin - 3, right: margin },
+          margin: { left: margin - 3, right: margin, top: SAFE_TOP },
           didDrawPage: () => {
             addPageHeader();
             addPageFooter();
@@ -668,7 +676,7 @@ export const generatePDF = async (
 
   // Quantity & Price Ranges
   yPosition += 4;
-  checkPageBreak(50);
+  checkPageBreak(80);
   
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
@@ -676,9 +684,22 @@ export const generatePDF = async (
   doc.text('Quantity & Price Range Patterns', margin, yPosition);
   yPosition += 8;
 
+  // Calculate dynamic heights based on content
+  const boxWidth = (pageWidth - 2 * margin - 5) / 2;
+  let quantityBoxHeight = 15;
+  let priceBoxHeight = 15;
+
   if (signals?.quantity_ranges && signals.quantity_ranges.length > 0) {
+    // Calculate required height for quantity ranges
+    let totalLines = 0;
+    signals.quantity_ranges.forEach((range) => {
+      const lines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
+      totalLines += lines.length;
+    });
+    quantityBoxHeight = Math.max(15, 10 + (totalLines * 4));
+
     doc.setFillColor(240, 253, 244);
-    doc.roundedRect(margin, yPosition, (pageWidth - 2 * margin - 5) / 2, 25, 2, 2, 'F');
+    doc.roundedRect(margin, yPosition, boxWidth, quantityBoxHeight, 2, 2, 'F');
     
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
@@ -688,15 +709,26 @@ export const generatePDF = async (
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(7);
     doc.setTextColor(...colors.darkGray);
-    signals.quantity_ranges.slice(0, 3).forEach((range, i) => {
-      const rangeText = clean(range).substring(0, 40);
-      doc.text('- ' + rangeText, margin + 3, yPosition + 10 + (i * 4));
+    
+    let currentY = yPosition + 10;
+    signals.quantity_ranges.forEach((range) => {
+      const rangeLines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
+      doc.text(rangeLines, margin + 3, currentY);
+      currentY += (rangeLines.length * 4);
     });
   }
 
   if (signals?.price_ranges && signals.price_ranges.length > 0) {
+    // Calculate required height for price ranges
+    let totalLines = 0;
+    signals.price_ranges.forEach((range) => {
+      const lines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
+      totalLines += lines.length;
+    });
+    priceBoxHeight = Math.max(15, 10 + (totalLines * 4));
+
     doc.setFillColor(254, 243, 199);
-    doc.roundedRect((pageWidth / 2) + 2.5, yPosition, (pageWidth - 2 * margin - 5) / 2, 25, 2, 2, 'F');
+    doc.roundedRect((pageWidth / 2) + 2.5, yPosition, boxWidth, priceBoxHeight, 2, 2, 'F');
     
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
@@ -706,13 +738,16 @@ export const generatePDF = async (
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(7);
     doc.setTextColor(...colors.darkGray);
-    signals.price_ranges.slice(0, 3).forEach((range, i) => {
-      const rangeText = clean(range).substring(0, 40);
-      doc.text('- ' + rangeText, (pageWidth / 2) + 5.5, yPosition + 10 + (i * 4));
+    
+    let currentY = yPosition + 10;
+    signals.price_ranges.forEach((range) => {
+      const rangeLines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
+      doc.text(rangeLines, (pageWidth / 2) + 5.5, currentY);
+      currentY += (rangeLines.length * 4);
     });
   }
 
-  yPosition += 28;
+  yPosition += Math.max(quantityBoxHeight, priceBoxHeight) + 5;
 
   // ============ PAGE 4: STRATEGIC GUIDANCE & RECOMMENDATIONS ============
   addNewPage();
@@ -799,10 +834,12 @@ export const generatePDF = async (
       yPosition += 18;
     });
   }
+  }
 
   // ============ PAGE 5: PRICE BAND ANALYSIS ============
-  addNewPage();
-  addSectionHeader('Price Band Analysis', colors.successGreen);
+  if (shouldIncludeSection('marketOverview')) {
+    addNewPage();
+    addSectionHeader('Price Band Analysis', colors.successGreen);
 
   const priceBand = reportData.data.priceBand;
 
@@ -861,10 +898,12 @@ export const generatePDF = async (
     
     yPosition += insightBoxHeight + 5;
   }
+  }
 
   // ============ PAGE 6: CATEGORY DISTRIBUTION ============
-  addNewPage();
-  addSectionHeader('Category-wise Tender Distribution', colors.darkBlue);
+  if (shouldIncludeSection('categoryAnalysis')) {
+    addNewPage();
+    addSectionHeader('Category-wise Tender Distribution', colors.darkBlue);
 
   const categoryData = reportData.data.categoryListing;
 
@@ -893,6 +932,14 @@ export const generatePDF = async (
       const catName = clean(cat.category).substring(0, 25);
       doc.text(catName, margin, yPosition);
 
+      // Value label positioned to the left of the bar to prevent overlap
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...colors.darkBlue);
+      const valueText = cat.times.toLocaleString();
+      const valueWidth = doc.getTextWidth(valueText);
+      doc.text(valueText, barX - valueWidth - 2, yPosition);
+
       // Background track
       doc.setFillColor(...colors.lightGray);
       doc.roundedRect(barX, yPosition - 5, barAreaWidth, 8, 1, 1, 'F');
@@ -901,48 +948,17 @@ export const generatePDF = async (
       doc.setFillColor(...colors.darkBlue);
       doc.roundedRect(barX, yPosition - 5, barWidth, 8, 1, 1, 'F');
 
-      // Value label kept inside bar and aligned to the right
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkBlue);
-      doc.text(cat.times.toLocaleString(), barX + barWidth - 2, yPosition, { align: 'right' });
-
       yPosition += 12;
     });
 
     yPosition += 10;
-
-    if (categoryData.metadata) {
-      const meta = categoryData.metadata;
-      const metaCardHeight = 20;
-      
-      doc.setFillColor(239, 246, 255);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, metaCardHeight, 2, 2, 'F');
-      
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.mediumGray);
-      
-      doc.text('Total Items: ', margin + 5, yPosition + 7);
-      doc.setTextColor(...colors.darkGray);
-      doc.text(meta.totalItems.toLocaleString(), margin + 25, yPosition + 7);
-      
-      doc.setTextColor(...colors.mediumGray);
-      doc.text('Total Count: ', margin + 5, yPosition + 14);
-      doc.setTextColor(...colors.darkGray);
-      doc.text(meta.totalCount.toLocaleString(), margin + 28, yPosition + 14);
-      
-      doc.setTextColor(...colors.mediumGray);
-      doc.text('Processing Time: ', pageWidth - margin - 60, yPosition + 7);
-      doc.setTextColor(...colors.darkGray);
-      doc.text(meta.processingTime + 'ms', pageWidth - margin - 25, yPosition + 7);
-      
-      yPosition += metaCardHeight + 5;
-    }
+  }
   }
 
   // ============ PAGE 7: TOP SELLERS BY DEPARTMENT ============
-  addNewPage();
-  addSectionHeader('Leading Competitors - ' + clean(reportData.meta.params_used.department), colors.warningOrange);
+  if (shouldIncludeSection('rivalryScore')) {
+    addNewPage();
+    addSectionHeader('Leading Competitors - ' + clean(reportData.meta.params_used.department), colors.warningOrange);
 
   const topSellers = reportData.data.topSellersByDept;
 
@@ -991,7 +1007,7 @@ export const generatePDF = async (
         1: { cellWidth: 130 },
         2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' }
       },
-      margin: { left: margin, right: margin },
+      margin: { left: margin, right: margin, top: SAFE_TOP },
       didDrawPage: () => {
         addPageHeader();
         addPageFooter();
@@ -1000,10 +1016,12 @@ export const generatePDF = async (
 
     yPosition = (doc as any).lastAutoTable.finalY + 8;
   }
+  }
 
   // ============ PAGE 8: TOP PERFORMING STATES ============
-  addNewPage();
-  addSectionHeader('Top Performing States by Tender Volume', colors.successGreen);
+  if (shouldIncludeSection('statesAnalysis')) {
+    addNewPage();
+    addSectionHeader('Top Performing States by Tender Volume', colors.successGreen);
 
   const statesData = reportData.data.topPerformingStates;
 
@@ -1020,7 +1038,8 @@ export const generatePDF = async (
     states.forEach((state, index) => {
       checkPageBreak(10);
       
-      const barWidth = ((state.total_tenders / maxTenders) * (pageWidth - 2 * margin - 60));
+      const barAreaWidth = pageWidth - 2 * margin - 65;
+      const barWidth = ((state.total_tenders / maxTenders) * barAreaWidth);
       
       let fillColor: [number, number, number] = colors.successGreen;
       if (index < 5) {
@@ -1033,23 +1052,28 @@ export const generatePDF = async (
       const stateText = clean(state.state_name).substring(0, 25);
       doc.text(stateText, margin, yPosition);
       
+      // Draw numerical value on the left side of the bar
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...fillColor);
+      const valueText = state.total_tenders.toLocaleString();
+      const valueWidth = doc.getTextWidth(valueText);
+      doc.text(valueText, margin + 60 - valueWidth - 2, yPosition);
+      
       doc.setFillColor(...colors.lightGray);
-      doc.roundedRect(margin + 60, yPosition - 4, pageWidth - 2 * margin - 65, 6, 1, 1, 'F');
+      doc.roundedRect(margin + 60, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
       
       doc.setFillColor(...fillColor);
       doc.roundedRect(margin + 60, yPosition - 4, barWidth, 6, 1, 1, 'F');
       
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...fillColor);
-      doc.text(state.total_tenders.toLocaleString(), margin + 62 + barWidth, yPosition);
-      
       yPosition += 9;
     });
   }
+  }
 
   // ============ PAGE 9: DEPARTMENTAL LANDSCAPE ============
-  addNewPage();
-  addSectionHeader('All Departments - Tender Volume Overview', colors.darkBlue);
+  if (shouldIncludeSection('departmentsAnalysis')) {
+    addNewPage();
+    addSectionHeader('All Departments - Tender Volume Overview', colors.darkBlue);
 
   const allDepts = reportData.data.allDepartments;
 
@@ -1067,7 +1091,8 @@ export const generatePDF = async (
       checkPageBreak(10);
       
       const tenderCount = typeof dept.total_tenders === 'string' ? parseInt(dept.total_tenders) : dept.total_tenders;
-      const barWidth = ((tenderCount / maxTenders) * (pageWidth - 2 * margin - 70));
+      const barAreaWidth = pageWidth - 2 * margin - 75;
+      const barWidth = ((tenderCount / maxTenders) * barAreaWidth);
       
       doc.setFontSize(7);
       doc.setFont('helvetica', 'normal');
@@ -1075,23 +1100,28 @@ export const generatePDF = async (
       const deptText = clean(dept.department).substring(0, 32);
       doc.text(deptText, margin, yPosition);
       
+      // Draw numerical value on the left side of the bar
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...colors.darkBlue);
+      const valueText = tenderCount.toLocaleString();
+      const valueWidth = doc.getTextWidth(valueText);
+      doc.text(valueText, margin + 70 - valueWidth - 2, yPosition);
+      
       doc.setFillColor(...colors.lightGray);
-      doc.roundedRect(margin + 70, yPosition - 4, pageWidth - 2 * margin - 75, 6, 1, 1, 'F');
+      doc.roundedRect(margin + 70, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
       
       doc.setFillColor(...colors.darkBlue);
       doc.roundedRect(margin + 70, yPosition - 4, barWidth, 6, 1, 1, 'F');
       
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkBlue);
-      doc.text(tenderCount.toLocaleString(), margin + 72 + barWidth, yPosition);
-      
       yPosition += 9;
     });
   }
+  }
 
   // ============ PAGE 10: LOW COMPETITION OPPORTUNITIES ============
-  addNewPage();
-  addSectionHeader('Low Competition Bids - Strategic Opportunities', colors.successGreen);
+  if (shouldIncludeSection('lowCompetition')) {
+    addNewPage();
+    addSectionHeader('Low Competition Bids - Strategic Opportunities', colors.successGreen);
 
   const lowCompBids = reportData.data.lowCompetitionBids;
 
@@ -1164,7 +1194,7 @@ export const generatePDF = async (
         5: { cellWidth: 20, halign: 'center' },
         6: { cellWidth: 13, halign: 'center', fontStyle: 'bold', textColor: [231, 76, 60], fillColor: [254, 242, 242] }
       },
-      margin: { left: margin - 2, right: margin - 2 },
+      margin: { left: margin - 2, right: margin - 2, top: SAFE_TOP },
       didDrawPage: () => {
         addPageHeader();
         addPageFooter();
@@ -1173,13 +1203,15 @@ export const generatePDF = async (
 
     yPosition = (doc as any).lastAutoTable.finalY + 8;
   }
+  }
 
   // ============ PAGES 11-12: SELLER BID PERFORMANCE ANALYSIS ============
-  const sellerBids = reportData.data.sellerBids;
+  if (shouldIncludeSection('bidsSummary')) {
+    const sellerBids = reportData.data.sellerBids;
 
-  if (sellerBids) {
-    addNewPage();
-    addSectionHeader(clean(reportData.meta.params_used.sellerName) + ' - Bidding Performance Deep Dive', colors.electricBlue);
+    if (sellerBids) {
+      addNewPage();
+      addSectionHeader(clean(reportData.meta.params_used.sellerName) + ' - Bidding Performance Deep Dive', colors.electricBlue);
 
     // Performance Summary Cards
     if (sellerBids.table1) {
@@ -1286,7 +1318,7 @@ export const generatePDF = async (
           1: { cellWidth: 30, halign: 'right' },
           2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' }
         },
-        margin: { left: margin, right: margin },
+        margin: { left: margin, right: margin, top: SAFE_TOP },
         didDrawPage: () => {
           addPageHeader();
           addPageFooter();
@@ -1335,7 +1367,7 @@ export const generatePDF = async (
           1: { cellWidth: 30, halign: 'right' },
           2: { cellWidth: 50, halign: 'right' }
         },
-        margin: { left: margin, right: margin },
+        margin: { left: margin, right: margin, top: SAFE_TOP },
         didDrawPage: () => {
           addPageHeader();
           addPageFooter();
@@ -1374,7 +1406,7 @@ export const generatePDF = async (
           0: { cellWidth: 50 },
           1: { cellWidth: 50, halign: 'right', fontStyle: 'bold' }
         },
-        margin: { left: margin, right: margin },
+        margin: { left: margin, right: margin, top: SAFE_TOP },
         didDrawPage: () => {
           addPageHeader();
           addPageFooter();
@@ -1474,6 +1506,7 @@ export const generatePDF = async (
 
       yPosition = (doc as any).lastAutoTable.finalY + 8;
     }
+  }
   }
 
   return doc;

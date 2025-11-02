@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CreditBadge } from '@/components/CreditBadge';
 import { FileText, LogOut, Plus, History, User } from 'lucide-react';
+import { getReportCount } from '@/utils/reportStorage';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -13,6 +14,8 @@ const Dashboard = () => {
     logout();
     navigate('/login');
   };
+
+  const reportCount = user ? getReportCount(user.email) : 0;
 
   if (!user) return null;
 
@@ -68,21 +71,21 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-2">
+          <Card className="border-2 hover:shadow-lg hover:border-primary transition-all cursor-pointer" onClick={() => navigate('/history')}>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                 Generated Reports
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-4xl font-bold text-foreground">0</div>
+              <div className="text-4xl font-bold text-foreground">{reportCount}</div>
               <p className="text-sm text-muted-foreground mt-2">
-                No reports generated yet
+                {reportCount === 0 ? 'No reports generated yet' : `${reportCount} report${reportCount !== 1 ? 's' : ''} generated`}
               </p>
             </CardContent>
           </Card>
 
-          <Card className="border-2">
+          <Card className="border-2 hover:shadow-lg hover:border-primary transition-all cursor-pointer" onClick={() => navigate('/profile')}>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
                 Account Information

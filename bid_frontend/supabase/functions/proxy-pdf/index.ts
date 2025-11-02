@@ -19,16 +19,52 @@ serve(async (req) => {
     console.log('Request payload:', JSON.stringify(requestBody));
 
     // Forward the request to the HTTP API
-    const apiUrl = 'http://161.118.181.8/api/pdf';
+    const apiUrl = 'https://68wtcsg0-4000.inc1.devtunnels.ms/api/pdf';
     console.log('Forwarding to:', apiUrl);
 
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    });
+    // Create an AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
+
+    let response;
+    try {
+      response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      console.error('Failed to connect to backend API:', fetchError);
+      
+      let errorMessage = 'Cannot connect to the backend API server';
+      if (fetchError instanceof Error) {
+        if (fetchError.name === 'AbortError') {
+          errorMessage = 'Request to backend API timed out after 60 seconds. The backend server may be overloaded or down.';
+        } else {
+          errorMessage = `Network error: ${fetchError.message}. The backend server at ${apiUrl} may be down or unreachable.`;
+        }
+      }
+      
+      return new Response(
+        JSON.stringify({
+          error: 'Backend Connection Failed',
+          message: errorMessage,
+          details: 'Please verify that the backend API server is running and accessible.',
+        }),
+        {
+          status: 503,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
 
     console.log('API response status:', response.status);
 

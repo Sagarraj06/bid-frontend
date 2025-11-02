@@ -12,6 +12,7 @@ import { CreditBadge } from '@/components/CreditBadge';
 import { ArrowLeft, FileText, Loader2, ChevronDown, ChevronUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { generatePDF } from '@/utils/pdfGenerator';
+import { saveReport } from '@/utils/reportStorage';
 
 const DEPARTMENTS = [
   "Department Of Defence",
@@ -104,19 +105,20 @@ const GenerateReport = () => {
 
       let response;
       try {
-        // Use direct connection in localhost, proxy in production
+        // Detect current protocol and choose appropriate API endpoint
+        const isHttps = window.location.protocol === 'https:';
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         
         let apiUrl;
-        if (isLocalhost) {
-          // Direct connection for local development
-          apiUrl = 'http://161.118.181.8/api/pdf';
-          console.log('Using direct API connection (localhost)');
-        } else {
-          // Use proxy for production (HTTPS)
+        if (isHttps && !isLocalhost) {
+          // Use proxy for HTTPS production environments
           const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
           apiUrl = `${supabaseUrl}/functions/v1/proxy-pdf`;
-          console.log('Using proxy API connection (production)');
+          console.log('Using HTTPS proxy API connection:', apiUrl);
+        } else {
+          // Direct connection for HTTP or localhost
+          apiUrl = 'http://161.118.181.8/api/pdf';
+          console.log('Using direct HTTP API connection:', apiUrl);
         }
         
         response = await fetch(apiUrl, {
@@ -148,12 +150,23 @@ const GenerateReport = () => {
 
       // Handle HTTP error responses
       if (!response.ok) {
-        let errorMessage = `Server error (Status ${response.status})`;
+        let errorTitle = `Server Error (${response.status})`;
+        let errorMessage = 'An unexpected error occurred';
         
         try {
           const errorData = await response.json();
-          errorMessage = errorData.message || errorData.error || errorData.detail || errorMessage;
           console.error('API error response:', errorData);
+          
+          // Use specific error information from backend
+          if (errorData.error) {
+            errorTitle = errorData.error;
+          }
+          errorMessage = errorData.message || errorData.detail || errorMessage;
+          
+          // Add additional details if available
+          if (errorData.details) {
+            errorMessage += `\n\n${errorData.details}`;
+          }
         } catch {
           // If JSON parsing fails, try text
           try {
@@ -165,9 +178,10 @@ const GenerateReport = () => {
         }
 
         toast({
-          title: `API Error (${response.status})`,
+          title: errorTitle,
           description: errorMessage,
           variant: "destructive",
+          duration: 10000, // Show longer for important error messages
         });
         return;
       }
@@ -218,6 +232,20 @@ const GenerateReport = () => {
       try {
         const fileName = `${formData.sellerName.replace(/\s+/g, '_')}_Report_${new Date().toISOString().split('T')[0]}.pdf`;
         pdfDoc.save(fileName);
+
+        // Persist report entry locally for history/counts
+        const id = (window.crypto && 'randomUUID' in window.crypto)
+          ? (window.crypto as any).randomUUID()
+          : Math.random().toString(36).slice(2);
+        saveReport({
+          id,
+          userEmail: user.email,
+          sellerName: formData.sellerName,
+          department: formData.department,
+          offeredItem: formData.offeredItem,
+          createdAt: new Date().toISOString(),
+          fileName,
+        });
 
         // Deduct credit only after successful PDF generation
         updateCredits(user.credits - 1);
