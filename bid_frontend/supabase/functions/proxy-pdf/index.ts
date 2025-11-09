@@ -19,7 +19,7 @@ serve(async (req) => {
     console.log('Request payload:', JSON.stringify(requestBody));
 
     // Forward the request to the HTTP API
-    const apiUrl = 'https://68wtcsg0-4000.inc1.devtunnels.ms/api/pdf';
+    const apiUrl = 'http://localhost:4000/api/pdf';
     console.log('Forwarding to:', apiUrl);
 
     // Create an AbortController for timeout
