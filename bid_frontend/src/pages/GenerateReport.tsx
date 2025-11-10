@@ -106,7 +106,7 @@ const GenerateReport = () => {
       let response;
       try {
         // Detect current protocol and choose appropriate API endpoint
-        const isHttps = window.location.protocol === 'https:';
+        const isHttps = window.location.protocol === 'http:';
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         
         let apiUrl;
@@ -117,7 +117,8 @@ const GenerateReport = () => {
           console.log('Using HTTPS proxy API connection:', apiUrl);
         } else {
           // Direct connection for HTTP or localhost
-          apiUrl = 'http://161.118.181.8/api/pdf';
+          // apiUrl = 'http://161.118.181.8/api/pdf';
+          apiUrl = '/api/pdf';
           console.log('Using direct HTTP API connection:', apiUrl);
         }
         
@@ -280,7 +281,8 @@ const GenerateReport = () => {
     }
   };
 
-  const isFormValid = formData.sellerName && formData.department && formData.offeredItem && formData.email;
+  const isFormValid = formData.sellerName  && formData.email;
+  //&& formData.department && formData.offeredItem;
 
   return (
     <div className="min-h-screen bg-background">
@@ -334,7 +336,7 @@ const GenerateReport = () => {
               </div>
 
               {/* Department */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="department" className="text-base font-semibold">Target Department *</Label>
                 <Select
                   value={formData.department}
@@ -351,9 +353,9 @@ const GenerateReport = () => {
                     ))}
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
 
-              {/* Offered Item */}
+              {/* Offered Item
               <div className="space-y-2">
                 <Label htmlFor="offeredItem" className="text-base font-semibold">Offered Item Categories *</Label>
                 <Textarea
@@ -369,9 +371,9 @@ const GenerateReport = () => {
                 <p className="text-sm text-muted-foreground">
                   {formData.offeredItem.length}/500 characters used
                 </p>
-              </div>
+              </div> */}
 
-              {/* Days and Limit */}
+              {/* Days and Limit
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="days" className="text-base font-semibold">Analysis Time Period (Days) *</Label>
@@ -401,7 +403,7 @@ const GenerateReport = () => {
                   />
                   <p className="text-sm text-muted-foreground">Number of results to include (1-100)</p>
                 </div>
-              </div>
+              </div> */}
 
               {/* Email */}
               <div className="space-y-2">
@@ -420,7 +422,7 @@ const GenerateReport = () => {
             </CardContent>
           </Card>
 
-          {/* Advanced Filters */}
+          {/* Advanced Filters
           <Card className="mb-6 border-2">
             <CardHeader className="bg-muted/30 border-b">
               <div className="flex items-center justify-between cursor-pointer" onClick={() => setShowFilters(!showFilters)}>
@@ -463,7 +465,7 @@ const GenerateReport = () => {
                 </div>
               </CardContent>
             )}
-          </Card>
+          </Card> */}
 
           {/* Submit Button */}
           <Card className="border-2 bg-muted/30">
