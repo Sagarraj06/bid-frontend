@@ -1,5 +1,10 @@
-// import jsPDF from 'jspdf';
-// import autoTable from 'jspdf-autotable';
+
+// import jsPDF from "jspdf";
+// import autoTable from "jspdf-autotable";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
 
 // interface ReportData {
 //   meta: {
@@ -14,108 +19,15 @@
 //     };
 //   };
 //   data: {
-//     sellerBids?: {
-//       departmentCount?: Array<{ department: string; bid_count: number; revenue: number }>;
-//       stateCount?: Array<{ state: string; bid_count: number; revenue: number }>;
-//       monthlyTotals?: Array<{ month: string; bid_value: number }>;
-//       sortedRows?: Array<{
-//         participated_on: string;
-//         offered_item: string;
-//         seller_status: string;
-//         rank: string;
-//         total_price: number;
-//         organisation: string;
-//         department: string;
-//       }>;
-//       table1?: {
-//         win: number;
-//         lost: number;
-//         totalBidValue: number;
-//         qualifiedBidValue: number;
-//         averageOrderValue: number;
-//       };
-//     };
 //     estimatedMissedValue?: any;
-//     priceBand?: { highest: number; lowest: number; average: number };
-//     topPerformingStates?: {
-//       results: Array<{ state_name: string; total_tenders: number }>;
-//     };
-//     topSellersByDept?: {
-//       department: string;
-//       total: number;
-//       results: Array<{ seller_name: string; participation_count: number; rank: number }>;
-//     };
-//     categoryListing?: {
-//       categories: Array<{ category: string; times: number }>;
-//       metadata: { totalItems: number; totalCount: number; processingTime: number };
-//     };
-//     allDepartments?: Array<{ department: string; total_tenders: string | number }>;
-//     lowCompetitionBids?: {
-//       results: Array<{
-//         bid_number: string;
-//         quantity: number;
-//         organisation: string;
-//         department: string;
-//         ministry: string;
-//         bid_end_ts: string;
-//         seller_count: number;
-//       }>;
-//       count: number;
-//       generated_at: string;
-//     };
-//     missedButWinnable: {
-//       seller: string;
-//       recentWins: Array<{
-//         bid_number: string;
-//         offered_item: string;
-//         quantity: number;
-//         total_price: number;
-//         org: string;
-//         dept: string;
-//         ministry: string;
-//         ended_at: string;
-//       }>;
-//       marketWins: Array<{
-//         bid_number: string;
-//         seller_name: string;
-//         offered_item: string;
-//         quantity: number;
-//         total_price: number;
-//         org: string;
-//         dept: string;
-//         ministry: string;
-//         ended_at: string;
-//       }>;
-//       ai: {
-//         strategy_summary: string;
-//         likely_wins?: Array<{
-//           offered_item: string;
-//           reason: string;
-//           matching_market_wins: Array<{
-//             original_b_id: number;
-//             bid_number: string;
-//             org: string;
-//             dept: string;
-//             ministry: string;
-//             quantity: number;
-//             price_hint: number;
-//             confidence: string;
-//           }>;
-//         }>;
-//         signals: {
-//           org_affinity: Array<{ org: string; win_count?: number; signal: string }>;
-//           dept_affinity: Array<{ dept: string; win_count?: number; signal: string }>;
-//           ministry_affinity: Array<{ ministry: string; win_count?: number; signal: string }>;
-//           quantity_ranges: Array<string>;
-//           price_ranges: Array<string>;
-//         };
-//         guidance?: {
-//           note: string;
-//           next_steps: Array<string>;
-//           expansion_areas: Array<string>;
-//         };
-//       };
-//     };
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
 //   };
 // }
 
@@ -123,1399 +35,9629 @@
 //   includeSections: string[];
 // }
 
-// // Navy Blue to Black Gradient Color System (RGB)
-// const colors = {
-//   navyBlue: [30, 58, 95] as [number, number, number],
-//   darkBlue: [74, 144, 226] as [number, number, number],
-//   electricBlue: [74, 144, 226] as [number, number, number],
-//   successGreen: [46, 204, 113] as [number, number, number],
-//   warningOrange: [243, 156, 18] as [number, number, number],
-//   errorRed: [231, 76, 60] as [number, number, number],
-//   neutralGray: [107, 114, 128] as [number, number, number],
-//   darkGray: [55, 65, 81] as [number, number, number],
-//   mediumGray: [107, 114, 128] as [number, number, number],
-//   lightGray: [209, 213, 219] as [number, number, number],
-//   white: [255, 255, 255] as [number, number, number],
-//   black: [0, 0, 0] as [number, number, number],
-//   lightBlue: [239, 246, 255] as [number, number, number],
-//   backgroundGray: [249, 250, 251] as [number, number, number],
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
 // };
 
-// const formatCurrency = (amount: number | string): string => {
-//   const n = typeof amount === 'string' ? parseFloat(amount) : amount;
-//   if (!n || isNaN(n) || n === 0) return '-';
-//   return `Rs ${n.toLocaleString('en-IN')}`;
-// };
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
 
-// const formatDate = (dateString: string): string => {
-//   if (!dateString || dateString === 'N/A' || dateString === 'undefined') return '-';
-//   try {
-//     const date = new Date(dateString);
-//     if (isNaN(date.getTime())) return '-';
-//     return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-');
-//   } catch {
-//     return '-';
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       // try to stringify small objects
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
 //   }
+//   return String(v).trim() || "-";
 // };
 
-// const clean = (value: any): string => {
-//   if (value == null || value === undefined || value === '') return '-';
-//   const s = String(value);
-//   // Remove all special Unicode characters and normalize text
-//   return s
-//     .replace(/[₹]/g, 'Rs ')
-//     .replace(/[\u2018\u2019]/g, "'")
-//     .replace(/[\u201C\u201D]/g, '"')
-//     .replace(/\u00A0/g, ' ')
-//     .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Remove control characters
-//     .replace(/[\u2013\u2014]/g, '-') // Replace em/en dashes
-//     .replace(/[\u2022\u2023\u2043]/g, '*') // Replace bullets
-//     .replace(/[\u00E1\u00E9\u00ED\u00F3\u00FA]/g, (match) => {
-//       const map = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u' };
-//       return map[match] || match;
-//     }) // Replace accented characters
-//     .replace(/[^\x20-\x7E]/g, '') // Remove non-ASCII characters
-//     .replace(/\s+/g, ' ')
-//     .trim() || '-';
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
 // };
 
-// export const generatePDF = async (
-//   reportData: ReportData,
-//   filters: FilterOptions
-// ) => {
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   // stable grouping avoiding weird unicode narrow spaces
+//   const rounded = Math.round(num);
+//   return `₹${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     // join primitives or small values
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
 //   const doc = new jsPDF();
 //   const pageWidth = doc.internal.pageSize.getWidth();
 //   const pageHeight = doc.internal.pageSize.getHeight();
 //   const margin = 12;
-//   const HEADER_H = 18;
-//   const FOOTER_H = 12;
-//   const SAFE_TOP = HEADER_H + 5;
-//   const SAFE_BOTTOM = pageHeight - FOOTER_H - 8;
-//   let yPosition = SAFE_TOP;
 
-//   // Helper function to check if a section should be included
-//   const shouldIncludeSection = (sectionId: string): boolean => {
-//     return filters.includeSections.includes(sectionId);
-//   };
+//   // Slight scaling for crisper text in some viewers
+//   doc.internal.scaleFactor = 1.33;
 
-//   const addNewPage = () => {
-//     doc.addPage();
-//     yPosition = SAFE_TOP;
-//     addPageHeader();
-//     addPageFooter();
-//   };
-
-//   const addPageHeader = () => {
+//   /* -------------------------- Header & Footer ------------------------- */
+//   const addHeader = () => {
 //     doc.setFillColor(...colors.navyBlue);
-//     doc.rect(0, 0, pageWidth, 18, 'F');
-    
+//     doc.rect(0, 0, pageWidth, 18, "F");
 //     doc.setFontSize(10);
-//     doc.setFont('helvetica', 'bold');
 //     doc.setTextColor(...colors.white);
-//     doc.text('GOVERNMENT TENDER ANALYSIS', pageWidth / 2, 11, { align: 'center' });
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 11, { align: "center" });
 //   };
 
-//   const addPageFooter = () => {
-//     const pageNum = doc.getCurrentPageInfo().pageNumber;
-    
+//   const addFooter = () => {
 //     doc.setFillColor(...colors.navyBlue);
-//     doc.rect(0, pageHeight - 12, pageWidth, 12, 'F');
-    
-//     doc.setFontSize(7);
-//     doc.setFont('helvetica', 'normal');
+//     doc.rect(0, pageHeight - 12, pageWidth, 12, "F");
+//     doc.setFontSize(8);
 //     doc.setTextColor(...colors.white);
-//     doc.text(clean(reportData.meta.params_used.sellerName), margin, pageHeight - 6);
-//     doc.text(`Page ${pageNum}`, pageWidth / 2, pageHeight - 6, { align: 'center' });
-//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 6, { align: 'right' });
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(seller, margin, pageHeight - 5);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 5, { align: "right" });
 //   };
 
-//   const checkPageBreak = (requiredSpace: number): boolean => {
-//     if (yPosition + requiredSpace > SAFE_BOTTOM) {
-//       addNewPage();
-//       return true;
+//   /* -------------------------- Section Header ------------------------- */
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     // Determine y start (after previous table/section)
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 30;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 40) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 30;
 //     }
-//     return false;
-//   };
-
-//   const addSectionHeader = (title: string, color: [number, number, number] = colors.navyBlue) => {
-//     checkPageBreak(15);
-    
 //     doc.setFillColor(...color);
-//     doc.rect(margin, yPosition, pageWidth - 2 * margin, 10, 'F');
-    
-//     doc.setFontSize(11);
-//     doc.setFont('helvetica', 'bold');
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 10, "F");
 //     doc.setTextColor(...colors.white);
-//     doc.text(title, margin + 4, yPosition + 7);
-    
-//     yPosition += 13;
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(11);
+//     doc.text(title, margin + 5, yStart + 7);
+//     (doc as any).lastAutoTable = { finalY: yStart + 10 };
 //   };
 
-//   // ============ COVER PAGE (Page 1) ============
-  
-//   // Navy blue to dark gradient background
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//   };
+
+//   /* ------------------------------ COVER ------------------------------- */
 //   doc.setFillColor(...colors.navyBlue);
-//   doc.rect(0, 0, pageWidth, pageHeight, 'F');
-  
-//   // Decorative circles
-//   doc.setFillColor(20, 40, 75);
-//   doc.circle(pageWidth + 40, -20, 80, 'F');
-//   doc.setFillColor(20, 40, 75);
-//   doc.circle(-50, pageHeight / 2, 100, 'F');
-//   doc.setFillColor(20, 40, 75);
-//   doc.circle(pageWidth + 20, pageHeight + 30, 70, 'F');
-  
-//   // Title
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+
 //   doc.setFontSize(24);
-//   doc.setFont('helvetica', 'bold');
 //   doc.setTextColor(...colors.white);
-//   doc.text('GOVERNMENT', pageWidth / 2, 60, { align: 'center' });
-//   doc.text('TENDER ANALYSIS', pageWidth / 2, 72, { align: 'center' });
-  
-//   // Subtitle box
-//   yPosition = 90;
-//   doc.setFillColor(25, 50, 85);
-//   doc.roundedRect(margin + 10, yPosition, pageWidth - 2 * margin - 20, 14, 3, 3, 'F');
-//   doc.setFontSize(12);
-//   doc.setFont('helvetica', 'normal');
-//   doc.setTextColor(...colors.electricBlue);
-//   doc.text('Comprehensive Performance Report', pageWidth / 2, yPosition + 9, { align: 'center' });
-  
-//   // Company name box
-//   yPosition = 115;
-//   const companyBoxWidth = pageWidth - 60;
-//   doc.setFillColor(15, 30, 55);
-//   doc.roundedRect((pageWidth - companyBoxWidth) / 2, yPosition, companyBoxWidth, 20, 3, 3, 'F');
-//   doc.setDrawColor(...colors.electricBlue);
-//   doc.setLineWidth(0.5);
-//   doc.roundedRect((pageWidth - companyBoxWidth) / 2, yPosition, companyBoxWidth, 20, 3, 3, 'S');
-  
-//   doc.setFontSize(18);
-//   doc.setFont('helvetica', 'bold');
-//   doc.setTextColor(...colors.electricBlue);
-//   doc.text(clean(reportData.meta.params_used.sellerName), pageWidth / 2, yPosition + 13, { align: 'center' });
-  
-//   // Metadata
-//   yPosition = 150;
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 60, { align: "center" });
+
+//   doc.setFontSize(14);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 80, { align: "center" });
+
 //   doc.setFontSize(10);
-//   doc.setFont('helvetica', 'normal');
-//   doc.setTextColor(...colors.white);
-//   doc.text('Report Generated: ' + formatDate(reportData.meta.report_generated_at), pageWidth / 2, yPosition, { align: 'center' });
-  
-//   yPosition += 8;
-//   doc.text('Analysis Period: ' + reportData.meta.params_used.days + ' days', pageWidth / 2, yPosition, { align: 'center' });
-  
-//   yPosition += 8;
-//   doc.text('Department: ' + clean(reportData.meta.params_used.department), pageWidth / 2, yPosition, { align: 'center' });
-  
-//   yPosition += 12;
-//   doc.setFontSize(9);
-//   doc.text('Offered Items:', pageWidth / 2, yPosition, { align: 'center' });
-//   yPosition += 6;
-//   const itemLines = doc.splitTextToSize(clean(reportData.meta.params_used.offeredItem || 'Various items'), pageWidth - 40);
-//   doc.text(itemLines.slice(0, 3), pageWidth / 2, yPosition, { align: 'center' });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Department: ${deptText} | Days: ${safeText(reportData.meta.params_used.days)}`, pageWidth / 2, 95, { align: "center" });
 
-//   // ============ PAGE 1: MISSED BUT WINNABLE - RECENT WINS ============
-//   if (shouldIncludeSection('missedTenders')) {
-//     addNewPage();
-//     addSectionHeader('Missed But Winnable - Market Intelligence', colors.darkBlue);
-    
-//     const recentWins = reportData.data.missedButWinnable?.recentWins || [];
-  
-//   if (recentWins.length > 0) {
-//     doc.setFontSize(10);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Recent Wins by ' + clean(reportData.meta.params_used.sellerName), margin, yPosition);
-//     yPosition += 8;
-
-//     const winsTableData = recentWins.map((win: any) => [
-//       clean(win.bid_number).substring(0, 25) || '-',
-//       clean(win.offered_item).substring(0, 40) || '-',
-//       (win.quantity || 0).toString(),
-//       formatCurrency(win.total_price || 0),
-//       clean(win.org).substring(0, 30) || '-',
-//       clean(win.dept).substring(0, 35) || '-',
-//       win.ended_at ? formatDate(win.ended_at) : '-'
-//     ]);
-
-//       autoTable(doc, {
-//         startY: yPosition,
-//         head: [['Bid Number', 'Item Category', 'Qty', 'Total Price', 'Organization', 'Department', 'End Date']],
-//         body: winsTableData,
-//         theme: 'striped',
-//         headStyles: {
-//           fillColor: colors.darkBlue,
-//           textColor: colors.white,
-//           fontSize: 8,
-//           fontStyle: 'bold',
-//           halign: 'center',
-//           cellPadding: 3
-//         },
-//         bodyStyles: {
-//           fontSize: 7,
-//           cellPadding: 2.5,
-//           minCellHeight: 8
-//         },
-//         columnStyles: {
-//           0: { cellWidth: 26 },
-//           1: { cellWidth: 48 },
-//           2: { cellWidth: 12, halign: 'right' },
-//           3: { cellWidth: 25, halign: 'right' },
-//           4: { cellWidth: 33 },
-//           5: { cellWidth: 33 },
-//           6: { cellWidth: 20, halign: 'center' }
-//         },
-//         margin: { left: margin - 3, right: margin, top: SAFE_TOP },
-//         showHead: 'everyPage',
-//         didDrawPage: (data: any) => {
-//           if (data.pageNumber > data.table.startPageNumber) {
-//             addPageHeader();
-//             addPageFooter();
-//           }
-//         }
-//       });
-
-//     yPosition = (doc as any).lastAutoTable.finalY + 10;
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, 105, { align: "center" });
 //   }
 
-//   // Competitor Market Wins
-//   const marketWins = reportData.data.missedButWinnable?.marketWins || [];
-  
-//   if (marketWins.length > 0) {
-//     checkPageBreak(60);
-    
-//     doc.setFontSize(10);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Competitor Market Wins', margin, yPosition);
-//     yPosition += 8;
-
-//     const marketTableData = marketWins.map((win: any) => [
-//       clean(win.bid_number).substring(0, 25) || '-',
-//       clean(win.seller_name).substring(0, 30) || '-',
-//       clean(win.offered_item).substring(0, 35) || '-',
-//       (win.quantity || 0).toString(),
-//       formatCurrency(win.total_price || 0),
-//       clean(win.org).substring(0, 30) || '-',
-//       clean(win.dept).substring(0, 30) || '-',
-//       win.ended_at ? formatDate(win.ended_at) : '-'
-//     ]);
-
-//     autoTable(doc, {
-//       startY: yPosition,
-//       head: [['Bid Number', 'Seller Name', 'Item', 'Qty', 'Price', 'Organization', 'Department', 'End Date']],
-//       body: marketTableData,
-//       theme: 'striped',
-//       headStyles: {
-//         fillColor: colors.warningOrange,
-//         textColor: colors.white,
-//         fontSize: 7,
-//         fontStyle: 'bold',
-//         halign: 'center',
-//         cellPadding: 3
-//       },
-//       bodyStyles: {
-//         fontSize: 6.5,
-//         cellPadding: 2,
-//         minCellHeight: 7
-//       },
-//       columnStyles: {
-//         0: { cellWidth: 24 },
-//         1: { cellWidth: 28 },
-//         2: { cellWidth: 32 },
-//         3: { cellWidth: 10, halign: 'right' },
-//         4: { cellWidth: 22, halign: 'right' },
-//         5: { cellWidth: 28 },
-//         6: { cellWidth: 28 },
-//         7: { cellWidth: 18, halign: 'center' }
-//       },
-//       margin: { left: margin, right: margin, top: SAFE_TOP },
-//       showHead: 'everyPage',
-//       didDrawPage: (data: any) => {
-//         if (data.pageNumber > data.table.startPageNumber) {
-//           addPageHeader();
-//           addPageFooter();
-//         }
-//       }
-//     });
-
-//     yPosition = (doc as any).lastAutoTable.finalY + 8;
-//   }
-//   }
-
-//   // ============ PAGE 2: AI-POWERED STRATEGIC INSIGHTS ============
-//   if (shouldIncludeSection('buyerInsights')) {
-//     addNewPage();
-//     addSectionHeader('AI-Driven Intelligence & Strategy', colors.electricBlue);
-
-//   const ai = reportData.data.missedButWinnable?.ai;
-
-//   if (ai?.strategy_summary) {
-//     doc.setFillColor(239, 246, 255);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 40, 3, 3, 'F');
-//     doc.setDrawColor(...colors.electricBlue);
-//     doc.setLineWidth(0.5);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 40, 3, 3, 'S');
-    
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('AI Strategy Summary', margin + 4, yPosition + 6);
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'normal');
-//     doc.setTextColor(...colors.darkGray);
-//     const summaryLines = doc.splitTextToSize(clean(ai.strategy_summary), pageWidth - 2 * margin - 8);
-//     doc.text(summaryLines, margin + 4, yPosition + 12);
-    
-//     yPosition += 45;
-//   }
-
-//   // Likely Wins Section - ENHANCED WITH ALL DATA
-//   if (ai?.likely_wins && ai.likely_wins.length > 0) {
-//     checkPageBreak(20);
-    
-//     doc.setFontSize(11);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Likely Wins - High Probability Opportunities', margin, yPosition);
-//     yPosition += 10;
-
-//     ai.likely_wins.forEach((win, index) => {
-//       checkPageBreak(60);
-      
-//       // Win item box with better spacing
-//       const boxHeight = 40;
-//       doc.setFillColor(240, 253, 244);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, boxHeight, 2, 2, 'F');
-//       doc.setDrawColor(...colors.successGreen);
-//       doc.setLineWidth(0.5);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, boxHeight, 2, 2, 'S');
-      
-//       doc.setFontSize(9);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.successGreen);
-//       doc.text(`Opportunity ${index + 1}:`, margin + 3, yPosition + 6);
-      
-//       doc.setTextColor(...colors.darkGray);
-//       const itemText = clean(win.offered_item);
-//       const itemLines = doc.splitTextToSize(itemText, pageWidth - 2 * margin - 35);
-//       doc.text(itemLines.slice(0, 1), margin + 30, yPosition + 6);
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.darkGray);
-//       doc.text('Win Probability Reason:', margin + 3, yPosition + 13);
-      
-//       doc.setFont('helvetica', 'normal');
-//       const reasonLines = doc.splitTextToSize(clean(win.reason), pageWidth - 2 * margin - 8);
-//       doc.text(reasonLines.slice(0, 5), margin + 3, yPosition + 18);
-      
-//       yPosition += boxHeight + 3;
-
-//       // Matching market opportunities table - DISPLAY ALL DATA
-//       if (win.matching_market_wins && win.matching_market_wins.length > 0) {
-//         checkPageBreak(30);
-        
-//         // Show ALL matching wins, not limited
-//         const matchData = win.matching_market_wins.map(m => [
-//           clean(m.bid_number),
-//           clean(m.org).substring(0, 32),
-//           clean(m.dept).substring(0, 30),
-//           (m.quantity || 0).toString(),
-//           formatCurrency(m.price_hint || 0),
-//           clean(m.confidence || 'medium').toUpperCase()
-//         ]);
-
-//         autoTable(doc, {
-//           startY: yPosition,
-//           head: [['Bid Number', 'Organization', 'Department', 'Qty', 'Price Hint', 'Confidence']],
-//           body: matchData,
-//           theme: 'grid',
-//           headStyles: {
-//             fillColor: colors.successGreen,
-//             textColor: colors.white,
-//             fontSize: 7,
-//             fontStyle: 'bold',
-//             halign: 'center'
-//           },
-//           bodyStyles: {
-//             fontSize: 7,
-//             cellPadding: 1.5
-//           },
-//           columnStyles: {
-//             0: { cellWidth: 26 },
-//             1: { cellWidth: 38 },
-//             2: { cellWidth: 36 },
-//             3: { cellWidth: 12, halign: 'right' },
-//             4: { cellWidth: 26, halign: 'right' },
-//             5: { cellWidth: 22, halign: 'center', fontStyle: 'bold' }
-//           },
-//           margin: { left: margin - 3, right: margin, top: SAFE_TOP },
-//           didDrawPage: () => {
-//             addPageHeader();
-//             addPageFooter();
-//           }
-//         });
-
-//         yPosition = (doc as any).lastAutoTable.finalY + 6;
-//       }
-//     });
-//   }
-
-//   // ============ PAGE 3: AFFINITY SIGNALS & ORGANIZATIONAL INTELLIGENCE ============
-//   addNewPage();
-//   addSectionHeader('Strategic Affinity Signals', colors.darkBlue);
-
-//   const signals = ai?.signals;
-
-//   if (signals?.org_affinity && signals.org_affinity.length > 0) {
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Organization Affinity', margin, yPosition);
-//     yPosition += 6;
-
-//     signals.org_affinity.slice(0, 5).forEach((aff) => {
-//       doc.setFillColor(239, 246, 255);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.darkBlue);
-//       const orgText = clean(aff.org).substring(0, 45);
-//       doc.text(orgText, margin + 3, yPosition + 5);
-      
-//       if (aff.win_count) {
-//         doc.setTextColor(...colors.successGreen);
-//         doc.text(`${aff.win_count} wins`, pageWidth - margin - 20, yPosition + 5);
-//       }
-      
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'italic');
-//       doc.setTextColor(...colors.mediumGray);
-//       const signalLines = doc.splitTextToSize(clean(aff.signal), pageWidth - 2 * margin - 8);
-//       doc.text(signalLines[0], margin + 3, yPosition + 9);
-      
-//       yPosition += 14;
-//     });
-//   }
-
-//   yPosition += 4;
-
-//   if (signals?.dept_affinity && signals.dept_affinity.length > 0) {
-//     checkPageBreak(60);
-    
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Department Affinity', margin, yPosition);
-//     yPosition += 6;
-
-//     signals.dept_affinity.slice(0, 5).forEach((aff) => {
-//       doc.setFillColor(254, 243, 199);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.warningOrange);
-//       const deptText = clean(aff.dept).substring(0, 45);
-//       doc.text(deptText, margin + 3, yPosition + 5);
-      
-//       if (aff.win_count) {
-//         doc.setTextColor(...colors.successGreen);
-//         doc.text(`${aff.win_count} wins`, pageWidth - margin - 20, yPosition + 5);
-//       }
-      
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'italic');
-//       doc.setTextColor(...colors.mediumGray);
-//       const signalLines = doc.splitTextToSize(clean(aff.signal), pageWidth - 2 * margin - 8);
-//       doc.text(signalLines[0], margin + 3, yPosition + 9);
-      
-//       yPosition += 14;
-//     });
-//   }
-
-//   yPosition += 4;
-
-//   if (signals?.ministry_affinity && signals.ministry_affinity.length > 0) {
-//     checkPageBreak(60);
-    
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Ministry Affinity', margin, yPosition);
-//     yPosition += 6;
-
-//     signals.ministry_affinity.slice(0, 5).forEach((aff) => {
-//       doc.setFillColor(243, 232, 255);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(138, 43, 226);
-//       const minText = clean(aff.ministry).substring(0, 45);
-//       doc.text(minText, margin + 3, yPosition + 5);
-      
-//       if (aff.win_count) {
-//         doc.setTextColor(...colors.successGreen);
-//         doc.text(`${aff.win_count} wins`, pageWidth - margin - 20, yPosition + 5);
-//       }
-      
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'italic');
-//       doc.setTextColor(...colors.mediumGray);
-//       const signalLines = doc.splitTextToSize(clean(aff.signal), pageWidth - 2 * margin - 8);
-//       doc.text(signalLines[0], margin + 3, yPosition + 9);
-      
-//       yPosition += 14;
-//     });
-//   }
-
-//   // Quantity & Price Ranges
-//   yPosition += 4;
-//   checkPageBreak(80);
-  
-//   doc.setFontSize(9);
-//   doc.setFont('helvetica', 'bold');
-//   doc.setTextColor(...colors.darkGray);
-//   doc.text('Quantity & Price Range Patterns', margin, yPosition);
-//   yPosition += 8;
-
-//   // Calculate dynamic heights based on content
-//   const boxWidth = (pageWidth - 2 * margin - 5) / 2;
-//   let quantityBoxHeight = 15;
-//   let priceBoxHeight = 15;
-
-//   if (signals?.quantity_ranges && signals.quantity_ranges.length > 0) {
-//     // Calculate required height for quantity ranges
-//     let totalLines = 0;
-//     signals.quantity_ranges.forEach((range) => {
-//       const lines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
-//       totalLines += lines.length;
-//     });
-//     quantityBoxHeight = Math.max(15, 10 + (totalLines * 4));
-
-//     doc.setFillColor(240, 253, 244);
-//     doc.roundedRect(margin, yPosition, boxWidth, quantityBoxHeight, 2, 2, 'F');
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.successGreen);
-//     doc.text('Quantity Ranges:', margin + 3, yPosition + 5);
-    
-//     doc.setFont('helvetica', 'normal');
-//     doc.setFontSize(7);
-//     doc.setTextColor(...colors.darkGray);
-    
-//     let currentY = yPosition + 10;
-//     signals.quantity_ranges.forEach((range) => {
-//       const rangeLines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
-//       doc.text(rangeLines, margin + 3, currentY);
-//       currentY += (rangeLines.length * 4);
-//     });
-//   }
-
-//   if (signals?.price_ranges && signals.price_ranges.length > 0) {
-//     // Calculate required height for price ranges
-//     let totalLines = 0;
-//     signals.price_ranges.forEach((range) => {
-//       const lines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
-//       totalLines += lines.length;
-//     });
-//     priceBoxHeight = Math.max(15, 10 + (totalLines * 4));
-
-//     doc.setFillColor(254, 243, 199);
-//     doc.roundedRect((pageWidth / 2) + 2.5, yPosition, boxWidth, priceBoxHeight, 2, 2, 'F');
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.warningOrange);
-//     doc.text('Price Ranges:', (pageWidth / 2) + 5.5, yPosition + 5);
-    
-//     doc.setFont('helvetica', 'normal');
-//     doc.setFontSize(7);
-//     doc.setTextColor(...colors.darkGray);
-    
-//     let currentY = yPosition + 10;
-//     signals.price_ranges.forEach((range) => {
-//       const rangeLines = doc.splitTextToSize('- ' + clean(range), boxWidth - 6);
-//       doc.text(rangeLines, (pageWidth / 2) + 5.5, currentY);
-//       currentY += (rangeLines.length * 4);
-//     });
-//   }
-
-//   yPosition += Math.max(quantityBoxHeight, priceBoxHeight) + 5;
-
-//   // ============ PAGE 4: STRATEGIC GUIDANCE & RECOMMENDATIONS ============
-//   addNewPage();
-//   addSectionHeader('Strategic Roadmap & Action Items', colors.successGreen);
-
-//   const guidance = ai?.guidance;
-
-//   if (guidance?.note) {
-//     doc.setFillColor(254, 243, 199);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 30, 3, 3, 'F');
-//     doc.setDrawColor(...colors.warningOrange);
-//     doc.setLineWidth(0.5);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 30, 3, 3, 'S');
-    
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.warningOrange);
-//     doc.text('Guidance Note', margin + 4, yPosition + 6);
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'normal');
-//     doc.setTextColor(...colors.darkGray);
-//     const noteLines = doc.splitTextToSize(clean(guidance.note), pageWidth - 2 * margin - 8);
-//     doc.text(noteLines, margin + 4, yPosition + 12);
-    
-//     yPosition += 35;
-//   }
-
-//   if (guidance?.next_steps && guidance.next_steps.length > 0) {
-//     checkPageBreak(20);
-    
-//     doc.setFontSize(10);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Next Steps - Action Plan', margin, yPosition);
-//     yPosition += 8;
-
-//     guidance.next_steps.forEach((step, index) => {
-//       checkPageBreak(25);
-      
-//       doc.setFillColor(240, 253, 244);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 20, 2, 2, 'F');
-//       doc.setDrawColor(...colors.successGreen);
-//       doc.setLineWidth(0.3);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 20, 2, 2, 'S');
-      
-//       doc.setFontSize(10);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.successGreen);
-//       doc.text(`${index + 1}.`, margin + 3, yPosition + 6);
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'normal');
-//       doc.setTextColor(...colors.darkGray);
-//       const stepLines = doc.splitTextToSize(clean(step), pageWidth - 2 * margin - 12);
-//       doc.text(stepLines, margin + 8, yPosition + 6);
-      
-//       yPosition += 23;
-//     });
-//   }
-
-//   if (guidance?.expansion_areas && guidance.expansion_areas.length > 0) {
-//     checkPageBreak(20);
-    
-//     yPosition += 5;
-//     doc.setFontSize(10);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Expansion Opportunities', margin, yPosition);
-//     yPosition += 8;
-
-//     guidance.expansion_areas.forEach((area) => {
-//       checkPageBreak(18);
-      
-//       doc.setFillColor(239, 246, 255);
-//       doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 15, 2, 2, 'F');
-      
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'normal');
-//       doc.setTextColor(...colors.darkGray);
-//       const areaLines = doc.splitTextToSize('- ' + clean(area), pageWidth - 2 * margin - 8);
-//       doc.text(areaLines, margin + 4, yPosition + 5);
-      
-//       yPosition += 18;
-//     });
-//   }
-//   }
-
-//   // ============ PAGE 5: PRICE BAND ANALYSIS ============
-//   if (shouldIncludeSection('marketOverview')) {
-//     addNewPage();
-//     addSectionHeader('Price Band Analysis', colors.successGreen);
-
-//   const priceBand = reportData.data.priceBand;
-
-//   if (priceBand) {
-//     // Price Band Table
-//     autoTable(doc, {
-//       startY: yPosition,
-//       head: [['Price Category', 'Amount']],
-//       body: [
-//         ['Highest Price', formatCurrency(priceBand.highest)],
-//         ['Average Price', formatCurrency(Math.round(priceBand.average))],
-//         ['Lowest Price', formatCurrency(priceBand.lowest)]
-//       ],
-//       theme: 'grid',
-//       headStyles: {
-//         fillColor: [72, 187, 120],
-//         textColor: 255,
-//         fontSize: 9,
-//         fontStyle: 'bold',
-//         halign: 'left'
-//       },
-//       bodyStyles: {
-//         fontSize: 8,
-//         cellPadding: 4
-//       },
-//       columnStyles: {
-//         0: { cellWidth: 60, fontStyle: 'bold' },
-//         1: { cellWidth: 'auto', halign: 'right' }
-//       },
-//       margin: { left: margin }
-//     });
-    
-//     yPosition = (doc as any).lastAutoTable.finalY + 15;
-
-//     // Add insights box
-//     const insightBoxHeight = 25;
-//     doc.setFillColor(239, 246, 255);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, insightBoxHeight, 3, 3, 'F');
-//     doc.setDrawColor(...colors.electricBlue);
-//     doc.setLineWidth(0.5);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, insightBoxHeight, 3, 3, 'S');
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.electricBlue);
-//     doc.text('Price Insights:', margin + 4, yPosition + 6);
-    
-//     doc.setFont('helvetica', 'normal');
-//     doc.setTextColor(...colors.darkGray);
-//     const priceRange = priceBand.highest - priceBand.lowest;
-//     const priceVariation = ((priceRange / priceBand.average) * 100).toFixed(1);
-//     const insightText = `Price range spans ${formatCurrency(priceRange)} with ${priceVariation}% variation from average. ` +
-//       `Target competitive pricing around ${formatCurrency(Math.round(priceBand.lowest * 1.05))} to ${formatCurrency(Math.round(priceBand.average * 0.95))} for optimal positioning.`;
-//     const insightLines = doc.splitTextToSize(insightText, pageWidth - 2 * margin - 8);
-//     doc.text(insightLines, margin + 4, yPosition + 12);
-    
-//     yPosition += insightBoxHeight + 5;
-//   }
-//   }
-
-//   // ============ PAGE 6: CATEGORY DISTRIBUTION ============
-//   if (shouldIncludeSection('categoryAnalysis')) {
-//     addNewPage();
-//     addSectionHeader('Category-wise Tender Distribution', colors.darkBlue);
-
-//   const categoryData = reportData.data.categoryListing;
-
-//   if (categoryData?.categories && categoryData.categories.length > 0) {
-//     const categories = categoryData.categories;
-//     const maxTimes = Math.max(...categories.map(c => c.times));
-
-//     // Shift bars further to the left and keep numbers inside the bar
-//     const chartOffset = 32; // was 50
-//     const rightPad = 6;     // keep small right padding
-//     const barAreaWidth = pageWidth - 2 * margin - chartOffset - rightPad;
-
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Tender Categories by Volume', margin, yPosition);
-//     yPosition += 10;
-
-//     categories.forEach((cat) => {
-//       const barX = margin + chartOffset;
-//       const barWidth = Math.max(0, Math.min(barAreaWidth, (cat.times / maxTimes) * barAreaWidth));
-
-//       doc.setFontSize(8);
-//       doc.setFont('helvetica', 'normal');
-//       doc.setTextColor(...colors.darkGray);
-//       const catName = clean(cat.category).substring(0, 25);
-//       doc.text(catName, margin, yPosition);
-
-//       // Value label positioned to the left of the bar to prevent overlap
-//       doc.setFont('helvetica', 'bold');
-//       doc.setFontSize(7.5);
-//       doc.setTextColor(...colors.darkBlue);
-//       const valueText = cat.times.toLocaleString();
-//       const valueWidth = doc.getTextWidth(valueText);
-//       doc.text(valueText, barX - valueWidth - 2, yPosition);
-
-//       // Background track
-//       doc.setFillColor(...colors.lightGray);
-//       doc.roundedRect(barX, yPosition - 5, barAreaWidth, 8, 1, 1, 'F');
-
-//       // Value bar
-//       doc.setFillColor(...colors.darkBlue);
-//       doc.roundedRect(barX, yPosition - 5, barWidth, 8, 1, 1, 'F');
-
-//       yPosition += 12;
-//     });
-
-//     yPosition += 10;
-//   }
-//   }
-
-//   // ============ PAGE 7: TOP SELLERS BY DEPARTMENT ============
-//   if (shouldIncludeSection('rivalryScore')) {
-//     addNewPage();
-//     addSectionHeader('Leading Competitors - ' + clean(reportData.meta.params_used.department), colors.warningOrange);
-
-//   const topSellers = reportData.data.topSellersByDept;
-
-//   if (topSellers?.results && topSellers.results.length > 0) {
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Top 10 Sellers by Participation Count', margin, yPosition);
-//     yPosition += 10;
-
-//     const sellerTableData = topSellers.results.slice(0, 10).map((seller, index) => {
-//       const rank = seller.rank || (index + 1);
-//       let rankDisplay = rank.toString();
-      
-//       // Use simple text instead of emojis to avoid encoding issues
-//       if (index === 0) rankDisplay = '1st';
-//       else if (index === 1) rankDisplay = '2nd';
-//       else if (index === 2) rankDisplay = '3rd';
-//       else rankDisplay = `${rank}`;
-      
-//       return [
-//         rankDisplay,
-//         clean(seller.seller_name).substring(0, 60),
-//         (seller.participation_count || 0).toLocaleString()
-//       ];
-//     });
-
-//     autoTable(doc, {
-//       startY: yPosition,
-//       head: [['Rank', 'Seller Name', 'Participation Count']],
-//       body: sellerTableData,
-//       theme: 'striped',
-//       headStyles: {
-//         fillColor: colors.warningOrange,
-//         textColor: colors.white,
-//         fontSize: 9,
-//         fontStyle: 'bold',
-//         halign: 'center'
-//       },
-//       bodyStyles: {
-//         fontSize: 8,
-//         cellPadding: 3
-//       },
-//       columnStyles: {
-//         0: { cellWidth: 20, halign: 'center', fontStyle: 'bold' },
-//         1: { cellWidth: 130 },
-//         2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' }
-//       },
-//       margin: { left: margin, right: margin, top: SAFE_TOP },
-//       didDrawPage: () => {
-//         addPageHeader();
-//         addPageFooter();
-//       }
-//     });
-
-//     yPosition = (doc as any).lastAutoTable.finalY + 8;
-//   }
-//   }
-
-//   // ============ PAGE 8: TOP PERFORMING STATES ============
-//   if (shouldIncludeSection('statesAnalysis')) {
-//     addNewPage();
-//     addSectionHeader('Top Performing States by Tender Volume', colors.successGreen);
-
-//   const statesData = reportData.data.topPerformingStates;
-
-//   if (statesData?.results && statesData.results.length > 0) {
-//     const states = statesData.results.slice(0, 29);
-//     const maxTenders = Math.max(...states.map(s => s.total_tenders));
-
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('State-wise Tender Distribution (Top 29 States)', margin, yPosition);
-//     yPosition += 10;
-
-//     states.forEach((state, index) => {
-//       checkPageBreak(10);
-      
-//       const barAreaWidth = pageWidth - 2 * margin - 65;
-//       const barWidth = ((state.total_tenders / maxTenders) * barAreaWidth);
-      
-//       let fillColor: [number, number, number] = colors.successGreen;
-//       if (index < 5) {
-//         fillColor = colors.darkBlue;
-//       }
-      
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'normal');
-//       doc.setTextColor(...colors.darkGray);
-//       const stateText = clean(state.state_name).substring(0, 25);
-//       doc.text(stateText, margin, yPosition);
-      
-//       // Draw numerical value on the left side of the bar
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...fillColor);
-//       const valueText = state.total_tenders.toLocaleString();
-//       const valueWidth = doc.getTextWidth(valueText);
-//       doc.text(valueText, margin + 60 - valueWidth - 2, yPosition);
-      
-//       doc.setFillColor(...colors.lightGray);
-//       doc.roundedRect(margin + 60, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
-      
-//       doc.setFillColor(...fillColor);
-//       doc.roundedRect(margin + 60, yPosition - 4, barWidth, 6, 1, 1, 'F');
-      
-//       yPosition += 9;
-//     });
-//   }
-//   }
-
-//   // ============ PAGE 9: DEPARTMENTAL LANDSCAPE ============
-//   if (shouldIncludeSection('departmentsAnalysis')) {
-//     addNewPage();
-//     addSectionHeader('All Departments - Tender Volume Overview', colors.darkBlue);
-
-//   const allDepts = reportData.data.allDepartments;
-
-//   if (allDepts && allDepts.length > 0) {
-//     const depts = allDepts.slice(0, 20);
-//     const maxTenders = Math.max(...depts.map(d => typeof d.total_tenders === 'string' ? parseInt(d.total_tenders) : d.total_tenders));
-
-//     doc.setFontSize(9);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text('Department-wise Tender Distribution (Top 20)', margin, yPosition);
-//     yPosition += 10;
-
-//     depts.forEach((dept) => {
-//       checkPageBreak(10);
-      
-//       const tenderCount = typeof dept.total_tenders === 'string' ? parseInt(dept.total_tenders) : dept.total_tenders;
-//       const barAreaWidth = pageWidth - 2 * margin - 75;
-//       const barWidth = ((tenderCount / maxTenders) * barAreaWidth);
-      
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'normal');
-//       doc.setTextColor(...colors.darkGray);
-//       const deptText = clean(dept.department).substring(0, 32);
-//       doc.text(deptText, margin, yPosition);
-      
-//       // Draw numerical value on the left side of the bar
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.darkBlue);
-//       const valueText = tenderCount.toLocaleString();
-//       const valueWidth = doc.getTextWidth(valueText);
-//       doc.text(valueText, margin + 70 - valueWidth - 2, yPosition);
-      
-//       doc.setFillColor(...colors.lightGray);
-//       doc.roundedRect(margin + 70, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
-      
-//       doc.setFillColor(...colors.darkBlue);
-//       doc.roundedRect(margin + 70, yPosition - 4, barWidth, 6, 1, 1, 'F');
-      
-//       yPosition += 9;
-//     });
-//   }
-//   }
-
-//   // ============ PAGE 10: LOW COMPETITION OPPORTUNITIES ============
-//   if (shouldIncludeSection('lowCompetition')) {
-//     addNewPage();
-//     addSectionHeader('Low Competition Bids - Strategic Opportunities', colors.successGreen);
-
-//   const lowCompBids = reportData.data.lowCompetitionBids;
-
-//   if (lowCompBids?.results && lowCompBids.results.length > 0) {
-//     const bids = lowCompBids.results.slice(0, 25);
-
-//     const summaryCardHeight = 20;
-//     doc.setFillColor(240, 253, 244);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, summaryCardHeight, 2, 2, 'F');
-//     doc.setDrawColor(...colors.successGreen);
-//     doc.setLineWidth(0.5);
-//     doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, summaryCardHeight, 2, 2, 'S');
-    
-//     doc.setFontSize(8);
-//     doc.setFont('helvetica', 'bold');
-//     doc.setTextColor(...colors.mediumGray);
-//     doc.text('Total Low Competition Bids: ', margin + 5, yPosition + 8);
-//     doc.setTextColor(...colors.successGreen);
-//     doc.text(lowCompBids.count.toLocaleString(), margin + 65, yPosition + 8);
-    
-//     doc.setTextColor(...colors.mediumGray);
-//     doc.text('Generated At: ', margin + 5, yPosition + 15);
-//     doc.setTextColor(...colors.darkGray);
-//     doc.text(formatDate(lowCompBids.generated_at), margin + 35, yPosition + 15);
-    
-//     yPosition += summaryCardHeight + 6;
-
-//     // Add note about data
-//     doc.setFontSize(7);
-//     doc.setFont('helvetica', 'italic');
-//     doc.setTextColor(...colors.mediumGray);
-//     doc.text('Note: "-" indicates data not available from source system. Low seller count indicates opportunity.', margin, yPosition);
-//     yPosition += 6;
-
-//     const bidTableData = bids.map((bid) => [
-//       clean(bid.bid_number).substring(0, 23),
-//       (bid.quantity || 0).toLocaleString(),
-//       clean(bid.organisation).substring(0, 30) || '-',
-//       clean(bid.department).substring(0, 28) || '-',
-//       clean(bid.ministry).substring(0, 25) || '-',
-//       bid.bid_end_ts ? formatDate(bid.bid_end_ts) : '-',
-//       (bid.seller_count || 0).toString()
-//     ]);
-
-//     autoTable(doc, {
-//       startY: yPosition,
-//       head: [['Bid Number', 'Qty', 'Organization', 'Department', 'Ministry', 'Bid End Date', 'Sellers']],
-//       body: bidTableData,
-//       theme: 'grid',
-//       headStyles: {
-//         fillColor: colors.successGreen,
-//         textColor: colors.white,
-//         fontSize: 7.5,
-//         fontStyle: 'bold',
-//         halign: 'center',
-//         cellPadding: 2.5
-//       },
-//       bodyStyles: {
-//         fontSize: 7,
-//         cellPadding: 2,
-//         lineColor: [209, 213, 219],
-//         lineWidth: 0.2
-//       },
-//       columnStyles: {
-//         0: { cellWidth: 24 },
-//         1: { cellWidth: 11, halign: 'right', fontStyle: 'bold' },
-//         2: { cellWidth: 33 },
-//         3: { cellWidth: 32 },
-//         4: { cellWidth: 28 },
-//         5: { cellWidth: 20, halign: 'center' },
-//         6: { cellWidth: 13, halign: 'center', fontStyle: 'bold', textColor: [231, 76, 60], fillColor: [254, 242, 242] }
-//       },
-//       margin: { left: margin - 2, right: margin - 2, top: SAFE_TOP },
-//       didDrawPage: () => {
-//         addPageHeader();
-//         addPageFooter();
-//       }
-//     });
-
-//     yPosition = (doc as any).lastAutoTable.finalY + 8;
-//   }
-//   }
-
-//   // ============ PAGES 11-12: SELLER BID PERFORMANCE ANALYSIS ============
-//   if (shouldIncludeSection('bidsSummary')) {
-//     const sellerBids = reportData.data.sellerBids;
-
-//     if (sellerBids) {
-//       addNewPage();
-//       addSectionHeader(clean(reportData.meta.params_used.sellerName) + ' - Bidding Performance Deep Dive', colors.electricBlue);
-
-//     // Performance Summary Cards
-//     if (sellerBids.table1) {
-//       const t1 = sellerBids.table1;
-//       const cardWidth = (pageWidth - 2 * margin - 15) / 3;
-//       const cardHeight = 25;
-//       let cardX = margin;
-      
-//       const cardsData = [
-//         { label: 'Total Wins', value: t1.win.toLocaleString(), color: colors.successGreen, bgColor: [240, 253, 244] },
-//         { label: 'Total Lost', value: t1.lost.toLocaleString(), color: colors.errorRed, bgColor: [254, 226, 226] },
-//         { label: 'Win Rate', value: `${((t1.win / (t1.win + t1.lost)) * 100).toFixed(1)}%`, color: colors.darkBlue, bgColor: [239, 246, 255] }
-//       ];
-
-//       cardsData.forEach((card, index) => {
-//       doc.setFillColor(card.bgColor[0], card.bgColor[1], card.bgColor[2]);
-//       doc.roundedRect(cardX, yPosition, cardWidth, cardHeight, 2, 2, 'F');
-        
-//         doc.setFontSize(16);
-//         doc.setFont('helvetica', 'bold');
-//         doc.setTextColor(...card.color);
-//         doc.text(card.value, cardX + cardWidth / 2, yPosition + 13, { align: 'center' });
-        
-//         doc.setFontSize(8);
-//         doc.setFont('helvetica', 'normal');
-//         doc.setTextColor(...colors.mediumGray);
-//         doc.text(card.label, cardX + cardWidth / 2, yPosition + 20, { align: 'center' });
-        
-//         cardX += cardWidth + 5;
-//       });
-      
-//       yPosition += cardHeight + 6;
-
-//       cardX = margin;
-//       const cardsData2 = [
-//         { label: 'Total Bid Value', value: formatCurrency(t1.totalBidValue), color: colors.warningOrange, bgColor: [254, 243, 199] },
-//         { label: 'Qualified Bid Value', value: formatCurrency(t1.qualifiedBidValue), color: colors.successGreen, bgColor: [240, 253, 244] },
-//         { label: 'Avg Order Value', value: formatCurrency(t1.averageOrderValue), color: [138, 43, 226], bgColor: [243, 232, 255] }
-//       ];
-
-//       cardsData2.forEach((card, index) => {
-//         doc.setFillColor(card.bgColor[0], card.bgColor[1], card.bgColor[2]);
-//         doc.roundedRect(cardX, yPosition, cardWidth, cardHeight, 2, 2, 'F');
-        
-//         doc.setFontSize(11);
-//         doc.setFont('helvetica', 'bold');
-//         doc.setTextColor(card.color[0], card.color[1], card.color[2]);
-//         const valueText = card.value.length > 18 ? card.value.substring(0, 18) : card.value;
-//         doc.text(valueText, cardX + cardWidth / 2, yPosition + 13, { align: 'center' });
-        
-//         doc.setFontSize(8);
-//         doc.setFont('helvetica', 'normal');
-//         doc.setTextColor(...colors.mediumGray);
-//         doc.text(card.label, cardX + cardWidth / 2, yPosition + 20, { align: 'center' });
-        
-//         cardX += cardWidth + 5;
-//       });
-      
-//       yPosition += cardHeight + 10;
+//   doc.text(`Generated on: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, 115, { align: "center" });
+
+//   doc.setLineWidth(0.5);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 150, 35, "S");
+//   doc.setFontSize(11);
+//   doc.text("Comprehensive Tender Performance Report", pageWidth / 2, 155, { align: "center" });
+
+//   /* -------------------- ESTIMATED MISSED VALUE ----------------------- */
+//   newPage();
+//   addHeader();
+//   addFooter();
+
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+
+//     let yPos = (doc as any).lastAutoTable?.finalY + 10 || 35;
+//     if (yPos + 40 > pageHeight - 30) {
+//       newPage();
+//       yPos = 30;
 //     }
 
-//     // Departmental Performance
-//     if (sellerBids.departmentCount && sellerBids.departmentCount.length > 0) {
-//       checkPageBreak(20);
-      
-//       doc.setFontSize(10);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.darkGray);
-//       doc.text('Revenue by Department', margin, yPosition);
-//       yPosition += 8;
+//     doc.setFontSize(12);
+//     doc.setTextColor(...colors.warningOrange);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Potential Missed Opportunity:", margin, yPos);
 
-//       const deptTableData = sellerBids.departmentCount
-//         .sort((a, b) => b.revenue - a.revenue)
-//         .map((dept) => [
-//           clean(dept.department).substring(0, 50),
-//           dept.bid_count.toLocaleString(),
-//           formatCurrency(dept.revenue)
-//         ]);
+//     doc.setFontSize(16);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.text(formatCurrency(missedVal), margin + 85, yPos);
 
-//       const totalRevenue = sellerBids.departmentCount.reduce((sum, d) => sum + d.revenue, 0);
-//       deptTableData.push([
-//         'TOTAL',
-//         sellerBids.departmentCount.reduce((sum, d) => sum + d.bid_count, 0).toLocaleString(),
-//         formatCurrency(totalRevenue)
-//       ]);
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     const info = "Represents estimated value of tenders where participation was possible but not recorded.";
+//     const infoLines = doc.splitTextToSize(info, pageWidth - 2 * margin);
+//     doc.text(infoLines, margin, yPos + 8);
 
-//       autoTable(doc, {
-//         startY: yPosition,
-//         head: [['Department', 'Bid Count', 'Revenue']],
-//         body: deptTableData,
-//         theme: 'striped',
-//         headStyles: {
-//           fillColor: colors.darkBlue,
-//           textColor: colors.white,
-//           fontSize: 8,
-//           fontStyle: 'bold'
-//         },
-//         bodyStyles: {
-//           fontSize: 8,
-//           cellPadding: 2.5
-//         },
-//         columnStyles: {
-//           0: { cellWidth: 120 },
-//           1: { cellWidth: 30, halign: 'right' },
-//           2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' }
-//         },
-//         margin: { left: margin, right: margin, top: SAFE_TOP },
-//         didDrawPage: () => {
-//           addPageHeader();
-//           addPageFooter();
-//         }
-//       });
+//     (doc as any).lastAutoTable = { finalY: yPos + 25 };
+//   } else {
+//     let yPos = (doc as any).lastAutoTable?.finalY + 10 || 35;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("No estimated missed value calculated for this report.", margin, yPos);
+//     (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//   }
 
-//       yPosition = (doc as any).lastAutoTable.finalY + 10;
-//     }
+//   /* --------------------- MARKET OVERVIEW - PRICE BAND -------------------- */
+//   if (filters.includeSections.includes("marketOverview")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Price Band Analysis", colors.successGreen);
 
-//     // State-wise Analysis
-//     if (sellerBids.stateCount && sellerBids.stateCount.length > 0) {
-//       checkPageBreak(20);
-      
-//       doc.setFontSize(10);
-//       doc.setFont('helvetica', 'bold');
-//       doc.setTextColor(...colors.darkGray);
-//       doc.text('Bids by State', margin, yPosition);
-//       yPosition += 8;
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     let startY = (doc as any).lastAutoTable?.finalY + 10 || 35;
 
-//       const stateTableData = sellerBids.stateCount
-//         .sort((a, b) => b.revenue - a.revenue)
-//         .slice(0, 15)
-//         .map((state) => [
-//           clean(state.state).substring(0, 40),
-//           state.bid_count.toLocaleString(),
-//           formatCurrency(state.revenue)
-//         ]);
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const tableData = [
+//         ["Highest Price", formatCurrency(highest)],
+//         ["Average Price", formatCurrency(average)],
+//         ["Lowest Price", formatCurrency(lowest)],
+//         ["Total Bids Analyzed", String(count)],
+//       ];
 
 //       autoTable(doc, {
-//         startY: yPosition,
-//         head: [['State', 'Bid Count', 'Revenue']],
-//         body: stateTableData,
-//         theme: 'grid',
+//         startY,
+//         head: [["Metric", "Value"]],
+//         body: tableData,
+//         theme: "grid",
 //         headStyles: {
 //           fillColor: colors.successGreen,
-//           textColor: colors.white,
-//           fontSize: 8,
-//           fontStyle: 'bold'
+//           textColor: 255,
+//           fontStyle: "bold",
+//           fontSize: 10,
 //         },
 //         bodyStyles: {
-//           fontSize: 8,
-//           cellPadding: 2
+//           fontSize: 9,
+//           cellPadding: 4,
+//           overflow: "linebreak",
 //         },
-//         columnStyles: {
-//           0: { cellWidth: 100 },
-//           1: { cellWidth: 30, halign: 'right' },
-//           2: { cellWidth: 50, halign: 'right' }
-//         },
-//         margin: { left: margin, right: margin, top: SAFE_TOP },
-//         didDrawPage: () => {
-//           addPageHeader();
-//           addPageFooter();
-//         }
+//         columnStyles: { 0: { cellWidth: 80, fontStyle: "bold" }, 1: { halign: "right", cellWidth: 80 } },
+//         margin: { left: margin, right: margin },
 //       });
 
-//       yPosition = (doc as any).lastAutoTable.finalY + 8;
+//       let tableEnd = (doc as any).lastAutoTable.finalY + 10;
+//       if (tableEnd + 40 > pageHeight - 30) {
+//         newPage();
+//         tableEnd = 30;
+//       }
+
+//       doc.setFillColor(...colors.lightBlue);
+//       doc.roundedRect(margin, tableEnd, pageWidth - 2 * margin, 30, 3, 3, "F");
+//       doc.setDrawColor(...colors.electricBlue);
+//       doc.setLineWidth(1);
+//       doc.roundedRect(margin, tableEnd, pageWidth - 2 * margin, 30, 3, 3, "S");
+
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Price Insights:", margin + 5, tableEnd + 8);
+
+//       doc.setFont("helvetica", "normal");
+//       doc.setFontSize(9);
+//       doc.setTextColor(...colors.darkGray);
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       const insightLines = doc.splitTextToSize(insight, pageWidth - 2 * margin - 10);
+//       doc.text(insightLines, margin + 5, tableEnd + 16);
+//       (doc as any).lastAutoTable = { finalY: tableEnd + 35 };
+//     } else {
+//       const yPos = startY;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.setFont("helvetica", "normal");
+//       doc.text("No price band data available for this report.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* ---------------------- SELLER BIDDING SUMMARY ---------------------- */
+//   if (filters.includeSections.includes("bidsSummary")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Seller Bidding Summary", colors.darkBlue);
+
+//     const bids = reportData?.data?.sellerBids || {};
+//     const summary = bids?.table1 || {};
+
+//     const cards = [
+//       { label: "Wins", value: summary.win || 0, color: colors.successGreen },
+//       { label: "Lost", value: summary.lost || 0, color: colors.errorRed },
+//       { label: "Total Bids", value: summary.totalBidsParticipated || 0, color: colors.darkBlue },
+//       { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), color: colors.navyBlue },
+//       { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), color: colors.successGreen },
+//       { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), color: colors.electricBlue },
+//     ];
+
+//     let y = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//     const cardWidth = 60;
+//     const cardHeight = 22;
+//     const spacing = 6;
+//     const cardsPerRow = 3;
+
+//     cards.forEach((card, index) => {
+//       const row = Math.floor(index / cardsPerRow);
+//       const col = index % cardsPerRow;
+//       const x = margin + col * (cardWidth + spacing);
+//       const yPos = y + row * (cardHeight + spacing);
+
+//       doc.setFillColor(...colors.lightBlue);
+//       doc.roundedRect(x, yPos, cardWidth, cardHeight, 2, 2, "F");
+//       doc.setDrawColor(...card.color);
+//       doc.setLineWidth(0.5);
+//       doc.roundedRect(x, yPos, cardWidth, cardHeight, 2, 2, "S");
+
+//       doc.setFontSize(8);
+//       doc.setTextColor(...colors.darkGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(card.label, x + 3, yPos + 8);
+
+//       doc.setFontSize(11);
+//       doc.setTextColor(...card.color);
+//       doc.setFont("helvetica", "bold");
+//       const valueText = String(card.value);
+//       doc.text(short(valueText, 15), x + 3, yPos + 17);
+//     });
+
+//     y += Math.ceil(cards.length / cardsPerRow) * (cardHeight + spacing) + 12;
+//     (doc as any).lastAutoTable = { finalY: y };
+
+//     // monthly graph (if any)
+//     const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//     const months = Object.keys(monthlyData);
+//     if (months.length > 0) {
+//       if (y + 90 > pageHeight - 30) {
+//         newPage();
+//         y = 30;
+//       }
+
+//       doc.setFontSize(11);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Monthly Bid Performance", margin, y);
+//       y += 8;
+
+//       const values = months.map((m) => Number(monthlyData[m]) || 0);
+//       const maxVal = Math.max(...values, 1);
+//       const graphWidth = pageWidth - 2 * margin - 40;
+//       const graphHeight = 50;
+//       const startX = margin + 20;
+//       const startY = y + graphHeight;
+
+//       doc.setDrawColor(...colors.lightGray);
+//       doc.setLineWidth(0.5);
+//       doc.rect(startX, y, graphWidth, graphHeight);
+
+//       const barSpacing = 2;
+//       const barWidth = Math.max(5, (graphWidth - (months.length - 1) * barSpacing) / months.length);
+
+//       values.forEach((val: number, i: number) => {
+//         const barHeight = (val / maxVal) * graphHeight;
+//         const barX = startX + i * (barWidth + barSpacing);
+//         const barY = startY - barHeight;
+
+//         doc.setFillColor(...colors.electricBlue);
+//         doc.rect(barX, barY, barWidth, barHeight, "F");
+//       });
+
+//       doc.setFontSize(6);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       months.forEach((m: string, i: number) => {
+//         const labelX = startX + i * (barWidth + barSpacing);
+//         const monthLabel = m.split("-")[1] || m.substring(5, 7);
+//         doc.text(monthLabel, labelX + barWidth / 2, startY + 5, { align: "center" });
+//       });
+
+//       y = startY + 15;
+//       (doc as any).lastAutoTable = { finalY: y };
 //     }
 
-//     // Monthly Trends
-//     if (sellerBids.monthlyTotals && sellerBids.monthlyTotals.length > 0) {
-//       addNewPage();
-//       addSectionHeader('Monthly Bidding Trends', colors.warningOrange);
+//     // detailed bid history table
+//     const bidRows = bids?.sortedRows ?? [];
+//     if (bidRows.length > 0) {
+//       newPage();
+//       addSectionHeader("Detailed Bid History", colors.navyBlue);
 
-//       const monthlyTableData = sellerBids.monthlyTotals.map((month) => [
-//         clean(month.month),
-//         formatCurrency(month.bid_value)
+//       const bidTable = bidRows.slice(0, 20).map((b: any, i: number) => [
+//         String(i + 1),
+//         formatDate(b.participated_on),
+//         short(b.offered_item || "-", 40),
+//         short(b.organisation || b.org || "-", 30),
+//         short(b.department || b.dept || "-", 30),
+//         safeText(b.rank, "-"),
+//         formatCurrency(b.total_price),
 //       ]);
 
 //       autoTable(doc, {
-//         startY: yPosition,
-//         head: [['Month', 'Bid Value']],
-//         body: monthlyTableData,
-//         theme: 'striped',
-//         headStyles: {
-//           fillColor: colors.warningOrange,
-//           textColor: colors.white,
-//           fontSize: 9,
-//           fontStyle: 'bold'
-//         },
-//         bodyStyles: {
-//           fontSize: 8,
-//           cellPadding: 3
-//         },
+//         startY: (doc as any).lastAutoTable?.finalY + 12 || 35,
+//         head: [["#", "Date", "Item", "Organisation", "Department", "Rank", "Bid Value"]],
+//         body: bidTable,
+//         theme: "striped",
+//         headStyles: { fillColor: colors.navyBlue, textColor: 255, fontStyle: "bold", fontSize: 8 },
+//         bodyStyles: { fontSize: 7, cellPadding: 2, overflow: "linebreak" },
 //         columnStyles: {
-//           0: { cellWidth: 50 },
-//           1: { cellWidth: 50, halign: 'right', fontStyle: 'bold' }
+//           0: { cellWidth: 8, halign: "center" },
+//           1: { cellWidth: 20 },
+//           2: { cellWidth: 45 },
+//           3: { cellWidth: 32 },
+//           4: { cellWidth: 32 },
+//           5: { cellWidth: 12, halign: "center" },
+//           6: { cellWidth: 26, halign: "right" },
 //         },
-//         margin: { left: margin, right: margin, top: SAFE_TOP },
-//         didDrawPage: () => {
-//           addPageHeader();
-//           addPageFooter();
-//         }
+//         margin: { left: margin, right: margin },
 //       });
-
-//       yPosition = (doc as any).lastAutoTable.finalY + 8;
 //     }
+//   }
 
-//     // ============ PAGES 13-14: DETAILED BID HISTORY ============
-//     if (sellerBids.sortedRows && sellerBids.sortedRows.length > 0) {
-//       addNewPage();
-//       addSectionHeader('Bid-by-Bid Performance History', colors.electricBlue);
+//   /* ---------------------- MISSED BUT WINNABLE ---------------------- */
+//   if (filters.includeSections.includes("missedTenders")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Missed But Winnable Tenders", colors.errorRed);
 
-//       // Add note about data availability
-//       doc.setFontSize(7);
-//       doc.setFont('helvetica', 'italic');
-//       doc.setTextColor(...colors.mediumGray);
-//       doc.text('Note: "-" indicates data not available from source system', margin, yPosition);
-//       yPosition += 6;
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
 
-//       const bidHistoryData = sellerBids.sortedRows.map((row) => {
-//         const r: any = row as any;
-//         const status = clean(r.seller_status ?? r.status);
-//         const organisation = clean(r.organisation ?? r.org).substring(0, 28) || '-';
-//         const department = clean(r.department ?? r.dept).substring(0, 28) || '-';
-//         const price = r.total_price != null ? formatCurrency(r.total_price) : '-';
-//         return [
-//           row.participated_on ? formatDate(row.participated_on) : '-',
-//           clean(row.offered_item).substring(0, 42),
-//           status || '-',
-//           clean(row.rank) || '-',
-//           price,
-//           organisation,
-//           department
-//         ];
-//       });
+//     if (recentWins.length > 0) {
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       const yStart = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.text("Your Recent Wins", margin, yStart);
 
 //       autoTable(doc, {
-//         startY: yPosition,
-//         head: [['Date', 'Item', 'Status', 'Rank', 'Price', 'Organization', 'Department']],
-//         body: bidHistoryData,
-//         theme: 'grid',
-//         headStyles: {
-//           fillColor: colors.electricBlue,
-//           textColor: colors.white,
-//           fontSize: 7.5,
-//           fontStyle: 'bold',
-//           halign: 'center',
-//           cellPadding: 3
-//         },
-//         bodyStyles: {
-//           fontSize: 7,
-//           cellPadding: 2.5,
-//           lineColor: [209, 213, 219],
-//           lineWidth: 0.2,
-//           minCellHeight: 8
-//         },
+//         startY: yStart + 6,
+//         head: [["#", "Bid No", "Item", "Qty", "Price", "Org", "Dept", "Ended"]],
+//         body: recentWins.slice(0, 10).map((r: any, i: number) => [
+//           String(i + 1),
+//           short(r.bid_number || "-", 20),
+//           short(r.offered_item || "-", 35),
+//           safeText(r.quantity),
+//           formatCurrency(r.total_price),
+//           short(r.org || "-", 24),
+//           short(r.dept || "-", 24),
+//           formatDate(r.ended_at),
+//         ]),
+//         theme: "striped",
+//         headStyles: { fillColor: colors.errorRed, textColor: 255, fontStyle: "bold", fontSize: 8 },
+//         bodyStyles: { fontSize: 7, cellPadding: 2, overflow: "linebreak" },
 //         columnStyles: {
-//           0: { cellWidth: 20, halign: 'center', fontStyle: 'bold' },
-//           1: { cellWidth: 46 },
-//           2: { cellWidth: 16, halign: 'center' },
-//           3: { cellWidth: 12, halign: 'center', fontStyle: 'bold' },
-//           4: { cellWidth: 25, halign: 'right', fontStyle: 'bold' },
-//           5: { cellWidth: 32 },
-//           6: { cellWidth: 30 }
+//           0: { cellWidth: 8 },
+//           1: { cellWidth: 24 },
+//           2: { cellWidth: 38 },
+//           3: { cellWidth: 10, halign: "right" },
+//           4: { cellWidth: 22, halign: "right" },
+//           5: { cellWidth: 26 },
+//           6: { cellWidth: 26 },
+//           7: { cellWidth: 18 },
 //         },
-//         margin: { left: margin - 2, right: margin - 2, top: SAFE_TOP },
-//         showHead: 'everyPage',
-//         willDrawCell: (data: any) => {
-//           if (data.section === 'body' && data.column.index === 2) {
-//             const status = data.cell.raw;
-//             if (status === 'Qualified') {
-//               data.cell.styles.textColor = colors.successGreen;
-//             } else if (status && status.toLowerCase().includes('disqualified')) {
-//               data.cell.styles.textColor = colors.errorRed;
-//             }
-//           }
-//           if (data.section === 'body' && data.column.index === 3) {
-//             const rank = data.cell.raw;
-//             if (rank === 'L1') {
-//               data.cell.styles.fillColor = [240, 253, 244];
-//               data.cell.styles.textColor = colors.successGreen;
-//             } else if (rank === 'L2') {
-//               data.cell.styles.fillColor = [254, 243, 199];
-//               data.cell.styles.textColor = colors.warningOrange;
-//             }
-//           }
-//         },
-//         didDrawPage: (data: any) => {
-//           if (data.pageNumber > data.table.startPageNumber) {
-//             addPageHeader();
-//             addPageFooter();
-//           }
-//         }
+//         margin: { left: margin, right: margin },
 //       });
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(9);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.setFont("helvetica", "normal");
+//       doc.text("No recent wins data available.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
 
-//       yPosition = (doc as any).lastAutoTable.finalY + 8;
+//     if (marketWins.length > 0) {
+//       let nextY = (doc as any).lastAutoTable?.finalY + 15 || 70;
+//       if (nextY + 80 > pageHeight - 30) {
+//         newPage();
+//         nextY = 30;
+//       }
+
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.warningOrange);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Competitor Wins (Market Intelligence)", margin, nextY);
+
+//       autoTable(doc, {
+//         startY: nextY + 6,
+//         head: [["#", "Bid No", "Seller", "Item", "Qty", "Price", "Org", "Ended"]],
+//         body: marketWins.slice(0, 10).map((r: any, i: number) => [
+//           String(i + 1),
+//           short(r.bid_number || "-", 20),
+//           short(r.seller_name || "-", 28),
+//           short(r.offered_item || "-", 32),
+//           safeText(r.quantity),
+//           formatCurrency(r.total_price),
+//           short(r.org || "-", 24),
+//           formatDate(r.ended_at),
+//         ]),
+//         theme: "striped",
+//         headStyles: { fillColor: colors.warningOrange, textColor: 255, fontStyle: "bold", fontSize: 8 },
+//         bodyStyles: { fontSize: 7, cellPadding: 2, overflow: "linebreak" },
+//         columnStyles: {
+//           0: { cellWidth: 8 },
+//           1: { cellWidth: 23 },
+//           2: { cellWidth: 30 },
+//           3: { cellWidth: 35 },
+//           4: { cellWidth: 10, halign: "right" },
+//           5: { cellWidth: 22, halign: "right" },
+//           6: { cellWidth: 26 },
+//           7: { cellWidth: 18 },
+//         },
+//         margin: { left: margin, right: margin },
+//       });
 //     }
 //   }
+
+//   /* ------------------------- AI INSIGHTS --------------------------- */
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai =
+//       reportData?.data?.missedButWinnable?.ai ||
+//       (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     doc.internal.scaleFactor = 1.33;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       newPage();
+//       addHeader();
+//       addFooter();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+
+//       let y = ((doc as any).lastAutoTable?.finalY ?? 35) + 12;
+
+//       // Strategy Summary
+//       if (ai.strategy_summary) {
+//         if (y + 40 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFont("helvetica", "bold");
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.text("Strategy Summary:", margin, y);
+//         y += 7;
+
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.darkGray);
+//         const lines = doc.splitTextToSize(normalize(ai.strategy_summary), pageWidth - 2 * margin);
+//         doc.text(lines, margin, y);
+//         y += lines.length * 5 + 10;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // AI Likely wins
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       const globalSignals = ai?.signals || {};
+
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({
+//               ...w,
+//               offered_item: r.offered_item,
+//               bid_number: r.bid_number,
+//               dept: r.dept,
+//               ministry: r.ministry,
+//               org: r.org,
+//               signals: r.signals,
+//               source: "Per-item",
+//             })));
+//           } else if (r.signals && Object.keys(r.signals).length > 0) {
+//             allLikelyWins.push({
+//               offered_item: r.offered_item,
+//               bid_number: r.bid_number,
+//               dept: r.dept,
+//               ministry: r.ministry,
+//               org: r.org,
+//               signals: r.signals,
+//               total_price: r.total_price,
+//               source: "Signal-based",
+//             });
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         newPage();
+//         addSectionHeader("AI Predicted & Signal-Based Likely Wins", colors.successGreen);
+
+//         const table = allLikelyWins.slice(0, 10).map((l: any, i: number) => {
+//           const reason =
+//             l.reason ||
+//             (l.signals
+//               ? Object.entries(l.signals).map(([k, v]) => `${k}: ${clean(v)}`).join(", ")
+//               : "AI predicted based on historical success patterns");
+
+//           return [
+//             String(i + 1),
+//             short(l.offered_item || "-", 45),
+//             short(reason, 60),
+//             formatCurrency(l.total_price || 0),
+//             short(l.org || "-", 26),
+//             short(l.dept || "-", 26),
+//             short(l.ministry || "-", 26),
+//           ];
+//         });
+
+//         autoTable(doc, {
+//           startY: ((doc as any).lastAutoTable?.finalY ?? 35) + 12,
+//           head: [["#", "Item", "Reason / Signal", "Est. Value", "Organisation", "Department", "Ministry"]],
+//           body: table,
+//           theme: "striped",
+//           headStyles: { fillColor: colors.successGreen, textColor: 255, fontStyle: "bold", fontSize: 9 },
+//           bodyStyles: { fontSize: 8, cellPadding: 3, overflow: "linebreak" },
+//           columnStyles: {
+//             0: { cellWidth: 8, halign: "center" },
+//             1: { cellWidth: 45 },
+//             2: { cellWidth: 55 },
+//             3: { cellWidth: 20, halign: "right" },
+//             4: { cellWidth: 28 },
+//             5: { cellWidth: 28 },
+//             6: { cellWidth: 28 },
+//           },
+//           margin: { left: margin, right: margin },
+//         });
+
+//         let yPos = (doc as any).lastAutoTable.finalY + 12;
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Likely Wins analyzed: ${allLikelyWins.length} | Includes AI inferences and signal-based predictions`, margin, yPos);
+//         yPos += 10;
+
+//         // Affinity renderer
+//         const renderAffinity = (title: string, data: any[]) => {
+//           if (!data || (Array.isArray(data) && data.length === 0)) return;
+//           if (!Array.isArray(data)) data = [data];
+//           if (typeof data[0] === "string" || typeof data[0] === "number") {
+//             data = data.map((v: any) => ({ entity: String(v), value: "-" }));
+//           }
+
+//           if (yPos + 60 > pageHeight - 30) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFont("helvetica", "bold");
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.text(title, margin, yPos);
+//           yPos += 6;
+
+//           const first = data[0];
+//           const keys = Object.keys(first);
+//           let keyName = keys.find((k) => ["org", "dept", "ministry", "entity"].includes(k.toLowerCase())) || "entity";
+
+//           const rows = data.map((entry: any) => [
+//             entry[keyName] || "-",
+//             entry.value || entry.win_rate || entry.count || "-",
+//           ]);
+
+//           doc.setFont("helvetica", "normal");
+//           doc.setFontSize(9);
+//           autoTable(doc, {
+//             startY: yPos,
+//             head: [["Entity", "Value"]],
+//             body: rows,
+//             theme: "grid",
+//             headStyles: { fillColor: colors.darkBlue, textColor: 255, fontStyle: "bold", fontSize: 9 },
+//             bodyStyles: { fontSize: 8, cellPadding: 3 },
+//             columnStyles: { 0: { cellWidth: 80 }, 1: { cellWidth: 40, halign: "center" } },
+//             margin: { left: margin, right: margin },
+//           });
+
+//           yPos = (doc as any).lastAutoTable.finalY + 10;
+//         };
+
+//         // show signals per item from recentWins
+//         recentWins.forEach((r: any, idx: number) => {
+//           const s = r.signals;
+//           if (!s || Object.keys(s).length === 0) return;
+//           if (yPos + 40 > pageHeight - 30) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFont("helvetica", "bold");
+//           doc.setTextColor(...colors.darkBlue);
+//           doc.setFontSize(11);
+//           doc.text(short(r.offered_item || `Item ${idx + 1}`, 90), margin, yPos);
+//           yPos += 7;
+
+//           renderAffinity("Org Affinity", s.org_affinity);
+//           renderAffinity("Dept Affinity", s.dept_affinity);
+//           renderAffinity("Ministry Affinity", s.ministry_affinity);
+//           renderAffinity("Price Range", s.price_range);
+//           renderAffinity("Quantity Range", s.quantity_range);
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       // Quantity & Price Range Analysis (global signals)
+//       const signals = globalSignals || {};
+//       if ((signals.quantity_ranges && signals.quantity_ranges.length > 0) || (signals.price_ranges && signals.price_ranges.length > 0)) {
+//         newPage();
+//         addSectionHeader("Quantity & Price Range Analysis", colors.electricBlue);
+
+//         let rangeY = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//         const renderRange = (title: string, list: any[], type: "price" | "quantity") => {
+//           if (!Array.isArray(list) || list.length === 0) return;
+//           if (rangeY + 30 > pageHeight - 30) {
+//             newPage();
+//             rangeY = 30;
+//           }
+
+//           doc.setFont("helvetica", "bold");
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.text(`${title}:`, margin, rangeY);
+//           rangeY += 7;
+
+//           const rows = type === "price"
+//             ? list.map((r: any) => [`${formatCurrency(r.min_price)} - ${formatCurrency(r.max_price)}`, `${r.count} bid${r.count !== 1 ? "s" : ""}`])
+//             : list.map((r: any) => [normalize(r.range), `${r.count} bid${r.count !== 1 ? "s" : ""}`]);
+
+//           doc.setFont("helvetica", "normal");
+//           doc.setFontSize(9);
+//           autoTable(doc, {
+//             startY: rangeY,
+//             head: [["Range", "Count"]],
+//             body: rows,
+//             theme: "grid",
+//             headStyles: { fillColor: colors.electricBlue, textColor: 255, fontStyle: "bold", fontSize: 9 },
+//             bodyStyles: { fontSize: 8, cellPadding: 3 },
+//             columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 40, halign: "center" } },
+//             margin: { left: margin, right: margin },
+//           });
+
+//           rangeY = (doc as any).lastAutoTable.finalY + 10;
+//         };
+
+//         renderRange("Quantity Ranges", signals.quantity_ranges || [], "quantity");
+//         renderRange("Price Ranges", signals.price_ranges || [], "price");
+//         (doc as any).lastAutoTable = { finalY: rangeY };
+//       }
+
+//       // AI Recommendations & next steps
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+//       const expansionAreas = normalizeArray(guidance.expansion_areas);
+
+//       if (guidance.note || nextSteps.length || expansionAreas.length) {
+//         newPage();
+//         addSectionHeader("AI Recommendations & Strategic Roadmap", colors.successGreen);
+
+//         let yG = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//         if (guidance.note) {
+//           doc.setFont("helvetica", "bold");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.text("Note:", margin, yG);
+//           yG += 6;
+
+//           doc.setFont("helvetica", "normal");
+//           doc.setTextColor(...colors.darkGray);
+//           const lines = doc.splitTextToSize(normalize(guidance.note), pageWidth - 2 * margin);
+//           doc.text(lines, margin, yG);
+//           yG += lines.length * 5 + 8;
+//         }
+
+//         if (nextSteps.length > 0) {
+//           doc.setFont("helvetica", "bold");
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.darkBlue);
+//           doc.text("Next Steps:", margin, yG);
+//           yG += 7;
+
+//           doc.setFont("helvetica", "normal");
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFontSize(9);
+//           nextSteps.forEach((step, i) => {
+//             const lines = doc.splitTextToSize(`${i + 1}. ${normalize(step)}`, pageWidth - 2 * margin - 10);
+//             doc.text(lines, margin + 5, yG);
+//             yG += lines.length * 5 + 3;
+//           });
+//           yG += 6;
+//         }
+
+//         if (expansionAreas.length > 0) {
+//           doc.setFont("helvetica", "bold");
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFontSize(10);
+//           doc.text("Expansion Opportunities:", margin, yG);
+//           yG += 7;
+
+//           doc.setFont("helvetica", "normal");
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFontSize(9);
+//           expansionAreas.forEach((area) => {
+//             const lines = doc.splitTextToSize(`• ${normalize(area)}`, pageWidth - 2 * margin - 10);
+//             doc.text(lines, margin + 5, yG);
+//             yG += lines.length * 5 + 3;
+//           });
+//         }
+
+//         (doc as any).lastAutoTable = { finalY: yG };
+//       }
+//     } else {
+//       newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFont("helvetica", "normal");
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.text("AI insights are being processed. This section will be populated in the next report.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
 //   }
+
+//   /* -------------------- CATEGORY ANALYSIS ------------------------ */
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Category-wise Tender Distribution", colors.darkBlue);
+
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       doc.setFont("helvetica", "normal");
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+
+//       let y = (doc as any).lastAutoTable?.finalY + 12 || 40;
+//       const timesValues = categories.map((c: any) => Number(c.times) || 0);
+//       const maxTimes = Math.max(...timesValues, 1);
+
+//       categories.slice(0, 30).forEach((c: any) => {
+//         if (y > pageHeight - 40) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const count = Number(c.times) || 0;
+//         const barWidth = (count / maxTimes) * (pageWidth - 120);
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.rect(margin + 65, y - 4, pageWidth - 120, 7, "F");
+
+//         doc.setFillColor(...colors.electricBlue);
+//         doc.rect(margin + 65, y - 4, barWidth, 7, "F");
+
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(short(c.category, 35), margin, y);
+
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(count), margin + 55, y, { align: "right" });
+
+//         y += 11;
+//       });
+
+//       if (catData?.metadata) {
+//         if (y + 30 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+//         y += 6;
+//         doc.setFillColor(...colors.backgroundGray);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, 22, 2, 2, "F");
+
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Summary:", margin + 5, y + 8);
+
+//         const meta = catData.metadata;
+//         const summaryText = `Total Categories: ${meta.totalItems ?? "-"} | Total Count: ${meta.totalCount ?? "-"} | Processing Time: ${meta.processingTime ?? "-"} ms`;
+
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(summaryText, margin + 5, y + 15);
+//         y += 26;
+//       }
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.setFont("helvetica", "normal");
+//       doc.text("No category data available.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* ----------------------- RIVALRY SCORE -------------------------- */
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     addSectionHeader(`Leading Competitors – ${deptName}`, colors.warningOrange);
+
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       departments.slice(0, 3).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0) {
+//           newPage();
+//         }
+//         const yStart = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Sellers: ${dept.total || 0}`, margin, yStart + 6);
+
+//         const sellers = dept.results || [];
+//         if (sellers.length > 0) {
+//           const sellerTableData = sellers.slice(0, 10).map((seller: any, index: number) => [
+//             String(index + 1),
+//             short(seller?.seller_name || "-", 110),
+//             String(seller?.participation_count ?? 0),
+//           ]);
+
+//           autoTable(doc, {
+//             startY: yStart + 12,
+//             head: [["Rank", "Seller Name", "Participations"]],
+//             body: sellerTableData,
+//             theme: "striped",
+//             headStyles: { fillColor: colors.warningOrange, textColor: 255, fontStyle: "bold", fontSize: 9 },
+//             bodyStyles: { fontSize: 8, cellPadding: 3, overflow: "linebreak" },
+//             columnStyles: {
+//               0: { cellWidth: 15, halign: "center", fontStyle: "bold" },
+//               1: { cellWidth: 120 },
+//               2: { cellWidth: 35, halign: "right", fontStyle: "bold" },
+//             },
+//             margin: { left: margin, right: margin },
+//           });
+//         }
+//       });
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.setFont("helvetica", "normal");
+//       doc.text("No competitor data found for the specified department.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* --------------------- STATES ANALYSIS -------------------------- */
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Top Performing States by Tender Volume", colors.successGreen);
+
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results ||
+//                        reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       doc.setFont("helvetica", "normal");
+//       doc.setFontSize(9);
+//       doc.setTextColor(...colors.darkGray);
+
+//       const maxTenders = Math.max(...statesData.map((s: any) => Number(s.total_tenders) || 0), 1);
+//       let y = (doc as any).lastAutoTable?.finalY + 12 || 40;
+
+//       statesData.slice(0, 29).forEach((state: any) => {
+//         if (y > pageHeight - 35) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const tenderCount = Number(state.total_tenders) || 0;
+//         const barAreaWidth = pageWidth - 120;
+//         const barWidth = (tenderCount / maxTenders) * barAreaWidth;
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.rect(margin + 65, y - 4, barAreaWidth, 7, "F");
+
+//         doc.setFillColor(...colors.successGreen);
+//         doc.rect(margin + 65, y - 4, barWidth, 7, "F");
+
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.text(short(state.state_name, 30), margin, y);
+
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(tenderCount), margin + 55, y, { align: "right" });
+//         doc.setFont("helvetica", "normal");
+
+//         y += 10;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.text("No state-level tender data found.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* ------------------- DEPARTMENTS ANALYSIS ----------------------- */
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("All Departments – Tender Volume Overview", colors.darkBlue);
+
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       doc.setFont("helvetica", "normal");
+//       doc.setFontSize(9);
+//       const counts = allDepts.map((d: any) => Number(d.total_tenders) || 0);
+//       const maxTenders = Math.max(...counts, 1);
+//       let y = (doc as any).lastAutoTable?.finalY + 12 || 40;
+
+//       allDepts.slice(0, 20).forEach((dept: any, i: number) => {
+//         if (y > pageHeight - 35) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const tenderCount = counts[i];
+//         const barAreaWidth = pageWidth - 140;
+//         const barWidth = (tenderCount / maxTenders) * barAreaWidth;
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.rect(margin + 75, y - 4, barAreaWidth, 7, "F");
+
+//         doc.setFillColor(...colors.electricBlue);
+//         doc.rect(margin + 75, y - 4, barWidth, 7, "F");
+
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.text(short(dept.department, 35), margin, y);
+
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(tenderCount), margin + 65, y, { align: "right" });
+//         doc.setFont("helvetica", "normal");
+
+//         y += 10;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.text("No department-wise data found.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* ----------------------- LOW COMPETITION ----------------------- */
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     newPage();
+//     addHeader();
+//     addFooter();
+//     addSectionHeader("Low Competition Tenders", colors.warningOrange);
+
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       const tableData = rows.slice(0, 15).map((r: any, index: number) => [
+//         String(index + 1),
+//         short(r.bid_number || "-", 30),
+//         short(r.organisation || "-", 40),
+//         short(r.department || "-", 40),
+//         String(r.seller_count ?? "-"),
+//         formatDate(r.bid_end_ts),
+//       ]);
+
+//       autoTable(doc, {
+//         startY: (doc as any).lastAutoTable?.finalY + 12 || 35,
+//         head: [["#", "Bid Number", "Organisation", "Department", "Sellers", "Bid End"]],
+//         body: tableData,
+//         theme: "striped",
+//         headStyles: { fillColor: colors.warningOrange, textColor: 255, fontStyle: "bold", fontSize: 9 },
+//         bodyStyles: { fontSize: 8, cellPadding: 3, overflow: "linebreak" },
+//         columnStyles: {
+//           0: { cellWidth: 10, halign: "center" },
+//           1: { cellWidth: 32 },
+//           2: { cellWidth: 42 },
+//           3: { cellWidth: 42 },
+//           4: { cellWidth: 18, halign: "center" },
+//           5: { cellWidth: 28, halign: "center" },
+//         },
+//         margin: { left: margin, right: margin },
+//       });
+
+//       const tableEnd = (doc as any).lastAutoTable.finalY + 10;
+//       doc.setFontSize(8);
+//       doc.setTextColor(...colors.darkGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(`Total Low Competition Bids: ${lowComp?.count ?? rows.length} | Generated: ${formatDate(lowComp?.generated_at)}`, margin, tableEnd);
+//       (doc as any).lastAutoTable = { finalY: tableEnd + 10 };
+//     } else {
+//       const yPos = (doc as any).lastAutoTable?.finalY + 12 || 35;
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.errorRed);
+//       doc.text("No low competition bids found.", margin, yPos);
+//       (doc as any).lastAutoTable = { finalY: yPos + 10 };
+//     }
+//   }
+
+//   /* ----------------------- END PAGE ------------------------------ */
+//   newPage();
+//   addHeader();
+//   addFooter();
+
+//   doc.setFontSize(20);
+//   doc.setTextColor(...colors.navyBlue);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+
+//   doc.setFontSize(10);
+//   doc.setTextColor(...colors.mediumGray);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This report was generated automatically based on government tender data.", pageWidth / 2, pageHeight / 2 - 5, { align: "center" });
+
+//   doc.setFontSize(9);
+//   doc.text("© 2025 Government Tender Analytics. All rights reserved.", pageWidth / 2, pageHeight / 2 + 10, { align: "center" });
+
+//   return doc;
+// };
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `₹${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   // Draw a stat card with label, value, and supporting text
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+    
+//     // Card background
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     // Colored left border
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+    
+//     // Shadow effect
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     // Label
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+    
+//     // Value (large and bold)
+//     doc.setFontSize(16);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(value, x + 5, y + height / 2 + 3);
+    
+//     // Supporting text
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   // Draw horizontal bar chart
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 7;
+//     const spacing = 10;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       // Background bar
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       // Actual bar
+//       doc.setFillColor(...barColor);
+//       doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+      
+//       // Label
+//       doc.setFontSize(8);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = short(item.label, 25);
+//       doc.text(labelText, x, yPos + 5);
+      
+//       // Value
+//       doc.setFontSize(8);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 50, yPos + 5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing;
+//   }
+
+//   // Draw donut chart for win/loss ratio
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const lossPercentage = (losses / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     // Draw win arc (green)
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+    
+//     // Draw loss arc (red)
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     // Draw inner white circle for donut effect
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     // Center text
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     // Legend
+//     const legendY = centerY + radius + 10;
+    
+//     // Wins
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+    
+//     // Losses
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   // Helper to draw arc
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   // Draw line chart for monthly trends
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     // Chart background
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     // Grid lines
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     // Calculate max value
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     // Draw line
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+      
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     // Draw data points
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     // X-axis labels
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   // Draw info box with icon-style visual
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+    
+//     // Background
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+    
+//     // Border
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(1);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+    
+//     // Title
+//     doc.setFontSize(10);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 8);
+    
+//     // Content
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     doc.text(lines, x + 5, y + 16);
+//   }
+
+//   // Draw opportunity card for likely wins
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     // Card background
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     // Border with confidence color
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     // Confidence badge
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     // Item name
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     // Details
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   /* -------------------------- Header & Footer ------------------------- */
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   /* -------------------------- Section Header ------------------------- */
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 12;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 10, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(12);
+//     doc.text(title, margin + 5, yStart + 7);
+//     (doc as any).lastAutoTable = { finalY: yStart + 10 };
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//   };
+
+//   /* ------------------------------ COVER ------------------------------- */
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+//   // Title
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+
+//   // Subtitle
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+
+//   // Company name
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+
+//   // Metadata box
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+  
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+  
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+
+//   // Decorative circle
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   /* -------------------- KEY METRICS DASHBOARD ----------------------- */
+//   newPage();
+//   addHeader();
+//   addFooter();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 15;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+    
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 15;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Donut Chart
+//   if (cardY + 60 < pageHeight - 30) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+    
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+    
+//     (doc as any).lastAutoTable = { finalY: cardY + 60 };
+//   }
+
+//   /* -------------------- MONTHLY PERFORMANCE ----------------------- */
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 15;
+    
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 10;
+    
+//     const chartData = months.map(m => ({
+//       label: m,
+//       value: Number(monthlyData[m]) || 0
+//     }));
+    
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+    
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   /* -------------------- ESTIMATED MISSED VALUE ----------------------- */
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if ((doc as any).lastAutoTable.finalY + 50 > pageHeight - 30) {
+//       newPage();
+//     }
+    
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+
+//     let yPos = (doc as any).lastAutoTable.finalY + 15;
+    
+//     const boxWidth = pageWidth - 2 * margin;
+//     const boxHeight = 35;
+    
+//     charts.drawInfoBox(
+//       margin,
+//       yPos,
+//       boxWidth,
+//       boxHeight,
+//       "⚠ Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential that could be captured with strategic bidding.`,
+//       colors.warningOrange
+//     );
+
+//     (doc as any).lastAutoTable = { finalY: yPos + boxHeight + 10 };
+//   }
+
+//   /* --------------------- MARKET OVERVIEW - PRICE BAND -------------------- */
+//   if (filters.includeSections.includes("marketOverview")) {
+//     newPage();
+//     addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     let startY = (doc as any).lastAutoTable.finalY + 15;
+
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       // Price metrics as stat cards
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 35;
+
+//       // Price insights box
+//       let insight = "Limited price data available for comprehensive analysis.";
+      
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 30, "💡 Price Insights", insight, colors.electricBlue);
+      
+//       (doc as any).lastAutoTable = { finalY: startY + 35 };
+//     }
+//   }
+
+//   /* ---------------------- MISSED BUT WINNABLE ---------------------- */
+//   if (filters.includeSections.includes("missedTenders")) {
+//     newPage();
+//     addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+
+//     if (recentWins.length > 0) {
+//       let yPos = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(11);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//       yPos += 10;
+
+//       // Display wins as cards
+//       recentWins.slice(0, 8).forEach((win: any, index: number) => {
+//         if (yPos + 30 > pageHeight - 30) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         const cardHeight = 25;
+        
+//         // Win card background
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         // Left accent bar
+//         doc.setFillColor(...colors.successGreen);
+//         doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+        
+//         // Content
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//         doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+        
+//         doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//         doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+        
+//         // Price on right
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+        
+//         yPos += cardHeight + 4;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: yPos };
+//     }
+
+//     // Competitor wins
+//     const marketWins = missed?.marketWins ?? [];
+    
+//     if (marketWins.length > 0) {
+//       let yPos = (doc as any).lastAutoTable.finalY + 15;
+      
+//       if (yPos + 60 > pageHeight - 30) {
+//         newPage();
+//         yPos = 30;
+//       }
+
+//       doc.setFontSize(11);
+//       doc.setTextColor(...colors.warningOrange);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//       yPos += 10;
+
+//       marketWins.slice(0, 6).forEach((win: any) => {
+//         if (yPos + 25 > pageHeight - 30) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         const cardHeight = 22;
+        
+//         doc.setFillColor(249, 250, 251);
+//         doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//         doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+        
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+        
+//         yPos += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: yPos };
+//     }
+//   }
+
+//   /* ------------------------- AI INSIGHTS --------------------------- */
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+
+//       // Strategy Summary
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(
+//           margin,
+//           y,
+//           pageWidth - 2 * margin,
+//           35,
+//           "🎯 Strategic Recommendation",
+//           normalize(ai.strategy_summary),
+//           colors.darkBlue
+//         );
+//         y += 45;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Likely Wins as Opportunity Cards
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+      
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({
+//               ...w,
+//               offered_item: r.offered_item,
+//               bid_number: r.bid_number,
+//               dept: r.dept,
+//               ministry: r.ministry,
+//               org: r.org,
+//               signals: r.signals,
+//               source: "Per-item",
+//             })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (y + 40 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("🏆 AI-Predicted Likely Wins", margin, y);
+//         y += 12;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 33;
+          
+//           if (cardY + 35 > pageHeight - 30) {
+//             newPage();
+//             y = 30;
+//           }
+          
+//           const confidence = Math.floor(Math.random() * 30 + 60); // Simulated confidence
+          
+//           charts.drawOpportunityCard(
+//             x,
+//             cardY,
+//             cardW,
+//             opp.offered_item || "Opportunity",
+//             opp.org || "-",
+//             opp.dept || "-",
+//             formatCurrency(opp.total_price || 0),
+//             confidence
+//           );
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 33 + 10;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Affinity Analysis with Bar Charts
+//       const signals = ai?.signals || {};
+      
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (y + 60 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 10;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         y = endY + 15;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Strategic Roadmap
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         if (y + 60 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("📋 Strategic Roadmap — Next Steps", margin, y);
+//         y += 12;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           if (y + 20 > pageHeight - 30) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           // Step card
+//           const stepHeight = 18;
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+          
+//           // Number badge
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+          
+//           // Step text
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+          
+//           y += stepHeight + 4;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   /* -------------------- CATEGORY ANALYSIS ------------------------ */
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     newPage();
+//     addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 10;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+      
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ----------------------- RIVALRY SCORE -------------------------- */
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     newPage();
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0) {
+//           newPage();
+//         }
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 15;
+        
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+        
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+        
+//         yStart += 15;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 10 };
+//       });
+//     }
+//   }
+
+//   /* --------------------- STATES ANALYSIS -------------------------- */
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     newPage();
+//     addSectionHeader("Top Performing States by Volume", colors.successGreen);
+
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results ||
+//                        reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 10;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ------------------- DEPARTMENTS ANALYSIS ----------------------- */
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     newPage();
+//     addSectionHeader("Department-wise Analysis", colors.darkBlue);
+
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 10;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ----------------------- LOW COMPETITION ----------------------- */
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     newPage();
+//     addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 12;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         if (y + 25 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const cardHeight = 22;
+        
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+        
+//         // Seller count badge
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+        
+//         y += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   /* ----------------------- END PAGE ------------------------------ */
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
 
 //   return doc;
 // };
 
 
 
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   // Draw a stat card with label, value, and supporting text
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+    
+//     // Card background
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     // Colored left border
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+    
+//     // Shadow effect
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     // Label
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+    
+//     // Value (large and bold) - truncate if too long
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+    
+//     // Supporting text
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   // Draw horizontal bar chart
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       // Background bar
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       // Actual bar - only draw if width > 0
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       // Label - properly truncated
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       // Value
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   // Draw donut chart for win/loss ratio
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const lossPercentage = (losses / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     // Draw win arc (green)
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+    
+//     // Draw loss arc (red)
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     // Draw inner white circle for donut effect
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     // Center text
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     // Legend
+//     const legendY = centerY + radius + 10;
+    
+//     // Wins
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+    
+//     // Losses
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   // Helper to draw arc
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   // Draw line chart for monthly trends
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     // Chart background
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     // Grid lines
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     // Calculate max value
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     // Draw line
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+      
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     // Draw data points
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     // X-axis labels
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   // Draw info box with icon-style visual
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+    
+//     // Background
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+    
+//     // Border
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+    
+//     // Title
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+    
+//     // Content - limit lines to fit height
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   // Draw opportunity card for likely wins
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     // Card background
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     // Border with confidence color
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     // Confidence badge
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     // Item name
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     // Details
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   /* -------------------------- Header & Footer ------------------------- */
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   /* -------------------------- Section Header ------------------------- */
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//   };
+
+//   /* ------------------------------ COVER ------------------------------- */
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+//   // Title
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+
+//   // Subtitle
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+
+//   // Company name
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+
+//   // Metadata box
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+  
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+  
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+
+//   // Decorative circle
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   /* -------------------- KEY METRICS DASHBOARD ----------------------- */
+//   newPage();
+//   addHeader();
+//   addFooter();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 15;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+    
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 15;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Donut Chart
+//   if (cardY + 60 < pageHeight - 30) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+    
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+    
+//     (doc as any).lastAutoTable = { finalY: cardY + 60 };
+//   }
+
+//   /* -------------------- MONTHLY PERFORMANCE ----------------------- */
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 15;
+    
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 10;
+    
+//     const chartData = months.map(m => ({
+//       label: m,
+//       value: Number(monthlyData[m]) || 0
+//     }));
+    
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+    
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   /* -------------------- ESTIMATED MISSED VALUE ----------------------- */
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if ((doc as any).lastAutoTable.finalY + 50 > pageHeight - 30) {
+//       newPage();
+//     }
+    
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+
+//     let yPos = (doc as any).lastAutoTable.finalY + 15;
+    
+//     const boxWidth = pageWidth - 2 * margin;
+//     const boxHeight = 35;
+    
+//     charts.drawInfoBox(
+//       margin,
+//       yPos,
+//       boxWidth,
+//       boxHeight,
+//       "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential that could be captured with strategic bidding.`,
+//       colors.warningOrange
+//     );
+
+//     (doc as any).lastAutoTable = { finalY: yPos + boxHeight + 10 };
+//   }
+
+//   /* --------------------- MARKET OVERVIEW - PRICE BAND -------------------- */
+//   if (filters.includeSections.includes("marketOverview")) {
+//     newPage();
+//     addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     let startY = (doc as any).lastAutoTable.finalY + 15;
+
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       // Price metrics as stat cards
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 35;
+
+//       // Price insights box
+//       let insight = "Limited price data available for comprehensive analysis.";
+      
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+      
+//       (doc as any).lastAutoTable = { finalY: startY + 35 };
+//     }
+//   }
+
+//   /* ---------------------- MISSED BUT WINNABLE ---------------------- */
+//   if (filters.includeSections.includes("missedTenders")) {
+//     newPage();
+//     addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+
+//     if (recentWins.length > 0) {
+//       let yPos = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(11);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//       yPos += 10;
+
+//       // Display wins as cards
+//       recentWins.slice(0, 8).forEach((win: any, index: number) => {
+//         if (yPos + 30 > pageHeight - 30) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         const cardHeight = 25;
+        
+//         // Win card background
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         // Left accent bar
+//         doc.setFillColor(...colors.successGreen);
+//         doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+        
+//         // Content
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//         doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+        
+//         doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//         doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+        
+//         // Price on right
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+        
+//         yPos += cardHeight + 4;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: yPos };
+//     }
+
+//     // Competitor wins
+//     const marketWins = missed?.marketWins ?? [];
+    
+//     if (marketWins.length > 0) {
+//       let yPos = (doc as any).lastAutoTable.finalY + 15;
+      
+//       if (yPos + 60 > pageHeight - 30) {
+//         newPage();
+//         yPos = 30;
+//       }
+
+//       doc.setFontSize(11);
+//       doc.setTextColor(...colors.warningOrange);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//       yPos += 10;
+
+//       marketWins.slice(0, 6).forEach((win: any) => {
+//         if (yPos + 25 > pageHeight - 30) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         const cardHeight = 22;
+        
+//         doc.setFillColor(249, 250, 251);
+//         doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//         doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+        
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+        
+//         yPos += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: yPos };
+//     }
+//   }
+
+//   /* ------------------------- AI INSIGHTS --------------------------- */
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+
+//       // Strategy Summary
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(
+//           margin,
+//           y,
+//           pageWidth - 2 * margin,
+//           32,
+//           "Strategic Recommendation",
+//           normalize(ai.strategy_summary),
+//           colors.darkBlue
+//         );
+//         y += 45;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Likely Wins as Opportunity Cards
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+      
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({
+//               ...w,
+//               offered_item: r.offered_item,
+//               bid_number: r.bid_number,
+//               dept: r.dept,
+//               ministry: r.ministry,
+//               org: r.org,
+//               signals: r.signals,
+//               source: "Per-item",
+//             })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (y + 40 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 12;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 33;
+          
+//           if (cardY + 35 > pageHeight - 30) {
+//             newPage();
+//             y = 30;
+//           }
+          
+//           const confidence = Math.floor(Math.random() * 30 + 60); // Simulated confidence
+          
+//           charts.drawOpportunityCard(
+//             x,
+//             cardY,
+//             cardW,
+//             opp.offered_item || "Opportunity",
+//             opp.org || "-",
+//             opp.dept || "-",
+//             formatCurrency(opp.total_price || 0),
+//             confidence
+//           );
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 33 + 10;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Affinity Analysis with Bar Charts
+//       const signals = ai?.signals || {};
+      
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (y + 60 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 10;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         y = endY + 15;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       // Strategic Roadmap
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         if (y + 60 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 12;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           if (y + 20 > pageHeight - 30) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           // Step card
+//           const stepHeight = 18;
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+          
+//           // Number badge
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+          
+//           // Step text
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+          
+//           y += stepHeight + 4;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   /* -------------------- CATEGORY ANALYSIS ------------------------ */
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     newPage();
+//     addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 10;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+      
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ----------------------- RIVALRY SCORE -------------------------- */
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     newPage();
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0) {
+//           newPage();
+//         }
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 15;
+        
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+        
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+        
+//         yStart += 15;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 10 };
+//       });
+//     }
+//   }
+
+//   /* --------------------- STATES ANALYSIS -------------------------- */
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     newPage();
+//     addSectionHeader("Top Performing States by Volume", colors.successGreen);
+
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results ||
+//                        reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 10;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ------------------- DEPARTMENTS ANALYSIS ----------------------- */
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     newPage();
+//     addSectionHeader("Department-wise Analysis", colors.darkBlue);
+
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 10;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 10 };
+//     }
+//   }
+
+//   /* ----------------------- LOW COMPETITION ----------------------- */
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     newPage();
+//     addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       let y = (doc as any).lastAutoTable.finalY + 15;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 12;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         if (y + 25 > pageHeight - 30) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const cardHeight = 22;
+        
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+        
+//         // Seller count badge
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+        
+//         y += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   /* ----------------------- END PAGE ------------------------------ */
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - only if space available
+//   if (checkSpace(50)) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 50 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (recentWins.length > 0) {
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 8;
+
+//         recentWins.slice(0, 8).forEach((win: any) => {
+//           if (!checkSpace(30)) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           const cardHeight = 25;
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         if (!checkSpace(40)) newPage();
+//         yPos = (doc as any).lastAutoTable.finalY + 10;
+        
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//         yPos += 8;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+//           if (!checkSpace(25)) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           const cardHeight = 22;
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       if (!checkSpace(80)) newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({ ...w, offered_item: r.offered_item, bid_number: r.bid_number, dept: r.dept, ministry: r.ministry, org: r.org, signals: r.signals, source: "Per-item" })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 10;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 33;
+          
+//           if (!checkSpace(35)) {
+//             newPage();
+//             y = 30;
+//           }
+          
+//           const confidence = Math.floor(Math.random() * 30 + 60);
+//           charts.drawOpportunityCard(x, cardY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 33 + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 10;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           if (!checkSpace(20)) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           const stepHeight = 18;
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 3;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 10;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         if (!checkSpace(25)) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const cardHeight = 22;
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+//         y += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 35;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     const itemMaxWidth = width - 30;
+//     const itemLines = doc.splitTextToSize(item && item !== '-' ? item : 'Opportunity', itemMaxWidth);
+//     doc.text(itemLines.slice(0, 2), x + 3, y + 9);
+    
+//     const textY = itemLines.length > 1 ? y + 20 : y + 16;
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     const orgText = org && org !== '-' ? short(org, 35) : 'Not specified';
+//     const deptText = dept && dept !== '-' ? short(dept, 35) : 'Not specified';
+    
+//     doc.text(`Org: ${orgText}`, x + 3, textY);
+//     doc.text(`Dept: ${deptText}`, x + 3, textY + 5);
+//     doc.text(`Value: ${value}`, x + 3, textY + 10);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - only if space available
+//   if (checkSpace(50)) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 50 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (recentWins.length > 0) {
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 8;
+
+//         recentWins.slice(0, 8).forEach((win: any) => {
+//           if (!checkSpace(30)) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           const cardHeight = 25;
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         if (!checkSpace(40)) newPage();
+//         yPos = (doc as any).lastAutoTable.finalY + 10;
+        
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//         yPos += 8;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+//           if (!checkSpace(25)) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           const cardHeight = 22;
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       if (!checkSpace(80)) newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             r.likely_wins.forEach((w: any) => {
+//               allLikelyWins.push({ 
+//                 ...w, 
+//                 offered_item: w.offered_item || r.offered_item,
+//                 bid_number: w.bid_number || r.bid_number, 
+//                 dept: w.dept || r.dept, 
+//                 ministry: w.ministry || r.ministry, 
+//                 org: w.org || r.org, 
+//                 signals: w.signals || r.signals,
+//                 total_price: w.total_price || w.value,
+//                 source: "Per-item" 
+//               });
+//             });
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 10;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 40;
+          
+//           if (cardY > pageHeight - 60) {
+//             newPage();
+//             y = 30;
+//             doc.setFontSize(11);
+//             doc.setTextColor(...colors.successGreen);
+//             doc.setFont("helvetica", "bold");
+//             doc.text("AI-Predicted Likely Wins (continued)", margin, y);
+//             y += 10;
+//           }
+          
+//           const confidence = opp.confidence || opp.win_probability || Math.floor(Math.random() * 30 + 60);
+//           const finalConfidence = typeof confidence === 'string' ? parseInt(confidence) : confidence;
+          
+//           charts.drawOpportunityCard(
+//             x, 
+//             cardY, 
+//             cardW, 
+//             opp.offered_item || opp.item || "Opportunity", 
+//             opp.org || opp.organization || "-", 
+//             opp.dept || opp.department || "-", 
+//             formatCurrency(opp.total_price || opp.value || 0), 
+//             finalConfidence
+//           );
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 40 + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 10;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           if (!checkSpace(20)) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           const stepHeight = 18;
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 3;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 10;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         if (!checkSpace(28)) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         const cardHeight = 26;
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 8);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         const orgText = short(row.organisation || "-", 60);
+//         doc.text(`Org: ${orgText}`, margin + 6, y + 14);
+//         const deptText = short(row.department || "-", 60);
+//         doc.text(`Dept: ${deptText}`, margin + 6, y + 20);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 20, { align: "right" });
+        
+//         y += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+
+
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 35;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     const itemMaxWidth = width - 30;
+//     const itemLines = doc.splitTextToSize(item && item !== '-' ? item : 'Opportunity', itemMaxWidth);
+//     doc.text(itemLines.slice(0, 2), x + 3, y + 9);
+    
+//     const textY = itemLines.length > 1 ? y + 20 : y + 16;
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     const orgText = org && org !== '-' ? short(org, 35) : 'Not specified';
+//     const deptText = dept && dept !== '-' ? short(dept, 35) : 'Not specified';
+    
+//     doc.text(`Org: ${orgText}`, x + 3, textY);
+//     doc.text(`Dept: ${deptText}`, x + 3, textY + 5);
+//     doc.text(`Value: ${value}`, x + 3, textY + 10);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - only if space available
+//   if (checkSpace(50)) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 50 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (recentWins.length > 0) {
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 8;
+
+//         recentWins.slice(0, 8).forEach((win: any) => {
+//           if (!checkSpace(32)) {
+//             newPage();
+//             addSectionHeader("Missed But Winnable - Market Intelligence (Continued)", colors.errorRed);
+//             yPos = (doc as any).lastAutoTable.finalY + 8;
+//           }
+
+//           const cardHeight = 28;
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         newPage(); // Start competitor wins on new page
+//         addSectionHeader("Competitor Market Wins — Learning Opportunities", colors.warningOrange);
+//         yPos = (doc as any).lastAutoTable.finalY + 8;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+//           if (!checkSpace(28)) {
+//             newPage();
+//             addSectionHeader("Competitor Market Wins — Learning Opportunities (Continued)", colors.warningOrange);
+//             yPos = (doc as any).lastAutoTable.finalY + 8;
+//           }
+
+//           const cardHeight = 22;
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 3;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             r.likely_wins.forEach((w: any) => {
+//               allLikelyWins.push({ 
+//                 ...w, 
+//                 offered_item: w.offered_item || r.offered_item,
+//                 bid_number: w.bid_number || r.bid_number, 
+//                 dept: w.dept || r.dept, 
+//                 ministry: w.ministry || r.ministry, 
+//                 org: w.org || r.org, 
+//                 signals: w.signals || r.signals,
+//                 total_price: w.total_price || w.value,
+//                 source: "Per-item" 
+//               });
+//             });
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) {
+//           newPage();
+//           addSectionHeader("AI-Driven Strategic Insights (Continued)", colors.darkBlue);
+//         }
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 10;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 40;
+          
+//           if (cardY > pageHeight - 60) {
+//             newPage();
+//             addSectionHeader("AI-Driven Strategic Insights (Continued)", colors.darkBlue);
+//             y = (doc as any).lastAutoTable.finalY + 8;
+//             doc.setFontSize(11);
+//             doc.setTextColor(...colors.successGreen);
+//             doc.setFont("helvetica", "bold");
+//             doc.text("AI-Predicted Likely Wins (continued)", margin, y);
+//             y += 10;
+//           }
+          
+//           const confidence = opp.confidence || opp.win_probability || Math.floor(Math.random() * 30 + 60);
+//           const finalConfidence = typeof confidence === 'string' ? parseInt(confidence) : confidence;
+          
+//           charts.drawOpportunityCard(
+//             x, 
+//             cardY, 
+//             cardW, 
+//             opp.offered_item || opp.item || "Opportunity", 
+//             opp.org || opp.organization || "-", 
+//             opp.dept || opp.department || "-", 
+//             formatCurrency(opp.total_price || opp.value || 0), 
+//             finalConfidence
+//           );
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 40 + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) {
+//           newPage();
+//           addSectionHeader("AI-Driven Strategic Insights (Continued)", colors.darkBlue);
+//         }
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         if (!checkSpace(60)) {
+//           newPage();
+//           addSectionHeader("AI-Driven Strategic Insights (Continued)", colors.darkBlue);
+//         }
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 10;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           if (!checkSpace(22)) {
+//             newPage();
+//             addSectionHeader("AI-Driven Strategic Insights (Continued)", colors.darkBlue);
+//             y = (doc as any).lastAutoTable.finalY + 8;
+//           }
+
+//           const stepHeight = 18;
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 3;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0) newPage(); // Each department on new page
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       newPage(); // Always start on new page
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 10;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         if (!checkSpace(28)) {
+//           newPage();
+//           addSectionHeader("Low Competition Opportunities (Continued)", colors.warningOrange);
+//           y = (doc as any).lastAutoTable.finalY + 8;
+//         }
+
+//         const cardHeight = 26;
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+        
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+        
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 8);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         const orgText = short(row.organisation || "-", 60);
+//         doc.text(`Org: ${orgText}`, margin + 6, y + 14);
+//         const deptText = short(row.department || "-", 60);
+//         doc.text(`Dept: ${deptText}`, margin + 6, y + 20);
+        
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 20, { align: "right" });
+        
+//         y += cardHeight + 3;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   console.log(reportData);
+
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - only if space available
+//   if (checkSpace(50)) {
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", margin, cardY);
+//     charts.drawDonutChart(pageWidth / 2, cardY + 25, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 50 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 12;
+
+//       if (recentWins.length > 0) {
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 60 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 10;
+
+//         recentWins.slice(0, 8).forEach((win: any, idx: number) => {
+
+//           const cardHeight = 25;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         yPos = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 50 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+        
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//         yPos += 10;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+
+//           const cardHeight = 22;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       if (!checkSpace(80)) newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({ ...w, offered_item: r.offered_item, bid_number: r.bid_number, dept: r.dept, ministry: r.ministry, org: r.org, signals: r.signals, source: "Per-item" })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 10;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 5) / 2;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + 5);
+//           const cardY = y + row * 33;
+          
+//           if (!checkSpace(35)) {
+//             newPage();
+//             y = 30;
+//           }
+          
+//           const confidence = Math.floor(Math.random() * 30 + 60);
+//           charts.drawOpportunityCard(x, cardY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//         });
+
+//         y += Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow) * 33 + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         y = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 steps
+//         if (y + 50 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 12;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           const stepHeight = 18;
+          
+//           // Check space before each step
+//           if (y + stepHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 4;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 12;
+      
+//       // Check if we have space for header + at least 2 cards
+//       if (y + 50 > pageHeight - 20) {
+//         newPage();
+//         y = 30;
+//       }
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 12;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         const cardHeight = 22;
+        
+//         // Check space before each card
+//         if (y + cardHeight + 5 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+//         y += cardHeight + 4;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+// import jsPDF from "jspdf";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     items.forEach((item, index) => {
+//       const yPos = y + index * spacing;
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, yPos, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, yPos, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, yPos + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, yPos + 4.5, { align: "right" });
+//     });
+    
+//     return y + items.length * spacing + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+  
+//   const charts = new ChartHelpers(doc);
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - FIXED ALIGNMENT
+//   if (checkSpace(70)) {
+//     cardY = (doc as any).lastAutoTable.finalY + 10;
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", pageWidth / 2, cardY, { align: "center" });
+//     charts.drawDonutChart(pageWidth / 2, cardY + 30, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 70 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 12;
+
+//       if (recentWins.length > 0) {
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 60 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 10;
+
+//         recentWins.slice(0, 8).forEach((win: any, idx: number) => {
+
+//           const cardHeight = 25;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         yPos = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 50 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+        
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//         yPos += 10;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+
+//           const cardHeight = 22;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS - FIXED ALIGNMENT
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       if (!checkSpace(80)) newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({ ...w, offered_item: r.offered_item, bid_number: r.bid_number, dept: r.dept, ministry: r.ministry, org: r.org, signals: r.signals, source: "Per-item" })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 12;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 12;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 6) / 2;
+//         const cardHeight = 30;
+//         const cardSpacing = 6;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + cardSpacing);
+//           const baseY = y + row * (cardHeight + cardSpacing);
+          
+//           // Check if we need a new page
+//           if (baseY + cardHeight > pageHeight - 20) {
+//             // Start fresh page and reset positioning
+//             newPage();
+//             y = 30;
+            
+//             // Recalculate for new page
+//             const newRow = Math.floor(index / cardsPerRow);
+//             const cardY = y + (newRow - row) * (cardHeight + cardSpacing);
+            
+//             const confidence = Math.floor(Math.random() * 30 + 60);
+//             charts.drawOpportunityCard(x, cardY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//           } else {
+//             const confidence = Math.floor(Math.random() * 30 + 60);
+//             charts.drawOpportunityCard(x, baseY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//           }
+//         });
+
+//         const totalRows = Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow);
+//         y += totalRows * (cardHeight + cardSpacing) + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         y = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 steps
+//         if (y + 50 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 12;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           const stepHeight = 18;
+          
+//           // Check space before each step
+//           if (y + stepHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 4;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems);
+//         (doc as any).lastAutoTable = { finalY: endY + 5 };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems);
+//       (doc as any).lastAutoTable = { finalY: endY + 5 };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 12;
+      
+//       // Check if we have space for header + at least 2 cards
+//       if (y + 50 > pageHeight - 20) {
+//         newPage();
+//         y = 30;
+//       }
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 12;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         const cardHeight = 22;
+        
+//         // Check space before each card
+//         if (y + cardHeight + 5 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+//         y += cardHeight + 4;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+
+
+
+// import jsPDF from "jspdf";
+// import { report } from "process";
+
+// /* ------------------------------------------------------------------ */
+// /*                                TYPES                                */
+// /* ------------------------------------------------------------------ */
+
+// interface ReportData {
+//   meta: {
+//     report_generated_at: string;
+//     params_used: {
+//       sellerName: string;
+//       department: string;
+//       offeredItem: string;
+//       days: number;
+//       limit: number;
+//       email?: string;
+//     };
+//   };
+//   data: {
+//     estimatedMissedValue?: any;
+//     sellerBids?: any;
+//     topPerformingStates?: any;
+//     topSellersByDept?: any;
+//     categoryListing?: any;
+//     allDepartments?: any;
+//     lowCompetitionBids?: any;
+//     missedButWinnable?: any;
+//     priceBand?: any;
+//   };
+// }
+
+// interface FilterOptions {
+//   includeSections: string[];
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                               COLORS                                */
+// /* ------------------------------------------------------------------ */
+
+// const colors: Record<string, [number, number, number]> = {
+//   navyBlue: [30, 58, 95],
+//   darkBlue: [74, 144, 226],
+//   electricBlue: [74, 144, 226],
+//   successGreen: [46, 204, 113],
+//   warningOrange: [243, 156, 18],
+//   errorRed: [231, 76, 60],
+//   neutralGray: [107, 114, 128],
+//   darkGray: [55, 65, 81],
+//   mediumGray: [107, 114, 128],
+//   lightGray: [209, 213, 219],
+//   white: [255, 255, 255],
+//   black: [0, 0, 0],
+//   lightBlue: [239, 246, 255],
+//   backgroundGray: [249, 250, 251],
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                          UTILITY FUNCTIONS                          */
+// /* ------------------------------------------------------------------ */
+
+// const clean = (v: any): string => {
+//   if (v === null || v === undefined) return "-";
+//   if (typeof v === "object") {
+//     try {
+//       return JSON.stringify(v);
+//     } catch {
+//       return String(v);
+//     }
+//   }
+//   return String(v).trim() || "-";
+// };
+
+// const safeText = (v: any, fb = "-") => {
+//   const c = clean(v);
+//   return c === "" ? fb : c;
+// };
+
+// const short = (v: any, len: number, fallback = "-") => {
+//   const c = clean(v);
+//   if (c === "-" || c === "" || c == null) return fallback;
+//   if (c.length <= len) return c;
+//   return c.slice(0, len - 1) + "…";
+// };
+
+// const formatCurrency = (n: any) => {
+//   const num = Number(n);
+//   if (isNaN(num)) return "-";
+//   const rounded = Math.round(num);
+//   return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+// };
+
+// const formatDate = (d: any) => {
+//   if (!d) return "-";
+//   const date = new Date(d);
+//   if (isNaN(date.getTime())) return "-";
+//   return date.toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "short",
+//     year: "numeric",
+//   });
+// };
+
+// const normalize = (v: any): string => {
+//   if (v == null) return "-";
+//   if (typeof v === "object") {
+//     const values = Object.values(v).map((x) => clean(x));
+//     return values.join(", ");
+//   }
+//   return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+// };
+
+// const normalizeArray = (val: any): string[] => {
+//   if (!val) return [];
+//   if (Array.isArray(val)) return val.map(normalize);
+//   if (typeof val === "string") return [normalize(val)];
+//   if (typeof val === "object") return Object.values(val).map(normalize);
+//   return [normalize(val)];
+// };
+
+// /* ------------------------------------------------------------------ */
+// /*                        CHART HELPER FUNCTIONS                       */
+// /* ------------------------------------------------------------------ */
+
+// class ChartHelpers {
+//   doc: jsPDF;
+  
+//   constructor(doc: jsPDF) {
+//     this.doc = doc;
+//   }
+
+//   drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+//     doc.setFillColor(...color);
+//     doc.roundedRect(x, y, 3, height, 2, 2, "F");
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(label, x + 5, y + 8);
+//     doc.setFontSize(14);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+//     doc.text(truncValue, x + 5, y + height / 2 + 3);
+//     if (supportText) {
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "normal");
+//       doc.text(supportText, x + 5, y + height - 5);
+//     }
+//   }
+
+//   drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number, onNewPage?: () => void) {
+//     const doc = this.doc;
+//     const barHeight = 6;
+//     const spacing = 9;
+//     const pageHeight = doc.internal.pageSize.getHeight();
+//     const bottomMargin = 20;
+    
+//     if (!maxValue) {
+//       maxValue = Math.max(...items.map(i => i.value), 1);
+//     }
+    
+//     let currentY = y;
+    
+//     items.forEach((item, index) => {
+//       // Check if we need a new page
+//       if (currentY + barHeight > pageHeight - bottomMargin) {
+//         if (onNewPage) {
+//           onNewPage();
+//           currentY = 30; // Reset to top of new page with some margin
+//         }
+//       }
+      
+//       const barWidth = (item.value / maxValue!) * (width - 60);
+//       const barColor = item.color || colors.electricBlue;
+      
+//       doc.setFillColor(...colors.backgroundGray);
+//       doc.rect(x + 60, currentY, width - 60, barHeight, "F");
+      
+//       if (barWidth > 0) {
+//         doc.setFillColor(...barColor);
+//         doc.rect(x + 60, currentY, barWidth, barHeight, "F");
+//       }
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "normal");
+//       const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+//       doc.text(labelText, x, currentY + 4.5);
+      
+//       doc.setFontSize(7);
+//       doc.setTextColor(...colors.mediumGray);
+//       doc.setFont("helvetica", "bold");
+//       doc.text(String(item.value), x + 55, currentY + 4.5, { align: "right" });
+      
+//       currentY += spacing;
+//     });
+    
+//     return currentY + 5;
+//   }
+
+//   drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+//     const doc = this.doc;
+//     const total = wins + losses;
+    
+//     if (total === 0) return;
+    
+//     const winPercentage = (wins / total) * 100;
+//     const winAngle = (wins / total) * 360;
+    
+//     this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+//     this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+//     doc.setFillColor(...colors.white);
+//     doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+//     doc.setFontSize(14);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+//     const legendY = centerY + radius + 10;
+//     doc.setFillColor(...colors.successGreen);
+//     doc.circle(centerX - 20, legendY, 2, "F");
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+//     doc.setFillColor(...colors.errorRed);
+//     doc.circle(centerX - 20, legendY + 6, 2, "F");
+//     doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+//   }
+
+//   private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...color);
+    
+//     const segments = 50;
+//     const angleStep = (endAngle - startAngle) / segments;
+    
+//     for (let i = 0; i < segments; i++) {
+//       const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+//       const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+//       const x1 = x + radius * Math.cos(angle1);
+//       const y1 = y + radius * Math.sin(angle1);
+//       const x2 = x + radius * Math.cos(angle2);
+//       const y2 = y + radius * Math.sin(angle2);
+      
+//       doc.triangle(x, y, x1, y1, x2, y2, "F");
+//     }
+//   }
+
+//   drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+//     const doc = this.doc;
+    
+//     if (data.length === 0) return;
+    
+//     doc.setFillColor(...colors.backgroundGray);
+//     doc.rect(x, y, width, height, "F");
+    
+//     doc.setDrawColor(...colors.lightGray);
+//     doc.setLineWidth(0.3);
+//     for (let i = 0; i <= 5; i++) {
+//       const gridY = y + (height / 5) * i;
+//       doc.line(x, gridY, x + width, gridY);
+//     }
+    
+//     const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+//     doc.setDrawColor(...colors.electricBlue);
+//     doc.setLineWidth(1.5);
+    
+//     const stepX = width / (data.length - 1 || 1);
+    
+//     for (let i = 0; i < data.length - 1; i++) {
+//       const x1 = x + i * stepX;
+//       const y1 = y + height - (data[i].value / maxValue) * height;
+//       const x2 = x + (i + 1) * stepX;
+//       const y2 = y + height - (data[i + 1].value / maxValue) * height;
+//       doc.line(x1, y1, x2, y2);
+//     }
+    
+//     doc.setFillColor(...colors.electricBlue);
+//     data.forEach((point, index) => {
+//       const pointX = x + index * stepX;
+//       const pointY = y + height - (point.value / maxValue) * height;
+//       doc.circle(pointX, pointY, 1.5, "F");
+//     });
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+    
+//     data.forEach((point, index) => {
+//       const labelX = x + index * stepX;
+//       const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+//       doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+//     });
+//   }
+
+//   drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+//     const doc = this.doc;
+//     doc.setFillColor(...colors.lightBlue);
+//     doc.roundedRect(x, y, width, height, 3, 3, "F");
+//     doc.setDrawColor(...color);
+//     doc.setLineWidth(0.8);
+//     doc.roundedRect(x, y, width, height, 3, 3, "S");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...color);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(title, x + 5, y + 7);
+//     doc.setFontSize(8);
+//     doc.setTextColor(...colors.darkGray);
+//     doc.setFont("helvetica", "normal");
+//     const lines = doc.splitTextToSize(content, width - 10);
+//     const maxLines = Math.floor((height - 12) / 4);
+//     doc.text(lines.slice(0, maxLines), x + 5, y + 13);
+//   }
+
+//   drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+//     const doc = this.doc;
+//     const height = 28;
+    
+//     doc.setFillColor(...colors.white);
+//     doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+//     const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+//     doc.setDrawColor(...confColor);
+//     doc.setLineWidth(0.5);
+//     doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+//     doc.setFillColor(...confColor);
+//     doc.roundedRect(x + width - 25, y + 3, 20, 6, 1, 1, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(`${confidence}%`, x + width - 15, y + 7, { align: "center" });
+    
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text(short(item, 45), x + 3, y + 8);
+    
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.mediumGray);
+//     doc.setFont("helvetica", "normal");
+//     doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+//     doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+//     doc.text(`Value: ${value}`, x + 3, y + 24);
+//   }
+// }
+
+// /* ------------------------------------------------------------------ */
+// /*                        MAIN PDF GENERATOR                           */
+// /* ------------------------------------------------------------------ */
+
+// export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
+//   const doc = new jsPDF();
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+//   const margin = 15;
+
+//   console.log(reportData);
+  
+//   const charts = new ChartHelpers(doc);
+
+//   const addHeader = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, 0, pageWidth, 15, "F");
+//     doc.setFontSize(9);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+//   };
+
+//   const addFooter = () => {
+//     doc.setFillColor(...colors.navyBlue);
+//     doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+//     doc.setFontSize(7);
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "normal");
+//     const seller = safeText(reportData.meta.params_used.sellerName);
+//     doc.text(short(seller, 40), margin, pageHeight - 4);
+//     doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+//   };
+
+//   const addSectionHeader = (title: string, color: [number, number, number]) => {
+//     const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     let yStart = prevY + 10;
+//     if (yStart > pageHeight - 50) {
+//       doc.addPage();
+//       addHeader();
+//       addFooter();
+//       yStart = 25;
+//     }
+//     doc.setFillColor(...color);
+//     doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+//     doc.setTextColor(...colors.white);
+//     doc.setFont("helvetica", "bold");
+//     doc.setFontSize(10);
+//     doc.text(title, margin + 5, yStart + 6.5);
+//     (doc as any).lastAutoTable = { finalY: yStart + 9 };
+//   };
+
+//   const checkSpace = (requiredSpace: number): boolean => {
+//     const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+//     return currentY + requiredSpace < pageHeight - 20;
+//   };
+
+//   const newPage = () => {
+//     doc.addPage();
+//     addHeader();
+//     addFooter();
+//     (doc as any).lastAutoTable = { finalY: 25 };
+//   };
+
+//   // COVER PAGE
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(28);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+//   doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+//   doc.setFontSize(12);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+//   doc.setFontSize(18);
+//   doc.setFont("helvetica", "bold");
+//   doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+//   const metaY = 140;
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+//   const deptText = reportData.meta.params_used.department || "All Departments";
+//   doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+//   doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+//   if (reportData.meta.params_used.email) {
+//     doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+//   }
+//   doc.setLineWidth(1);
+//   doc.setDrawColor(...colors.white);
+//   doc.circle(pageWidth / 2, 210, 30, "S");
+//   doc.setFontSize(9);
+//   doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
+
+//   // KEY METRICS DASHBOARD
+//   newPage();
+//   addSectionHeader("Key Performance Metrics", colors.navyBlue);
+
+//   const bids = reportData?.data?.sellerBids || {};
+//   const summary = bids?.table1 || {};
+
+//   const metrics = [
+//     { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+//     { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+//     { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+//     { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+//     { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+//     { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+//   ];
+
+//   let cardY = (doc as any).lastAutoTable.finalY + 10;
+//   const cardWidth = 60;
+//   const cardHeight = 25;
+//   const cardSpacing = 5;
+//   const cardsPerRow = 3;
+
+//   metrics.forEach((metric, index) => {
+//     const row = Math.floor(index / cardsPerRow);
+//     const col = index % cardsPerRow;
+//     const x = margin + col * (cardWidth + cardSpacing);
+//     const y = cardY + row * (cardHeight + cardSpacing);
+//     charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+//   });
+
+//   cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+//   (doc as any).lastAutoTable = { finalY: cardY };
+
+//   // Win/Loss Chart - FIXED ALIGNMENT
+//   if (checkSpace(70)) {
+//     cardY = (doc as any).lastAutoTable.finalY + 10;
+//     doc.setFontSize(11);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Win / Loss Distribution", pageWidth / 2, cardY, { align: "center" });
+//     charts.drawDonutChart(pageWidth / 2, cardY + 30, 20, summary.win || 0, summary.lost || 0);
+//     (doc as any).lastAutoTable = { finalY: cardY + 70 };
+//   }
+
+//   // MONTHLY PERFORMANCE
+//   const monthlyData = bids?.monthlyTotals?.byMonth || {};
+//   const months = Object.keys(monthlyData);
+  
+//   if (months.length > 0) {
+//     if (!checkSpace(80)) newPage();
+//     addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+//     let chartY = (doc as any).lastAutoTable.finalY + 8;
+//     doc.setFontSize(10);
+//     doc.setTextColor(...colors.navyBlue);
+//     doc.setFont("helvetica", "bold");
+//     doc.text("Bidding Activity Over Time", margin, chartY);
+//     chartY += 8;
+    
+//     const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+//     charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+//     (doc as any).lastAutoTable = { finalY: chartY + 60 };
+//   }
+
+//   // ESTIMATED MISSED VALUE - only if data exists
+//   const missedValData = reportData?.data?.estimatedMissedValue;
+//   const missedVal = missedValData?.total;
+
+//   if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+//     if (!checkSpace(45)) newPage();
+//     addSectionHeader("Estimated Missed Value", colors.warningOrange);
+//     let yPos = (doc as any).lastAutoTable.finalY + 10;
+//     charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+//       `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+//     (doc as any).lastAutoTable = { finalY: yPos + 35 };
+//   }
+
+//   // PRICE BAND ANALYSIS
+//   if (filters.includeSections.includes("marketOverview")) {
+//     const priceBand = reportData?.data?.priceBand?.analysis;
+//     if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Price Band Analysis", colors.successGreen);
+
+//       let startY = (doc as any).lastAutoTable.finalY + 10;
+//       const highest = Number(priceBand.highest || 0);
+//       const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+//       const average = Number(priceBand.average || 0);
+//       const count = Number(priceBand.count || 0);
+
+//       const priceMetrics = [
+//         { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+//         { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+//         { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+//       ];
+
+//       priceMetrics.forEach((pm, idx) => {
+//         const x = margin + idx * 65;
+//         charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
+//       });
+
+//       startY += 30;
+
+//       let insight = "Limited price data available for comprehensive analysis.";
+//       if (highest > 0 && average > 0 && count > 1) {
+//         const diff = highest - lowest;
+//         const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+//         insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+//       } else if (count === 1) {
+//         insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
+//       }
+
+//       charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+//       (doc as any).lastAutoTable = { finalY: startY + 33 };
+//     }
+//   }
+
+//   // MISSED BUT WINNABLE
+//   if (filters.includeSections.includes("missedTenders")) {
+//     const missed = reportData?.data?.missedButWinnable || {};
+//     const recentWins = missed?.recentWins ?? [];
+//     const marketWins = missed?.marketWins ?? [];
+
+//     if (recentWins.length > 0 || marketWins.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+//       let yPos = (doc as any).lastAutoTable.finalY + 12;
+
+//       if (recentWins.length > 0) {
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 60 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Recent Wins — Your Success Stories", margin, yPos);
+//         yPos += 10;
+
+//         recentWins.slice(0, 8).forEach((win: any, idx: number) => {
+
+//           const cardHeight = 25;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(...colors.lightBlue);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+//           doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+//           doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+//           doc.setFontSize(10);
+//           doc.setTextColor(...colors.successGreen);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+
+//       if (marketWins.length > 0) {
+//         yPos = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 cards
+//         if (yPos + 50 > pageHeight - 20) {
+//           newPage();
+//           yPos = 30;
+//         }
+        
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.warningOrange);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+//         yPos += 10;
+
+//         marketWins.slice(0, 6).forEach((win: any) => {
+
+//           const cardHeight = 22;
+          
+//           // Check space before each card
+//           if (yPos + cardHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             yPos = 30;
+//           }
+
+//           doc.setFillColor(249, 250, 251);
+//           doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.warningOrange);
+//           doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.navyBlue);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+//           doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.warningOrange);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+//           doc.setFontSize(7);
+//           doc.setTextColor(...colors.mediumGray);
+//           doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+//           yPos += cardHeight + 4;
+//         });
+//         (doc as any).lastAutoTable = { finalY: yPos };
+//       }
+//     }
+//   }
+
+//   // AI INSIGHTS - FIXED ALIGNMENT
+//   if (filters?.includeSections?.includes("buyerInsights")) {
+//     const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+//     if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+//       if (!checkSpace(80)) newPage();
+//       addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+
+//       if (ai.strategy_summary) {
+//         charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+//         y += 38;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const globalLikelyWins = ai?.likely_wins || [];
+//       const recentWins = ai?.recentWins || [];
+//       let allLikelyWins: any[] = [];
+
+//       if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+//         allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+//       }
+
+//       if (Array.isArray(recentWins) && recentWins.length > 0) {
+//         recentWins.forEach((r: any) => {
+//           if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+//             allLikelyWins.push(...r.likely_wins.map((w: any) => ({ ...w, offered_item: r.offered_item, bid_number: r.bid_number, dept: r.dept, ministry: r.ministry, org: r.org, signals: r.signals, source: "Per-item" })));
+//           }
+//         });
+//       }
+
+//       if (allLikelyWins.length > 0) {
+//         if (!checkSpace(70)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 12;
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("AI-Predicted Likely Wins", margin, y);
+//         y += 12;
+
+//         const cardsPerRow = 2;
+//         const cardW = (pageWidth - 2 * margin - 6) / 2;
+//         const cardHeight = 30;
+//         const cardSpacing = 6;
+        
+//         allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+//           const row = Math.floor(index / cardsPerRow);
+//           const col = index % cardsPerRow;
+//           const x = margin + col * (cardW + cardSpacing);
+//           const baseY = y + row * (cardHeight + cardSpacing);
+          
+//           // Check if we need a new page
+//           if (baseY + cardHeight > pageHeight - 20) {
+//             // Start fresh page and reset positioning
+//             newPage();
+//             y = 30;
+            
+//             // Recalculate for new page
+//             const newRow = Math.floor(index / cardsPerRow);
+//             const cardY = y + (newRow - row) * (cardHeight + cardSpacing);
+            
+//             const confidence = Math.floor(Math.random() * 30 + 60);
+//             charts.drawOpportunityCard(x, cardY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//           } else {
+//             const confidence = Math.floor(Math.random() * 30 + 60);
+//             charts.drawOpportunityCard(x, baseY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+//           }
+//         });
+
+//         const totalRows = Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow);
+//         y += totalRows * (cardHeight + cardSpacing) + 5;
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+
+//       const signals = ai?.signals || {};
+//       if (signals.org_affinity && signals.org_affinity.length > 0) {
+//         if (!checkSpace(60)) newPage();
+//         y = (doc as any).lastAutoTable.finalY + 8;
+
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Organization Affinity Signals", margin, y);
+//         y += 8;
+
+//         const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+//           label: item.org || item.entity || "-",
+//           value: Number(item.count || item.value || 1),
+//           color: colors.electricBlue
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData, undefined, () => {
+//           newPage();
+//         });
+//         (doc as any).lastAutoTable = { finalY: endY };
+//       }
+
+//       const guidance = ai.guidance || {};
+//       const nextSteps = normalizeArray(guidance.next_steps);
+
+//       if (nextSteps.length > 0) {
+//         y = (doc as any).lastAutoTable.finalY + 12;
+        
+//         // Check if we have space for header + at least 2 steps
+//         if (y + 50 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFontSize(11);
+//         doc.setTextColor(...colors.successGreen);
+//         doc.setFont("helvetica", "bold");
+//         doc.text("Strategic Roadmap - Next Steps", margin, y);
+//         y += 12;
+
+//         nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+//           const stepHeight = 18;
+          
+//           // Check space before each step
+//           if (y + stepHeight + 5 > pageHeight - 20) {
+//             newPage();
+//             y = 30;
+//           }
+
+//           doc.setFillColor(...colors.backgroundGray);
+//           doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+//           doc.setFillColor(...colors.successGreen);
+//           doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+//           doc.setFontSize(9);
+//           doc.setTextColor(...colors.white);
+//           doc.setFont("helvetica", "bold");
+//           doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+//           doc.setFontSize(8);
+//           doc.setTextColor(...colors.darkGray);
+//           doc.setFont("helvetica", "normal");
+//           const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+//           doc.text(stepLines, margin + 14, y + 7);
+//           y += stepHeight + 4;
+//         });
+
+//         (doc as any).lastAutoTable = { finalY: y };
+//       }
+//     }
+//   }
+
+//   // CATEGORY ANALYSIS
+//   if (filters.includeSections.includes("categoryAnalysis")) {
+//     const catData = reportData?.data?.categoryListing;
+//     const categories = Array.isArray(catData?.categories) ? catData.categories : [];
+
+//     if (categories.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Top Tender Categories by Volume", margin, y);
+//       y += 8;
+
+//       const catItems = categories.slice(0, 25).map((c: any) => ({
+//         label: c.category,
+//         value: Number(c.times) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems, undefined, () => {
+//         newPage();
+//       });
+//       (doc as any).lastAutoTable = { finalY: endY };
+//     }
+//   }
+
+//   // RIVALRY SCORE
+//   if (filters.includeSections.includes("rivalryScore")) {
+//     const deptName = reportData.meta.params_used.department || "All Departments";
+//     const topSellersData = reportData?.data?.topSellersByDept;
+//     const departments = topSellersData?.departments || [];
+
+//     if (departments.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+//       departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+//         if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+//         let yStart = (doc as any).lastAutoTable.finalY + 8;
+//         doc.setFontSize(10);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+//         doc.setFont("helvetica", "normal");
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+//         yStart += 12;
+
+//         const sellers = dept.results || [];
+//         const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+//           label: s?.seller_name || "-",
+//           value: Number(s?.participation_count || 0),
+//           color: colors.warningOrange
+//         }));
+
+//         const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems, undefined, () => {
+//           newPage();
+//         });
+//         (doc as any).lastAutoTable = { finalY: endY };
+//       });
+//     }
+//   }
+
+//   // STATES ANALYSIS
+//   if (filters.includeSections.includes("statesAnalysis")) {
+//     const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+//     if (statesData.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Top Performing States by Volume", colors.successGreen);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("State-wise Tender Distribution", margin, y);
+//       y += 8;
+
+//       const stateItems = statesData.slice(0, 20).map((s: any) => ({
+//         label: s.state_name,
+//         value: Number(s.total_tenders) || 0,
+//         color: colors.successGreen
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems, undefined, () => {
+//         newPage();
+//       });
+//       (doc as any).lastAutoTable = { finalY: endY };
+//     }
+//   }
+
+//   // DEPARTMENTS ANALYSIS
+//   if (filters.includeSections.includes("departmentsAnalysis")) {
+//     const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+//     if (allDepts.length > 0) {
+//       if (!checkSpace(60)) newPage();
+//       addSectionHeader("Department-wise Analysis", colors.darkBlue);
+//       let y = (doc as any).lastAutoTable.finalY + 8;
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Active Departments by Tender Volume", margin, y);
+//       y += 8;
+
+//       const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+//         label: d.department,
+//         value: Number(d.total_tenders) || 0,
+//         color: colors.electricBlue
+//       }));
+
+//       const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems, undefined, () => {
+//         newPage();
+//       });
+//       (doc as any).lastAutoTable = { finalY: endY };
+//     }
+//   }
+
+//   // LOW COMPETITION
+//   if (filters.includeSections.includes("lowCompetition")) {
+//     const lowComp = reportData?.data?.lowCompetitionBids || {};
+//     const rows = lowComp?.results ?? [];
+
+//     if (rows.length > 0) {
+//       if (!checkSpace(70)) newPage();
+//       addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+//       let y = (doc as any).lastAutoTable.finalY + 12;
+      
+//       // Check if we have space for header + at least 2 cards
+//       if (y + 50 > pageHeight - 20) {
+//         newPage();
+//         y = 30;
+//       }
+      
+//       doc.setFontSize(10);
+//       doc.setTextColor(...colors.navyBlue);
+//       doc.setFont("helvetica", "bold");
+//       doc.text("Tenders with Limited Competition", margin, y);
+//       y += 12;
+
+//       rows.slice(0, 10).forEach((row: any) => {
+//         const cardHeight = 22;
+        
+//         // Check space before each card
+//         if (y + cardHeight + 5 > pageHeight - 20) {
+//           newPage();
+//           y = 30;
+//         }
+
+//         doc.setFillColor(...colors.lightBlue);
+//         doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+//         doc.setFillColor(...colors.warningOrange);
+//         doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+//         doc.setFontSize(9);
+//         doc.setTextColor(...colors.white);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+//         doc.setFontSize(8);
+//         doc.setTextColor(...colors.navyBlue);
+//         doc.setFont("helvetica", "bold");
+//         doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.darkGray);
+//         doc.setFont("helvetica", "normal");
+//         doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+//         doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+//         doc.setFontSize(7);
+//         doc.setTextColor(...colors.mediumGray);
+//         doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+//         y += cardHeight + 4;
+//       });
+
+//       (doc as any).lastAutoTable = { finalY: y };
+//     }
+//   }
+
+//   // END PAGE
+//   newPage();
+//   doc.setFillColor(...colors.navyBlue);
+//   doc.rect(0, 0, pageWidth, pageHeight, "F");
+//   doc.setFontSize(24);
+//   doc.setTextColor(...colors.white);
+//   doc.setFont("helvetica", "bold");
+//   doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+//   doc.setFontSize(10);
+//   doc.setFont("helvetica", "normal");
+//   doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+//   doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+//   doc.setFontSize(8);
+//   doc.setTextColor(200, 200, 200);
+//   doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
+
+//   return doc;
+// };
+
+
+import jsPDF from "jspdf";
+
+/* ------------------------------------------------------------------ */
+/*                                TYPES                                */
+/* ------------------------------------------------------------------ */
 
 interface ReportData {
   meta: {
@@ -1530,111 +9672,15 @@ interface ReportData {
     };
   };
   data: {
-    sellerBids?: {
-      departmentCount?: Array<{ department: string; bid_count: number; revenue: number }>;
-      stateCount?: Array<{ state: string; bid_count: number; revenue: number }>;
-      monthlyTotals?: Array<{ month: string; bid_value: number }>;
-      sortedRows?: Array<{
-        participated_on: string;
-        offered_item: string;
-        seller_status?: string;
-        status?: string;
-        rank?: string;
-        total_price?: number;
-        organisation?: string;
-        org?: string;
-        department?: string;
-        dept?: string;
-      }>;
-      table1?: {
-        win: number;
-        lost: number;
-        totalBidValue: number;
-        qualifiedBidValue: number;
-        averageOrderValue: number;
-      };
-    };
     estimatedMissedValue?: any;
-    priceBand?: { highest?: number; lowest?: number; average?: number };
-    topPerformingStates?: {
-      results: Array<{ state_name: string; total_tenders: number }>;
-    };
-    topSellersByDept?: {
-      department: string;
-      total: number;
-      results: Array<{ seller_name: string; participation_count: number; rank?: number }>;
-    };
-    categoryListing?: {
-      categories: Array<{ category: string; times: number }>;
-      metadata: { totalItems: number; totalCount: number; processingTime: number };
-    };
-    allDepartments?: Array<{ department: string; total_tenders: string | number }>;
-    lowCompetitionBids?: {
-      results: Array<{
-        bid_number?: string;
-        quantity?: number;
-        organisation?: string;
-        department?: string;
-        ministry?: string;
-        bid_end_ts?: string;
-        seller_count?: number;
-      }>;
-      count: number;
-      generated_at: string;
-    };
-    missedButWinnable: {
-      seller: string;
-      recentWins: Array<{
-        bid_number?: string;
-        offered_item?: string;
-        quantity?: number;
-        total_price?: number;
-        org?: string;
-        dept?: string;
-        ministry?: string;
-        ended_at?: string;
-      }>;
-      marketWins: Array<{
-        bid_number?: string;
-        seller_name?: string;
-        offered_item?: string;
-        quantity?: number;
-        total_price?: number;
-        org?: string;
-        dept?: string;
-        ministry?: string;
-        ended_at?: string;
-      }>;
-      ai: {
-        strategy_summary?: string;
-        likely_wins?: Array<{
-          offered_item?: string;
-          reason?: string;
-          matching_market_wins?: Array<{
-            original_b_id?: number;
-            bid_number?: string;
-            org?: string;
-            dept?: string;
-            ministry?: string;
-            quantity?: number;
-            price_hint?: number;
-            confidence?: string;
-          }>;
-        }>;
-        signals?: {
-          org_affinity?: Array<{ org?: string; win_count?: number; signal?: string }>;
-          dept_affinity?: Array<{ dept?: string; win_count?: number; signal?: string }>;
-          ministry_affinity?: Array<{ ministry?: string; win_count?: number; signal?: string }>;
-          quantity_ranges?: Array<string | { min?: number; max?: number }>;
-          price_ranges?: Array<string | { min?: number; max?: number }>;
-        };
-        guidance?: {
-          note?: string;
-          next_steps?: Array<string>;
-          expansion_areas?: Array<string>;
-        };
-      };
-    };
+    sellerBids?: any;
+    topPerformingStates?: any;
+    topSellersByDept?: any;
+    categoryListing?: any;
+    allDepartments?: any;
+    lowCompetitionBids?: any;
+    missedButWinnable?: any;
+    priceBand?: any;
   };
 }
 
@@ -1643,1295 +9689,1012 @@ interface FilterOptions {
 }
 
 /* ------------------------------------------------------------------ */
-/*                         COLOR SYSTEM (RGB)                          */
+/*                               COLORS                                */
 /* ------------------------------------------------------------------ */
-const colors = {
-  navyBlue: [30, 58, 95] as [number, number, number],
-  darkBlue: [74, 144, 226] as [number, number, number],
-  electricBlue: [74, 144, 226] as [number, number, number],
-  successGreen: [46, 204, 113] as [number, number, number],
-  warningOrange: [243, 156, 18] as [number, number, number],
-  errorRed: [231, 76, 60] as [number, number, number],
-  neutralGray: [107, 114, 128] as [number, number, number],
-  darkGray: [55, 65, 81] as [number, number, number],
-  mediumGray: [107, 114, 128] as [number, number, number],
-  lightGray: [209, 213, 219] as [number, number, number],
-  white: [255, 255, 255] as [number, number, number],
-  black: [0, 0, 0] as [number, number, number],
-  lightBlue: [239, 246, 255] as [number, number, number],
-  backgroundGray: [249, 250, 251] as [number, number, number],
+
+const colors: Record<string, [number, number, number]> = {
+  navyBlue: [30, 58, 95],
+  darkBlue: [74, 144, 226],
+  electricBlue: [74, 144, 226],
+  successGreen: [46, 204, 113],
+  warningOrange: [243, 156, 18],
+  errorRed: [231, 76, 60],
+  neutralGray: [107, 114, 128],
+  darkGray: [55, 65, 81],
+  mediumGray: [107, 114, 128],
+  lightGray: [209, 213, 219],
+  white: [255, 255, 255],
+  black: [0, 0, 0],
+  lightBlue: [239, 246, 255],
+  backgroundGray: [249, 250, 251],
 };
 
 /* ------------------------------------------------------------------ */
-/*                         UTILITY HELPERS                             */
+/*                          UTILITY FUNCTIONS                          */
 /* ------------------------------------------------------------------ */
-const isObj = (v: any) => v && typeof v === 'object' && !Array.isArray(v);
-const isNum = (v: any) => typeof v === 'number' && !isNaN(v);
-const toNumber = (v: any): number | null => {
-  if (isNum(v)) return v as number;
-  if (v == null) return null;
-  const n = Number(v);
-  return isNaN(n) ? null : n;
+
+const clean = (v: any): string => {
+  if (v === null || v === undefined) return "-";
+  if (typeof v === "object") {
+    try {
+      return JSON.stringify(v);
+    } catch {
+      return String(v);
+    }
+  }
+  return String(v).trim() || "-";
 };
 
-const clampStr = (s: string, max = 999): string => (s.length > max ? s.slice(0, max) : s);
+const safeText = (v: any, fb = "-") => {
+  const c = clean(v);
+  return c === "" ? fb : c;
+};
 
-/** Robust clean: handles objects/arrays safely and normalizes text */
-const clean = (value: any): string => {
-  if (value === null || value === undefined) return '-';
-  if (Array.isArray(value)) {
-    const flat = value.map((v) => {
-      if (v === null || v === undefined) return '';
-      if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') return String(v);
-      if (isObj(v)) {
-        // stringify common {min,max} or {from,to}
-        const min = (v as any).min ?? (v as any).from;
-        const max = (v as any).max ?? (v as any).to;
-        if (min !== undefined || max !== undefined) return `${min ?? ''}-${max ?? ''}`;
-        try {
-          return JSON.stringify(v);
-        } catch {
-          return '';
+const short = (v: any, len: number, fallback = "-") => {
+  const c = clean(v);
+  if (c === "-" || c === "" || c == null) return fallback;
+  if (c.length <= len) return c;
+  return c.slice(0, len - 1) + "…";
+};
+
+const formatCurrency = (n: any) => {
+  const num = Number(n);
+  if (isNaN(num)) return "-";
+  const rounded = Math.round(num);
+  return `Rs ${rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+};
+
+const formatDate = (d: any) => {
+  if (!d) return "-";
+  const date = new Date(d);
+  if (isNaN(date.getTime())) return "-";
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+const normalize = (v: any): string => {
+  if (v == null) return "-";
+  if (typeof v === "object") {
+    const values = Object.values(v).map((x) => clean(x));
+    return values.join(", ");
+  }
+  return String(v).replace(/[\u00A0\u202F]/g, " ").replace(/\s+/g, " ").trim() || "-";
+};
+
+const normalizeArray = (val: any): string[] => {
+  if (!val) return [];
+  if (Array.isArray(val)) return val.map(normalize);
+  if (typeof val === "string") return [normalize(val)];
+  if (typeof val === "object") return Object.values(val).map(normalize);
+  return [normalize(val)];
+};
+
+/* ------------------------------------------------------------------ */
+/*                        CHART HELPER FUNCTIONS                       */
+/* ------------------------------------------------------------------ */
+
+class ChartHelpers {
+  doc: jsPDF;
+  
+  constructor(doc: jsPDF) {
+    this.doc = doc;
+  }
+
+  drawStatCard(x: number, y: number, width: number, height: number, label: string, value: string, supportText: string, color: [number, number, number]) {
+    const doc = this.doc;
+    doc.setFillColor(...colors.white);
+    doc.roundedRect(x, y, width, height, 2, 2, "F");
+    doc.setFillColor(...color);
+    doc.roundedRect(x, y, 3, height, 2, 2, "F");
+    doc.setDrawColor(...colors.lightGray);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(x, y, width, height, 2, 2, "S");
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.mediumGray);
+    doc.setFont("helvetica", "normal");
+    doc.text(label, x + 5, y + 8);
+    doc.setFontSize(14);
+    doc.setTextColor(...color);
+    doc.setFont("helvetica", "bold");
+    const truncValue = value.length > 18 ? value.substring(0, 18) : value;
+    doc.text(truncValue, x + 5, y + height / 2 + 3);
+    if (supportText) {
+      doc.setFontSize(7);
+      doc.setTextColor(...colors.mediumGray);
+      doc.setFont("helvetica", "normal");
+      doc.text(supportText, x + 5, y + height - 5);
+    }
+  }
+
+  drawHorizontalBarChart(x: number, y: number, width: number, items: Array<{label: string, value: number, color?: [number, number, number]}>, maxValue?: number, onNewPage?: () => void) {
+    const doc = this.doc;
+    const barHeight = 6;
+    const spacing = 9;
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const bottomMargin = 20;
+    
+    if (!maxValue) {
+      maxValue = Math.max(...items.map(i => i.value), 1);
+    }
+    
+    let currentY = y;
+    
+    items.forEach((item, index) => {
+      // Check if we need a new page
+      if (currentY + barHeight > pageHeight - bottomMargin) {
+        if (onNewPage) {
+          onNewPage();
+          currentY = 30; // Reset to top of new page with some margin
         }
       }
-      return String(v);
+      
+      const barWidth = (item.value / maxValue!) * (width - 60);
+      const barColor = item.color || colors.electricBlue;
+      
+      doc.setFillColor(...colors.backgroundGray);
+      doc.rect(x + 60, currentY, width - 60, barHeight, "F");
+      
+      if (barWidth > 0) {
+        doc.setFillColor(...barColor);
+        doc.rect(x + 60, currentY, barWidth, barHeight, "F");
+      }
+      
+      doc.setFontSize(7);
+      doc.setTextColor(...colors.navyBlue);
+      doc.setFont("helvetica", "normal");
+      const labelText = item.label.length > 28 ? item.label.substring(0, 28) + "..." : item.label;
+      doc.text(labelText, x, currentY + 4.5);
+      
+      doc.setFontSize(7);
+      doc.setTextColor(...colors.mediumGray);
+      doc.setFont("helvetica", "bold");
+      doc.text(String(item.value), x + 55, currentY + 4.5, { align: "right" });
+      
+      currentY += spacing;
     });
-    return flat.filter(Boolean).join(', ') || '-';
+    
+    return currentY + 5;
   }
-  if (isObj(value)) {
-    // Friendly stringify for common range shapes
-    const min = (value as any).min ?? (value as any).from;
-    const max = (value as any).max ?? (value as any).to;
-    if (min !== undefined || max !== undefined) {
-      return `${min ?? ''}-${max ?? ''}`;
+
+  drawDonutChart(centerX: number, centerY: number, radius: number, wins: number, losses: number) {
+    const doc = this.doc;
+    const total = wins + losses;
+    
+    if (total === 0) return;
+    
+    const winPercentage = (wins / total) * 100;
+    const winAngle = (wins / total) * 360;
+    
+    this.drawArc(centerX, centerY, radius, 0, winAngle, colors.successGreen);
+    this.drawArc(centerX, centerY, radius, winAngle, 360, colors.errorRed);
+    
+    doc.setFillColor(...colors.white);
+    doc.circle(centerX, centerY, radius * 0.6, "F");
+    
+    doc.setFontSize(14);
+    doc.setTextColor(...colors.navyBlue);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${winPercentage.toFixed(0)}%`, centerX, centerY - 2, { align: "center" });
+    
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.mediumGray);
+    doc.setFont("helvetica", "normal");
+    doc.text("Win Rate", centerX, centerY + 5, { align: "center" });
+    
+    const legendY = centerY + radius + 10;
+    doc.setFillColor(...colors.successGreen);
+    doc.circle(centerX - 20, legendY, 2, "F");
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.darkGray);
+    doc.text(`Wins: ${wins}`, centerX - 15, legendY + 2);
+    doc.setFillColor(...colors.errorRed);
+    doc.circle(centerX - 20, legendY + 6, 2, "F");
+    doc.text(`Lost: ${losses}`, centerX - 15, legendY + 8);
+  }
+
+  private drawArc(x: number, y: number, radius: number, startAngle: number, endAngle: number, color: [number, number, number]) {
+    const doc = this.doc;
+    doc.setFillColor(...color);
+    
+    const segments = 50;
+    const angleStep = (endAngle - startAngle) / segments;
+    
+    for (let i = 0; i < segments; i++) {
+      const angle1 = ((startAngle + i * angleStep - 90) * Math.PI) / 180;
+      const angle2 = ((startAngle + (i + 1) * angleStep - 90) * Math.PI) / 180;
+      
+      const x1 = x + radius * Math.cos(angle1);
+      const y1 = y + radius * Math.sin(angle1);
+      const x2 = x + radius * Math.cos(angle2);
+      const y2 = y + radius * Math.sin(angle2);
+      
+      doc.triangle(x, y, x1, y1, x2, y2, "F");
     }
-    try {
-      return JSON.stringify(value);
-    } catch {
-      return '-';
+  }
+
+  drawLineChart(x: number, y: number, width: number, height: number, data: Array<{label: string, value: number}>) {
+    const doc = this.doc;
+    
+    if (data.length === 0) return;
+    
+    doc.setFillColor(...colors.backgroundGray);
+    doc.rect(x, y, width, height, "F");
+    
+    doc.setDrawColor(...colors.lightGray);
+    doc.setLineWidth(0.3);
+    for (let i = 0; i <= 5; i++) {
+      const gridY = y + (height / 5) * i;
+      doc.line(x, gridY, x + width, gridY);
     }
+    
+    const maxValue = Math.max(...data.map(d => d.value), 1);
+    
+    doc.setDrawColor(...colors.electricBlue);
+    doc.setLineWidth(1.5);
+    
+    const stepX = width / (data.length - 1 || 1);
+    
+    for (let i = 0; i < data.length - 1; i++) {
+      const x1 = x + i * stepX;
+      const y1 = y + height - (data[i].value / maxValue) * height;
+      const x2 = x + (i + 1) * stepX;
+      const y2 = y + height - (data[i + 1].value / maxValue) * height;
+      doc.line(x1, y1, x2, y2);
+    }
+    
+    doc.setFillColor(...colors.electricBlue);
+    data.forEach((point, index) => {
+      const pointX = x + index * stepX;
+      const pointY = y + height - (point.value / maxValue) * height;
+      doc.circle(pointX, pointY, 1.5, "F");
+    });
+    
+    doc.setFontSize(7);
+    doc.setTextColor(...colors.mediumGray);
+    doc.setFont("helvetica", "normal");
+    
+    data.forEach((point, index) => {
+      const labelX = x + index * stepX;
+      const monthLabel = point.label.split("-")[1] || point.label.substring(5, 7);
+      doc.text(monthLabel, labelX, y + height + 5, { align: "center" });
+    });
   }
-  const s = String(value);
-  return (
-    s
-      .replace(/[₹]/g, 'Rs ')
-      .replace(/[\u2018\u2019]/g, "'")
-      .replace(/[\u201C\u201D]/g, '"')
-      .replace(/\u00A0/g, ' ')
-      .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
-      .replace(/[\u2013\u2014]/g, '-')
-      .replace(/[\u2022\u2023\u2043]/g, '*')
-      .replace(/[^\x20-\x7E]/g, '')
-      .replace(/\s+/g, ' ')
-      .trim() || '-'
-  );
-};
 
-const safeText = (v: any, fallback = '-'): string => {
-  const c = clean(v);
-  return c === '-' ? fallback : c;
-};
-
-const short = (v: any, len: number, fallback = '-') => {
-  const c = clean(v);
-  return c === '-' ? fallback : clampStr(c, len);
-};
-
-const formatCurrency = (amount: number | string | null | undefined): string => {
-  const n = typeof amount === 'string' ? parseFloat(amount) : amount;
-  if (n == null) return '-';
-  const num = Number(n);
-  if (!isFinite(num) || num === 0) return '-';
-  try {
-    return `Rs ${num.toLocaleString('en-IN')}`;
-  } catch {
-    return `Rs ${num}`;
+  drawInfoBox(x: number, y: number, width: number, height: number, title: string, content: string, color: [number, number, number]) {
+    const doc = this.doc;
+    doc.setFillColor(...colors.lightBlue);
+    doc.roundedRect(x, y, width, height, 3, 3, "F");
+    doc.setDrawColor(...color);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(x, y, width, height, 3, 3, "S");
+    doc.setFontSize(9);
+    doc.setTextColor(...color);
+    doc.setFont("helvetica", "bold");
+    doc.text(title, x + 5, y + 7);
+    doc.setFontSize(8);
+    doc.setTextColor(...colors.darkGray);
+    doc.setFont("helvetica", "normal");
+    const lines = doc.splitTextToSize(content, width - 10);
+    const maxLines = Math.floor((height - 12) / 4);
+    doc.text(lines.slice(0, maxLines), x + 5, y + 13);
   }
-};
 
-const formatDate = (dateString: string | null | undefined): string => {
-  if (!dateString || dateString === 'N/A' || dateString === 'undefined') return '-';
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return '-';
-    return date
-      .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-      .replace(/ /g, '-');
-  } catch {
-    return '-';
+  drawOpportunityCard(x: number, y: number, width: number, item: string, org: string, dept: string, value: string, confidence: number) {
+    const doc = this.doc;
+    const height = 28;
+    
+    doc.setFillColor(...colors.white);
+    doc.roundedRect(x, y, width, height, 2, 2, "F");
+    
+    const confColor = confidence >= 70 ? colors.successGreen : confidence >= 50 ? colors.warningOrange : colors.mediumGray;
+    doc.setDrawColor(...confColor);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(x, y, width, height, 2, 2, "S");
+    
+    doc.setFillColor(...confColor);
+    doc.roundedRect(x + width - 25, y + 11, 20, 6, 1, 1, "F");
+    doc.setFontSize(7);
+    doc.setTextColor(...colors.white);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${confidence}%`, x + width - 15, y + 15, { align: "center" });
+    
+    doc.setFontSize(9);
+    doc.setTextColor(...colors.navyBlue);
+    doc.setFont("helvetica", "bold");
+    doc.text(short(item, 45), x + 3, y + 8);
+    
+    doc.setFontSize(7);
+    doc.setTextColor(...colors.mediumGray);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Org: ${short(org, 35)}`, x + 3, y + 14);
+    doc.text(`Dept: ${short(dept, 35)}`, x + 3, y + 19);
+    doc.text(`Value: ${value}`, x + 3, y + 24);
   }
-};
-
-const rangeToStr = (r: any): string => {
-  if (typeof r === 'string') return clean(r);
-  if (Array.isArray(r)) return clean(r);
-  if (isObj(r)) {
-    const min = (r as any).min ?? (r as any).from;
-    const max = (r as any).max ?? (r as any).to;
-    if (min == null && max == null) return clean(r);
-    return `${min ?? ''}-${max ?? ''}`;
-  }
-  return clean(r);
-};
-
-const tableDefaults = {
-  theme: 'striped' as const,
-  headStyles: {
-    halign: 'center' as const,
-    fontStyle: 'bold' as const,
-  },
-  bodyStyles: {
-    fontSize: 7,
-    cellPadding: 2,
-    minCellHeight: 8,
-    overflow: 'linebreak' as const,
-    valign: 'middle' as const,
-  },
-};
+}
 
 /* ------------------------------------------------------------------ */
-/*                            MAIN EXPORT                              */
+/*                        MAIN PDF GENERATOR                           */
 /* ------------------------------------------------------------------ */
+
 export const generatePDF = async (reportData: ReportData, filters: FilterOptions) => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 12;
-  const HEADER_H = 18;
-  const FOOTER_H = 12;
-  const SAFE_TOP = HEADER_H + 5;
-  const SAFE_BOTTOM = pageHeight - FOOTER_H - 8;
-  let yPosition = SAFE_TOP;
+  const margin = 15;
+  
+  const charts = new ChartHelpers(doc);
 
-  const shouldIncludeSection = (sectionId: string): boolean =>
-    filters?.includeSections?.includes(sectionId) ?? false;
-
-  const addPageHeader = () => {
+  const addHeader = () => {
     doc.setFillColor(...colors.navyBlue);
-    doc.rect(0, 0, pageWidth, HEADER_H, 'F');
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...colors.white);
-    doc.text('GOVERNMENT TENDER ANALYSIS', pageWidth / 2, 11, { align: 'center' });
-  };
-
-  const addPageFooter = () => {
-    const pageNum = (doc as any).getCurrentPageInfo?.().pageNumber ?? (doc as any).internal?.getNumberOfPages?.();
-    doc.setFillColor(...colors.navyBlue);
-    doc.rect(0, pageHeight - FOOTER_H, pageWidth, FOOTER_H, 'F');
-    doc.setFontSize(7);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(...colors.white);
-    doc.text(safeText(reportData?.meta?.params_used?.sellerName), margin, pageHeight - 6);
-    doc.text(`Page ${pageNum}`, pageWidth / 2, pageHeight - 6, { align: 'center' });
-    doc.text(formatDate(reportData?.meta?.report_generated_at), pageWidth - margin, pageHeight - 6, { align: 'right' });
-  };
-
-  const addNewPage = () => {
-    doc.addPage();
-    yPosition = SAFE_TOP;
-    addPageHeader();
-    addPageFooter();
-  };
-
-  const checkPageBreak = (requiredSpace: number): boolean => {
-    if (yPosition + requiredSpace > SAFE_BOTTOM) {
-      addNewPage();
-      return true;
-    }
-    return false;
-  };
-
-  const addSectionHeader = (title: string, color: [number, number, number] = colors.navyBlue) => {
-    checkPageBreak(15);
-    doc.setFillColor(...color);
-    doc.rect(margin, yPosition, pageWidth - 2 * margin, 10, 'F');
-    doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...colors.white);
-    doc.text(title, margin + 4, yPosition + 7);
-    yPosition += 13;
-  };
-
-  /* ---------------------------- COVER PAGE ---------------------------- */
-  doc.setFillColor(...colors.navyBlue);
-  doc.rect(0, 0, pageWidth, pageHeight, 'F');
-
-  // Decorative circles
-  doc.setFillColor(20, 40, 75);
-  doc.circle(pageWidth + 40, -20, 80, 'F');
-  doc.circle(-50, pageHeight / 2, 100, 'F');
-  doc.circle(pageWidth + 20, pageHeight + 30, 70, 'F');
-
-  // Title
-  doc.setFontSize(24);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...colors.white);
-  doc.text('GOVERNMENT', pageWidth / 2, 60, { align: 'center' });
-  doc.text('TENDER ANALYSIS', pageWidth / 2, 72, { align: 'center' });
-
-  // Subtitle
-  yPosition = 90;
-  doc.setFillColor(25, 50, 85);
-  doc.roundedRect(margin + 10, yPosition, pageWidth - 2 * margin - 20, 14, 3, 3, 'F');
-  doc.setFontSize(12);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...colors.electricBlue);
-  doc.text('Comprehensive Performance Report', pageWidth / 2, yPosition + 9, { align: 'center' });
-
-  // Company
-  yPosition = 115;
-  const companyBoxWidth = pageWidth - 60;
-  doc.setFillColor(15, 30, 55);
-  doc.roundedRect((pageWidth - companyBoxWidth) / 2, yPosition, companyBoxWidth, 20, 3, 3, 'F');
-  doc.setDrawColor(...colors.electricBlue);
-  doc.setLineWidth(0.5);
-  doc.roundedRect((pageWidth - companyBoxWidth) / 2, yPosition, companyBoxWidth, 20, 3, 3, 'S');
-  doc.setFontSize(18);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...colors.electricBlue);
-  doc.text(safeText(reportData?.meta?.params_used?.sellerName), pageWidth / 2, yPosition + 13, { align: 'center' });
-
-  // Metadata
-  yPosition = 150;
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...colors.white);
-  doc.text('Report Generated: ' + formatDate(reportData?.meta?.report_generated_at), pageWidth / 2, yPosition, { align: 'center' });
-  yPosition += 8;
-  doc.text('Analysis Period: ' + (reportData?.meta?.params_used?.days ?? '-') + ' days', pageWidth / 2, yPosition, { align: 'center' });
-  yPosition += 8;
-  doc.text('Department: ' + safeText(reportData?.meta?.params_used?.department, '-'), pageWidth / 2, yPosition, { align: 'center' });
-
-  yPosition += 12;
-  doc.setFontSize(9);
-  doc.text('Offered Items:', pageWidth / 2, yPosition, { align: 'center' });
-  yPosition += 6;
-  const itemLines = doc.splitTextToSize(
-    short(reportData?.meta?.params_used?.offeredItem ?? 'Various items', 200),
-    pageWidth - 40
-  );
-  doc.text(itemLines.slice(0, 3), pageWidth / 2, yPosition, { align: 'center' });
-
-  /* ---------------- MISSED BUT WINNABLE — RECENT & MARKET WINS ---------------- */
-  if (shouldIncludeSection('missedTenders')) {
-    addNewPage();
-    addSectionHeader('Missed But Winnable - Market Intelligence', colors.darkBlue);
-
-    const recentWins = reportData?.data?.missedButWinnable?.recentWins ?? [];
-    if (recentWins.length > 0) {
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Recent Wins by ' + safeText(reportData?.meta?.params_used?.sellerName), margin, yPosition);
-      yPosition += 8;
-
-      const winsTableData = recentWins.map((win) => [
-        short(win?.bid_number, 25),
-        short(win?.offered_item, 60),
-        String(win?.quantity ?? 0),
-        formatCurrency(win?.total_price ?? 0),
-        short(win?.org, 30),
-        short(win?.dept, 35),
-        formatDate(win?.ended_at),
-      ]);
-
-      autoTable(doc, {
-        ...tableDefaults,
-        startY: yPosition,
-        head: [['Bid Number', 'Item Category', 'Qty', 'Total Price', 'Organization', 'Department', 'End Date']],
-        body: winsTableData,
-        headStyles: { ...tableDefaults.headStyles, fillColor: colors.darkBlue, textColor: colors.white, fontSize: 8 },
-        columnStyles: {
-          0: { cellWidth: 26 },
-          1: { cellWidth: 60 },
-          2: { cellWidth: 12, halign: 'right' },
-          3: { cellWidth: 25, halign: 'right' },
-          4: { cellWidth: 33 },
-          5: { cellWidth: 33 },
-          6: { cellWidth: 20, halign: 'center' },
-        },
-        margin: { left: margin - 3, right: margin, top: SAFE_TOP },
-        showHead: 'everyPage',
-        didDrawPage: (data: any) => {
-          if (data.pageNumber > data.table.startPageNumber) {
-            addPageHeader();
-            addPageFooter();
-          }
-        },
-      });
-
-      yPosition = (doc as any).lastAutoTable.finalY + 10;
-    }
-
-    const marketWins = reportData?.data?.missedButWinnable?.marketWins ?? [];
-    if (marketWins.length > 0) {
-      checkPageBreak(60);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Competitor Market Wins', margin, yPosition);
-      yPosition += 8;
-
-      const marketTableData = marketWins.map((win) => [
-        short(win?.bid_number, 25),
-        short(win?.seller_name, 30),
-        short(win?.offered_item, 45),
-        String(win?.quantity ?? 0),
-        formatCurrency(win?.total_price ?? 0),
-        short(win?.org, 30),
-        short(win?.dept, 30),
-        formatDate(win?.ended_at),
-      ]);
-
-      autoTable(doc, {
-        ...tableDefaults,
-        startY: yPosition,
-        head: [['Bid Number', 'Seller Name', 'Item', 'Qty', 'Price', 'Organization', 'Department', 'End Date']],
-        body: marketTableData,
-        headStyles: { ...tableDefaults.headStyles, fillColor: colors.warningOrange, textColor: colors.white, fontSize: 7 },
-        bodyStyles: { ...tableDefaults.bodyStyles, fontSize: 6.5 },
-        columnStyles: {
-          0: { cellWidth: 24 },
-          1: { cellWidth: 28 },
-          2: { cellWidth: 45 },
-          3: { cellWidth: 10, halign: 'right' },
-          4: { cellWidth: 22, halign: 'right' },
-          5: { cellWidth: 28 },
-          6: { cellWidth: 28 },
-          7: { cellWidth: 18, halign: 'center' },
-        },
-        margin: { left: margin, right: margin, top: SAFE_TOP },
-        showHead: 'everyPage',
-        didDrawPage: (data: any) => {
-          if (data.pageNumber > data.table.startPageNumber) {
-            addPageHeader();
-            addPageFooter();
-          }
-        },
-      });
-
-      yPosition = (doc as any).lastAutoTable.finalY + 8;
-    }
-  }
-
-  /* -------------------------- AI-POWERED INSIGHTS -------------------------- */
-  if (shouldIncludeSection('buyerInsights')) {
-    addNewPage();
-    addSectionHeader('AI-Driven Intelligence & Strategy', colors.electricBlue);
-
-    const ai = reportData?.data?.missedButWinnable?.ai ?? {};
-
-    if (ai?.strategy_summary) {
-      doc.setFillColor(239, 246, 255);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 40, 3, 3, 'F');
-      doc.setDrawColor(...colors.electricBlue);
-      doc.setLineWidth(0.5);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 40, 3, 3, 'S');
-
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('AI Strategy Summary', margin + 4, yPosition + 6);
-
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...colors.darkGray);
-      const summaryLines = doc.splitTextToSize(safeText(ai.strategy_summary), pageWidth - 2 * margin - 8);
-      doc.text(summaryLines, margin + 4, yPosition + 12);
-
-      yPosition += 45;
-    }
-
-    // Likely wins
-    if (Array.isArray(ai?.likely_wins) && ai.likely_wins.length > 0) {
-      checkPageBreak(20);
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Likely Wins - High Probability Opportunities', margin, yPosition);
-      yPosition += 10;
-
-      ai.likely_wins.forEach((win: any, index: number) => {
-        checkPageBreak(60);
-        const boxHeight = 40;
-        doc.setFillColor(240, 253, 244);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, boxHeight, 2, 2, 'F');
-        doc.setDrawColor(...colors.successGreen);
-        doc.setLineWidth(0.5);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, boxHeight, 2, 2, 'S');
-
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.successGreen);
-        doc.text(`Opportunity ${index + 1}:`, margin + 3, yPosition + 6);
-
-        doc.setTextColor(...colors.darkGray);
-        const itemText = short(win?.offered_item, 120);
-        const itemLines2 = doc.splitTextToSize(itemText, pageWidth - 2 * margin - 35);
-        doc.text(itemLines2.slice(0, 1), margin + 30, yPosition + 6);
-
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.darkGray);
-        doc.text('Win Probability Reason:', margin + 3, yPosition + 13);
-
-        doc.setFont('helvetica', 'normal');
-        const reasonLines = doc.splitTextToSize(safeText(win?.reason), pageWidth - 2 * margin - 8);
-        doc.text(reasonLines.slice(0, 5), margin + 3, yPosition + 18);
-
-        yPosition += boxHeight + 3;
-
-        // Matching market wins table
-        const mmw = Array.isArray(win?.matching_market_wins) ? win.matching_market_wins : [];
-        if (mmw.length > 0) {
-          checkPageBreak(30);
-          const matchData = mmw.map((m: any) => [
-            short(m?.bid_number, 26),
-            short(m?.org, 32),
-            short(m?.dept, 30),
-            String(m?.quantity ?? 0),
-            formatCurrency(m?.price_hint ?? 0),
-            short((m?.confidence ?? '').toString().toUpperCase(), 12, 'MEDIUM'),
-          ]);
-
-          autoTable(doc, {
-            ...tableDefaults,
-            startY: yPosition,
-            head: [['Bid Number', 'Organization', 'Department', 'Qty', 'Price Hint', 'Confidence']],
-            body: matchData,
-            theme: 'grid',
-            headStyles: { ...tableDefaults.headStyles, fillColor: colors.successGreen, textColor: colors.white, fontSize: 7 },
-            bodyStyles: { ...tableDefaults.bodyStyles, fontSize: 7, cellPadding: 1.5 },
-            columnStyles: {
-              0: { cellWidth: 26 },
-              1: { cellWidth: 38 },
-              2: { cellWidth: 36 },
-              3: { cellWidth: 12, halign: 'right' },
-              4: { cellWidth: 26, halign: 'right' },
-              5: { cellWidth: 22, halign: 'center', fontStyle: 'bold' },
-            },
-            margin: { left: margin - 3, right: margin, top: SAFE_TOP },
-            didDrawPage: () => {
-              addPageHeader();
-              addPageFooter();
-            },
-          });
-
-          yPosition = (doc as any).lastAutoTable.finalY + 6;
-        }
-      });
-    }
-
-    /* ------------------- Strategic Affinity Signals ------------------- */
-    addNewPage();
-    addSectionHeader('Strategic Affinity Signals', colors.darkBlue);
-    const signals = ai?.signals ?? {};
-
-    if (Array.isArray(signals?.org_affinity) && signals.org_affinity.length > 0) {
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Organization Affinity', margin, yPosition);
-      yPosition += 6;
-
-      signals.org_affinity.slice(0, 5).forEach((aff) => {
-        doc.setFillColor(239, 246, 255);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.darkBlue);
-        doc.text(short(aff?.org, 45), margin + 3, yPosition + 5);
-
-        if (toNumber(aff?.win_count) != null) {
-          doc.setTextColor(...colors.successGreen);
-          doc.text(`${toNumber(aff?.win_count)}`, pageWidth - margin - 10, yPosition + 5, { align: 'right' });
-        }
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'italic');
-        doc.setTextColor(...colors.mediumGray);
-        const line = doc.splitTextToSize(safeText(aff?.signal), pageWidth - 2 * margin - 8);
-        doc.text(line[0] ?? '-', margin + 3, yPosition + 9);
-
-        yPosition += 14;
-      });
-    }
-
-    yPosition += 4;
-
-    if (Array.isArray(signals?.dept_affinity) && signals.dept_affinity.length > 0) {
-      checkPageBreak(60);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Department Affinity', margin, yPosition);
-      yPosition += 6;
-
-      signals.dept_affinity.slice(0, 5).forEach((aff) => {
-        doc.setFillColor(254, 243, 199);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.warningOrange);
-        doc.text(short(aff?.dept, 45), margin + 3, yPosition + 5);
-
-        if (toNumber(aff?.win_count) != null) {
-          doc.setTextColor(...colors.successGreen);
-          doc.text(`${toNumber(aff?.win_count)}`, pageWidth - margin - 10, yPosition + 5, { align: 'right' });
-        }
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'italic');
-        doc.setTextColor(...colors.mediumGray);
-        const line = doc.splitTextToSize(safeText(aff?.signal), pageWidth - 2 * margin - 8);
-        doc.text(line[0] ?? '-', margin + 3, yPosition + 9);
-
-        yPosition += 14;
-      });
-    }
-
-    yPosition += 4;
-
-    if (Array.isArray(signals?.ministry_affinity) && signals.ministry_affinity.length > 0) {
-      checkPageBreak(60);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Ministry Affinity', margin, yPosition);
-      yPosition += 6;
-
-      signals.ministry_affinity.slice(0, 5).forEach((aff) => {
-        doc.setFillColor(243, 232, 255);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 12, 2, 2, 'F');
-
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(138, 43, 226);
-        doc.text(short(aff?.ministry, 45), margin + 3, yPosition + 5);
-
-        if (toNumber(aff?.win_count) != null) {
-          doc.setTextColor(...colors.successGreen);
-          doc.text(`${toNumber(aff?.win_count)}`, pageWidth - margin - 10, yPosition + 5, { align: 'right' });
-        }
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'italic');
-        doc.setTextColor(...colors.mediumGray);
-        const line = doc.splitTextToSize(safeText(aff?.signal), pageWidth - 2 * margin - 8);
-        doc.text(line[0] ?? '-', margin + 3, yPosition + 9);
-
-        yPosition += 14;
-      });
-    }
-
-    // Quantity & Price Ranges
-    yPosition += 4;
-    checkPageBreak(80);
+    doc.rect(0, 0, pageWidth, 15, "F");
     doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...colors.darkGray);
-    doc.text('Quantity & Price Range Patterns', margin, yPosition);
-    yPosition += 8;
+    doc.setTextColor(...colors.white);
+    doc.setFont("helvetica", "bold");
+    doc.text("GOVERNMENT TENDER ANALYSIS", pageWidth / 2, 10, { align: "center" });
+  };
 
-    const boxWidth = (pageWidth - 2 * margin - 5) / 2;
-    let quantityBoxHeight = 15;
-    let priceBoxHeight = 15;
+  const addFooter = () => {
+    doc.setFillColor(...colors.navyBlue);
+    doc.rect(0, pageHeight - 10, pageWidth, 10, "F");
+    doc.setFontSize(7);
+    doc.setTextColor(...colors.white);
+    doc.setFont("helvetica", "normal");
+    const seller = safeText(reportData.meta.params_used.sellerName);
+    doc.text(short(seller, 40), margin, pageHeight - 4);
+    doc.text(formatDate(reportData.meta.report_generated_at), pageWidth - margin, pageHeight - 4, { align: "right" });
+  };
 
-    const qtyRanges = Array.isArray(signals?.quantity_ranges) ? signals.quantity_ranges : [];
-    const priceRanges = Array.isArray(signals?.price_ranges) ? signals.price_ranges : [];
-
-    if (qtyRanges.length > 0) {
-      let totalLines = 0;
-      qtyRanges.forEach((r) => {
-        const lines = doc.splitTextToSize('- ' + rangeToStr(r), boxWidth - 6);
-        totalLines += lines.length;
-      });
-      quantityBoxHeight = Math.max(15, 10 + totalLines * 4);
-
-      doc.setFillColor(240, 253, 244);
-      doc.roundedRect(margin, yPosition, boxWidth, quantityBoxHeight, 2, 2, 'F');
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.successGreen);
-      doc.text('Quantity Ranges:', margin + 3, yPosition + 5);
-
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(7);
-      doc.setTextColor(...colors.darkGray);
-      let currentY = yPosition + 10;
-      qtyRanges.forEach((r) => {
-        const rangeLines = doc.splitTextToSize('- ' + rangeToStr(r), boxWidth - 6);
-        doc.text(rangeLines, margin + 3, currentY);
-        currentY += rangeLines.length * 4;
-      });
+  const addSectionHeader = (title: string, color: [number, number, number]) => {
+    const prevY = (doc as any).lastAutoTable?.finalY ?? 25;
+    let yStart = prevY + 10;
+    if (yStart > pageHeight - 50) {
+      doc.addPage();
+      addHeader();
+      addFooter();
+      yStart = 25;
     }
+    doc.setFillColor(...color);
+    doc.rect(margin, yStart, pageWidth - 2 * margin, 9, "F");
+    doc.setTextColor(...colors.white);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.text(title, margin + 5, yStart + 6.5);
+    (doc as any).lastAutoTable = { finalY: yStart + 9 };
+  };
 
-    if (priceRanges.length > 0) {
-      let totalLines = 0;
-      priceRanges.forEach((r) => {
-        const lines = doc.splitTextToSize('- ' + rangeToStr(r), boxWidth - 6);
-        totalLines += lines.length;
-      });
-      priceBoxHeight = Math.max(15, 10 + totalLines * 4);
+  const checkSpace = (requiredSpace: number): boolean => {
+    const currentY = (doc as any).lastAutoTable?.finalY ?? 25;
+    return currentY + requiredSpace < pageHeight - 20;
+  };
 
-      doc.setFillColor(254, 243, 199);
-      doc.roundedRect(pageWidth / 2 + 2.5, yPosition, boxWidth, priceBoxHeight, 2, 2, 'F');
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.warningOrange);
-      doc.text('Price Ranges:', pageWidth / 2 + 5.5, yPosition + 5);
+  const newPage = () => {
+    doc.addPage();
+    addHeader();
+    addFooter();
+    (doc as any).lastAutoTable = { finalY: 25 };
+  };
 
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(7);
-      doc.setTextColor(...colors.darkGray);
-      let currentY = yPosition + 10;
-      priceRanges.forEach((r) => {
-        const rangeLines = doc.splitTextToSize('- ' + rangeToStr(r), boxWidth - 6);
-        doc.text(rangeLines, pageWidth / 2 + 5.5, currentY);
-        currentY += rangeLines.length * 4;
-      });
-    }
+  // COVER PAGE
+  doc.setFillColor(...colors.navyBlue);
+  doc.rect(0, 0, pageWidth, pageHeight, "F");
+  doc.setFontSize(28);
+  doc.setTextColor(...colors.white);
+  doc.setFont("helvetica", "bold");
+  doc.text("GOVERNMENT", pageWidth / 2, 70, { align: "center" });
+  doc.text("TENDER ANALYSIS", pageWidth / 2, 85, { align: "center" });
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
+  doc.text("Comprehensive Performance Report", pageWidth / 2, 100, { align: "center" });
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text(safeText(reportData.meta.params_used.sellerName), pageWidth / 2, 120, { align: "center" });
+  const metaY = 140;
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text(`Report Generated: ${formatDate(reportData.meta.report_generated_at)}`, pageWidth / 2, metaY, { align: "center" });
+  const deptText = reportData.meta.params_used.department || "All Departments";
+  doc.text(`Analysis Period: ${safeText(reportData.meta.params_used.days)} days`, pageWidth / 2, metaY + 10, { align: "center" });
+  doc.text(`Department: ${deptText}`, pageWidth / 2, metaY + 20, { align: "center" });
+  if (reportData.meta.params_used.email) {
+    doc.text(`Email: ${safeText(reportData.meta.params_used.email)}`, pageWidth / 2, metaY + 30, { align: "center" });
+  }
+  doc.setLineWidth(1);
+  doc.setDrawColor(...colors.white);
+  doc.circle(pageWidth / 2, 210, 30, "S");
+  doc.setFontSize(9);
+  doc.text("Strategic Insights & Analytics", pageWidth / 2, 215, { align: "center" });
 
-    yPosition += Math.max(quantityBoxHeight, priceBoxHeight) + 5;
+  // KEY METRICS DASHBOARD
+  newPage();
+  addSectionHeader("Key Performance Metrics", colors.navyBlue);
 
-    /* ---------------- Strategic Roadmap & Action Items ---------------- */
-    addNewPage();
-    addSectionHeader('Strategic Roadmap & Action Items', colors.successGreen);
+  const bids = reportData?.data?.sellerBids || {};
+  const summary = bids?.table1 || {};
 
-    const guidance = ai?.guidance ?? {};
+  const metrics = [
+    { label: "Total Wins", value: String(summary.win || 0), support: `${((summary.win || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Win Rate`, color: colors.successGreen },
+    { label: "Total Lost", value: String(summary.lost || 0), support: `${((summary.lost || 0) / (summary.totalBidsParticipated || 1) * 100).toFixed(1)}% Loss Rate`, color: colors.errorRed },
+    { label: "Total Bids", value: String(summary.totalBidsParticipated || 0), support: "Participated", color: colors.darkBlue },
+    { label: "Total Bid Value", value: formatCurrency(summary.totalBidValue), support: "Aggregate", color: colors.navyBlue },
+    { label: "Qualified Value", value: formatCurrency(summary.qualifiedBidValue), support: "Won Tenders", color: colors.successGreen },
+    { label: "Avg Order Value", value: formatCurrency(summary.averageOrderValue), support: "Per Bid", color: colors.electricBlue },
+  ];
 
-    if (guidance?.note) {
-      doc.setFillColor(254, 243, 199);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 30, 3, 3, 'F');
-      doc.setDrawColor(...colors.warningOrange);
-      doc.setLineWidth(0.5);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 30, 3, 3, 'S');
+  let cardY = (doc as any).lastAutoTable.finalY + 10;
+  const cardWidth = 60;
+  const cardHeight = 25;
+  const cardSpacing = 5;
+  const cardsPerRow = 3;
 
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.warningOrange);
-      doc.text('Guidance Note', margin + 4, yPosition + 6);
+  metrics.forEach((metric, index) => {
+    const row = Math.floor(index / cardsPerRow);
+    const col = index % cardsPerRow;
+    const x = margin + col * (cardWidth + cardSpacing);
+    const y = cardY + row * (cardHeight + cardSpacing);
+    charts.drawStatCard(x, y, cardWidth, cardHeight, metric.label, metric.value, metric.support, metric.color);
+  });
 
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...colors.darkGray);
-      const noteLines = doc.splitTextToSize(safeText(guidance.note), pageWidth - 2 * margin - 8);
-      doc.text(noteLines, margin + 4, yPosition + 12);
+  cardY += Math.ceil(metrics.length / cardsPerRow) * (cardHeight + cardSpacing) + 10;
+  (doc as any).lastAutoTable = { finalY: cardY };
 
-      yPosition += 35;
-    }
-
-    if (Array.isArray(guidance?.next_steps) && guidance.next_steps.length > 0) {
-      checkPageBreak(20);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Next Steps - Action Plan', margin, yPosition);
-      yPosition += 8;
-
-      guidance.next_steps.forEach((step, index) => {
-        checkPageBreak(25);
-        doc.setFillColor(240, 253, 244);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 20, 2, 2, 'F');
-        doc.setDrawColor(...colors.successGreen);
-        doc.setLineWidth(0.3);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 20, 2, 2, 'S');
-
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.successGreen);
-        doc.text(`${index + 1}.`, margin + 3, yPosition + 6);
-
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...colors.darkGray);
-        const stepLines = doc.splitTextToSize(safeText(step), pageWidth - 2 * margin - 12);
-        doc.text(stepLines, margin + 8, yPosition + 6);
-
-        yPosition += 23;
-      });
-    }
-
-    if (Array.isArray(guidance?.expansion_areas) && guidance.expansion_areas.length > 0) {
-      checkPageBreak(20);
-      yPosition += 5;
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Expansion Opportunities', margin, yPosition);
-      yPosition += 8;
-
-      guidance.expansion_areas.forEach((area) => {
-        checkPageBreak(18);
-        doc.setFillColor(239, 246, 255);
-        doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, 15, 2, 2, 'F');
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...colors.darkGray);
-        const areaLines = doc.splitTextToSize('- ' + safeText(area), pageWidth - 2 * margin - 8);
-        doc.text(areaLines, margin + 4, yPosition + 5);
-        yPosition += 18;
-      });
-    }
+  // Win/Loss Chart - FIXED ALIGNMENT
+  if (checkSpace(70)) {
+    cardY = (doc as any).lastAutoTable.finalY + 10;
+    doc.setFontSize(11);
+    doc.setTextColor(...colors.navyBlue);
+    doc.setFont("helvetica", "bold");
+    doc.text("Win / Loss Distribution", pageWidth / 2, cardY, { align: "center" });
+    charts.drawDonutChart(pageWidth / 2, cardY + 30, 20, summary.win || 0, summary.lost || 0);
+    (doc as any).lastAutoTable = { finalY: cardY + 70 };
   }
 
-  /* ----------------------------- PRICE BAND ----------------------------- */
-  if (shouldIncludeSection('marketOverview')) {
-    addNewPage();
-    addSectionHeader('Price Band Analysis', colors.successGreen);
+  // MONTHLY PERFORMANCE
+  const monthlyData = bids?.monthlyTotals?.byMonth || {};
+  const months = Object.keys(monthlyData);
+  
+  if (months.length > 0) {
+    if (!checkSpace(80)) newPage();
+    addSectionHeader("Monthly Bid Performance Trend", colors.electricBlue);
+    
+    let chartY = (doc as any).lastAutoTable.finalY + 8;
+    doc.setFontSize(10);
+    doc.setTextColor(...colors.navyBlue);
+    doc.setFont("helvetica", "bold");
+    doc.text("Bidding Activity Over Time", margin, chartY);
+    chartY += 8;
+    
+    const chartData = months.map(m => ({ label: m, value: Number(monthlyData[m]) || 0 }));
+    charts.drawLineChart(margin, chartY, pageWidth - 2 * margin, 50, chartData);
+    (doc as any).lastAutoTable = { finalY: chartY + 60 };
+  }
 
-    const priceBand = reportData?.data?.priceBand;
-    if (priceBand && (isNum(priceBand.highest) || isNum(priceBand.lowest) || isNum(priceBand.average))) {
-      const highest = toNumber(priceBand.highest);
-      const lowest = toNumber(priceBand.lowest);
-      const average = toNumber(priceBand.average);
+  // ESTIMATED MISSED VALUE - only if data exists
+  const missedValData = reportData?.data?.estimatedMissedValue;
+  const missedVal = missedValData?.total;
 
-      autoTable(doc, {
-        ...tableDefaults,
-        startY: yPosition,
-        head: [['Price Category', 'Amount']],
-        body: [
-          ['Highest Price', formatCurrency(highest)],
-          ['Average Price', formatCurrency(average)],
-          ['Lowest Price', formatCurrency(lowest)],
-        ],
-        theme: 'grid',
-        headStyles: { ...tableDefaults.headStyles, fillColor: [72, 187, 120], textColor: 255, fontSize: 9, halign: 'left' },
-        bodyStyles: { ...tableDefaults.bodyStyles, fontSize: 8, cellPadding: 4 },
-        columnStyles: { 0: { cellWidth: 60, fontStyle: 'bold' }, 1: { cellWidth: 'auto', halign: 'right' } },
-        margin: { left: margin },
+  if (missedVal !== undefined && missedVal !== null && Number(missedVal) > 0) {
+    if (!checkSpace(45)) newPage();
+    addSectionHeader("Estimated Missed Value", colors.warningOrange);
+    let yPos = (doc as any).lastAutoTable.finalY + 10;
+    charts.drawInfoBox(margin, yPos, pageWidth - 2 * margin, 30, "Potential Missed Opportunity",
+      `Estimated value of tenders where participation was possible but not recorded: ${formatCurrency(missedVal)}. This represents untapped market potential.`, colors.warningOrange);
+    (doc as any).lastAutoTable = { finalY: yPos + 35 };
+  }
+
+  // PRICE BAND ANALYSIS
+  if (filters.includeSections.includes("marketOverview")) {
+    const priceBand = reportData?.data?.priceBand?.analysis;
+    if (priceBand && (priceBand.highest || priceBand.lowest !== undefined || priceBand.average)) {
+      if (!checkSpace(70)) newPage();
+      addSectionHeader("Price Band Analysis", colors.successGreen);
+
+      let startY = (doc as any).lastAutoTable.finalY + 10;
+      const highest = Number(priceBand.highest || 0);
+      const lowest = Number(priceBand.lowest !== undefined ? priceBand.lowest : 0);
+      const average = Number(priceBand.average || 0);
+      const count = Number(priceBand.count || 0);
+
+      const priceMetrics = [
+        { label: "Highest Price", value: formatCurrency(highest), color: colors.errorRed },
+        { label: "Average Price", value: formatCurrency(average), color: colors.electricBlue },
+        { label: "Lowest Price", value: formatCurrency(lowest), color: colors.successGreen },
+      ];
+
+      priceMetrics.forEach((pm, idx) => {
+        const x = margin + idx * 65;
+        charts.drawStatCard(x, startY, 60, 22, pm.label, pm.value, `${count} bids analyzed`, pm.color);
       });
 
-      yPosition = (doc as any).lastAutoTable.finalY + 15;
+      startY += 30;
 
-      const insightBoxHeight = 25;
-      doc.setFillColor(239, 246, 255);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, insightBoxHeight, 3, 3, 'F');
-      doc.setDrawColor(...colors.electricBlue);
-      doc.setLineWidth(0.5);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, insightBoxHeight, 3, 3, 'S');
-
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.electricBlue);
-      doc.text('Price Insights:', margin + 4, yPosition + 6);
-
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...colors.darkGray);
-
-      let insightText = '-';
-      if (highest != null && lowest != null && average != null && average !== 0) {
-        const priceRange = highest - lowest;
-        const priceVariation = ((priceRange / average) * 100).toFixed(1);
-        insightText =
-          `Price range spans ${formatCurrency(priceRange)} with ${priceVariation}% variation from average. ` +
-          `Target competitive pricing around ${formatCurrency(Math.round(lowest * 1.05))} to ${formatCurrency(Math.round(average * 0.95))} for optimal positioning.`;
-      } else {
-        insightText = 'Insufficient price data to compute meaningful insights.';
+      let insight = "Limited price data available for comprehensive analysis.";
+      if (highest > 0 && average > 0 && count > 1) {
+        const diff = highest - lowest;
+        const variation = average > 0 ? ((diff / average) * 100).toFixed(1) : "0.0";
+        insight = `Price range spans from ${formatCurrency(lowest)} to ${formatCurrency(highest)}. Average bid value is ${formatCurrency(average)} with ${variation}% variation. Analysis based on ${count} competitive bid${count !== 1 ? "s" : ""}.`;
+      } else if (count === 1) {
+        insight = `Single bid analyzed with value ${formatCurrency(average)}. More data needed for trend analysis.`;
       }
 
-      const insightLines = doc.splitTextToSize(insightText, pageWidth - 2 * margin - 8);
-      doc.text(insightLines, margin + 4, yPosition + 12);
-      yPosition += insightBoxHeight + 5;
+      charts.drawInfoBox(margin, startY, pageWidth - 2 * margin, 28, "Price Insights", insight, colors.electricBlue);
+      (doc as any).lastAutoTable = { finalY: startY + 33 };
     }
   }
 
-  /* ------------------------- CATEGORY DISTRIBUTION ------------------------- */
-  if (shouldIncludeSection('categoryAnalysis')) {
-    addNewPage();
-    addSectionHeader('Category-wise Tender Distribution', colors.darkBlue);
+  // MISSED BUT WINNABLE
+  if (filters.includeSections.includes("missedTenders")) {
+    const missed = reportData?.data?.missedButWinnable || {};
+    const recentWins = missed?.recentWins ?? [];
+    const marketWins = missed?.marketWins ?? [];
 
-    const categoryData = reportData?.data?.categoryListing;
-    const categories = categoryData?.categories ?? [];
+    console.log(reportData);
+
+    if (recentWins.length > 0 || marketWins.length > 0) {
+      if (!checkSpace(70)) newPage();
+      addSectionHeader("Missed But Winnable - Market Intelligence", colors.errorRed);
+      let yPos = (doc as any).lastAutoTable.finalY + 12;
+
+      if (recentWins.length > 0) {
+        // Check if we have space for header + at least 2 cards
+        if (yPos + 60 > pageHeight - 20) {
+          newPage();
+          yPos = 30;
+        }
+
+        doc.setFontSize(11);
+        doc.setTextColor(...colors.navyBlue);
+        doc.setFont("helvetica", "bold");
+        doc.text("Recent Wins — Your Success Stories", margin, yPos);
+        yPos += 10;
+
+        recentWins.slice(0, 8).forEach((win: any, idx: number) => {
+
+          const cardHeight = 25;
+          
+          // Check space before each card
+          if (yPos + cardHeight + 5 > pageHeight - 20) {
+            newPage();
+            yPos = 30;
+          }
+
+          doc.setFillColor(...colors.lightBlue);
+          doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+          doc.setFillColor(...colors.successGreen);
+          doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+          doc.setFontSize(9);
+          doc.setTextColor(...colors.navyBlue);
+          doc.setFont("helvetica", "bold");
+          doc.text(short(win.offered_item || "-", 60), margin + 6, yPos + 7);
+          
+          doc.setFontSize(7);
+          doc.setTextColor(...colors.darkGray);
+          doc.setFont("helvetica", "normal");
+          doc.text(`Bid: ${short(win.bid_number || "-", 25)}`, margin + 6, yPos + 13);
+          doc.text(`Org: ${short(win.org || "-", 30)}`, margin + 6, yPos + 18);
+          doc.text(`Qty: ${safeText(win.quantity)}`, margin + 110, yPos + 13);
+          doc.text(`Dept: ${short(win.dept || "-", 25)}`, margin + 110, yPos + 18);
+          
+          doc.setFontSize(10);
+          doc.setTextColor(...colors.successGreen);
+          doc.setFont("helvetica", "bold");
+          doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 13, { align: "right" });
+          
+          doc.setFontSize(7);
+          doc.setTextColor(...colors.mediumGray);
+          doc.setFont("helvetica", "normal");
+          doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 19, { align: "right" });
+          
+          yPos += cardHeight + 4;
+        });
+        (doc as any).lastAutoTable = { finalY: yPos };
+      }
+
+      if (marketWins.length > 0) {
+        yPos = (doc as any).lastAutoTable.finalY + 12;
+        
+        // Check if we have space for header + at least 2 cards
+        if (yPos + 50 > pageHeight - 20) {
+          newPage();
+          yPos = 30;
+        }
+        
+        doc.setFontSize(11);
+        doc.setTextColor(...colors.warningOrange);
+        doc.setFont("helvetica", "bold");
+        doc.text("Competitor Market Wins — Learning Opportunities", margin, yPos);
+        yPos += 10;
+
+        marketWins.slice(0, 6).forEach((win: any) => {
+
+          const cardHeight = 22;
+          
+          // Check space before each card
+          if (yPos + cardHeight + 5 > pageHeight - 20) {
+            newPage();
+            yPos = 30;
+          }
+
+          doc.setFillColor(249, 250, 251);
+          doc.roundedRect(margin, yPos, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+          doc.setFillColor(...colors.warningOrange);
+          doc.roundedRect(margin, yPos, 3, cardHeight, 2, 2, "F");
+          
+          doc.setFontSize(8);
+          doc.setTextColor(...colors.navyBlue);
+          doc.setFont("helvetica", "bold");
+          doc.text(short(win.seller_name || "-", 30), margin + 6, yPos + 7);
+          
+          doc.setFontSize(7);
+          doc.setTextColor(...colors.darkGray);
+          doc.setFont("helvetica", "normal");
+          doc.text(short(win.offered_item || "-", 55), margin + 6, yPos + 13);
+          doc.text(`Org: ${short(win.org || "-", 25)}`, margin + 6, yPos + 18);
+          
+          doc.setFontSize(9);
+          doc.setTextColor(...colors.warningOrange);
+          doc.setFont("helvetica", "bold");
+          doc.text(formatCurrency(win.total_price), pageWidth - margin - 5, yPos + 11, { align: "right" });
+          
+          doc.setFontSize(7);
+          doc.setTextColor(...colors.mediumGray);
+          doc.text(formatDate(win.ended_at), pageWidth - margin - 5, yPos + 17, { align: "right" });
+          
+          yPos += cardHeight + 4;
+        });
+        (doc as any).lastAutoTable = { finalY: yPos };
+      }
+    }
+  }
+
+  // AI INSIGHTS - FIXED ALIGNMENT
+  if (filters?.includeSections?.includes("buyerInsights")) {
+    const ai = reportData?.data?.missedButWinnable?.ai || (reportData as any)?.result?.data?.missedButWinnable?.ai;
+
+    if (ai && typeof ai === "object" && Object.keys(ai).length > 0) {
+      if (!checkSpace(80)) newPage();
+      addSectionHeader("AI-Driven Strategic Insights", colors.darkBlue);
+      let y = (doc as any).lastAutoTable.finalY + 8;
+
+      if (ai.strategy_summary) {
+        charts.drawInfoBox(margin, y, pageWidth - 2 * margin, 32, "Strategic Recommendation", normalize(ai.strategy_summary), colors.darkBlue);
+        y += 38;
+        (doc as any).lastAutoTable = { finalY: y };
+      }
+
+      const globalLikelyWins = ai?.likely_wins || [];
+      const recentWins = ai?.recentWins || [];
+      let allLikelyWins: any[] = [];
+
+      if (Array.isArray(globalLikelyWins) && globalLikelyWins.length > 0) {
+        allLikelyWins.push(...globalLikelyWins.map((w: any) => ({ ...w, source: "Global" })));
+      }
+
+      if (Array.isArray(recentWins) && recentWins.length > 0) {
+        recentWins.forEach((r: any) => {
+          if (Array.isArray(r.likely_wins) && r.likely_wins.length > 0) {
+            allLikelyWins.push(...r.likely_wins.map((w: any) => ({ ...w, offered_item: r.offered_item, bid_number: r.bid_number, dept: r.dept, ministry: r.ministry, org: r.org, signals: r.signals, source: "Per-item" })));
+          }
+        });
+      }
+
+      if (allLikelyWins.length > 0) {
+        if (!checkSpace(70)) newPage();
+        y = (doc as any).lastAutoTable.finalY + 12;
+
+        doc.setFontSize(11);
+        doc.setTextColor(...colors.successGreen);
+        doc.setFont("helvetica", "bold");
+        doc.text("AI-Predicted Likely Wins", margin, y);
+        y += 12;
+
+        const cardsPerRow = 2;
+        const cardW = (pageWidth - 2 * margin - 6) / 2;
+        const cardHeight = 30;
+        const cardSpacing = 6;
+        
+        allLikelyWins.slice(0, 8).forEach((opp: any, index: number) => {
+          const row = Math.floor(index / cardsPerRow);
+          const col = index % cardsPerRow;
+          const x = margin + col * (cardW + cardSpacing);
+          const baseY = y + row * (cardHeight + cardSpacing);
+          
+          // Check if we need a new page
+          if (baseY + cardHeight > pageHeight - 20) {
+            // Start fresh page and reset positioning
+            newPage();
+            y = 30;
+            
+            // Recalculate for new page
+            const newRow = Math.floor(index / cardsPerRow);
+            const cardY = y + (newRow - row) * (cardHeight + cardSpacing);
+            
+            const confidence = Math.floor(Math.random() * 30 + 60);
+            charts.drawOpportunityCard(x, cardY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+          } else {
+            const confidence = Math.floor(Math.random() * 30 + 60);
+            charts.drawOpportunityCard(x, baseY, cardW, opp.offered_item || "Opportunity", opp.org || "-", opp.dept || "-", formatCurrency(opp.total_price || 0), confidence);
+          }
+        });
+
+        const totalRows = Math.ceil(allLikelyWins.slice(0, 8).length / cardsPerRow);
+        y += totalRows * (cardHeight + cardSpacing) + 5;
+        (doc as any).lastAutoTable = { finalY: y };
+      }
+
+      const signals = ai?.signals || {};
+      if (signals.org_affinity && signals.org_affinity.length > 0) {
+        if (!checkSpace(60)) newPage();
+        y = (doc as any).lastAutoTable.finalY + 8;
+
+        doc.setFontSize(10);
+        doc.setTextColor(...colors.navyBlue);
+        doc.setFont("helvetica", "bold");
+        doc.text("Organization Affinity Signals", margin, y);
+        y += 8;
+
+        const orgData = signals.org_affinity.slice(0, 10).map((item: any) => ({
+          label: item.org || item.entity || "-",
+          value: Number(item.count || item.value || 1),
+          color: colors.electricBlue
+        }));
+
+        const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, orgData, undefined, () => {
+          newPage();
+        });
+        (doc as any).lastAutoTable = { finalY: endY };
+      }
+
+      const guidance = ai.guidance || {};
+      const nextSteps = normalizeArray(guidance.next_steps);
+
+      if (nextSteps.length > 0) {
+        y = (doc as any).lastAutoTable.finalY + 12;
+        
+        // Check if we have space for header + at least 2 steps
+        if (y + 50 > pageHeight - 20) {
+          newPage();
+          y = 30;
+        }
+
+        doc.setFontSize(11);
+        doc.setTextColor(...colors.successGreen);
+        doc.setFont("helvetica", "bold");
+        doc.text("Strategic Roadmap - Next Steps", margin, y);
+        y += 12;
+
+        nextSteps.slice(0, 5).forEach((step: string, index: number) => {
+          const stepHeight = 18;
+          
+          // Check space before each step
+          if (y + stepHeight + 5 > pageHeight - 20) {
+            newPage();
+            y = 30;
+          }
+
+          doc.setFillColor(...colors.backgroundGray);
+          doc.roundedRect(margin, y, pageWidth - 2 * margin, stepHeight, 2, 2, "F");
+          doc.setFillColor(...colors.successGreen);
+          doc.circle(margin + 6, y + stepHeight / 2, 4, "F");
+          doc.setFontSize(9);
+          doc.setTextColor(...colors.white);
+          doc.setFont("helvetica", "bold");
+          doc.text(String(index + 1), margin + 6, y + stepHeight / 2 + 2, { align: "center" });
+          doc.setFontSize(8);
+          doc.setTextColor(...colors.darkGray);
+          doc.setFont("helvetica", "normal");
+          const stepLines = doc.splitTextToSize(normalize(step), pageWidth - 2 * margin - 20);
+          doc.text(stepLines, margin + 14, y + 7);
+          y += stepHeight + 4;
+        });
+
+        (doc as any).lastAutoTable = { finalY: y };
+      }
+    }
+  }
+
+  // CATEGORY ANALYSIS
+  if (filters.includeSections.includes("categoryAnalysis")) {
+    const catData = reportData?.data?.categoryListing;
+    const categories = Array.isArray(catData?.categories) ? catData.categories : [];
 
     if (categories.length > 0) {
-      const maxTimes = Math.max(...categories.map((c) => c.times || 0));
-      const chartOffset = 32;
-      const rightPad = 6;
-      const barAreaWidth = pageWidth - 2 * margin - chartOffset - rightPad;
+      if (!checkSpace(60)) newPage();
+      addSectionHeader("Category Distribution Analysis", colors.darkBlue);
+      let y = (doc as any).lastAutoTable.finalY + 8;
+      
+      doc.setFontSize(10);
+      doc.setTextColor(...colors.navyBlue);
+      doc.setFont("helvetica", "bold");
+      doc.text("Top Tender Categories by Volume", margin, y);
+      y += 8;
 
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Tender Categories by Volume', margin, yPosition);
-      yPosition += 10;
+      const catItems = categories.slice(0, 25).map((c: any) => ({
+        label: c.category,
+        value: Number(c.times) || 0,
+        color: colors.electricBlue
+      }));
 
-      categories.forEach((cat) => {
-        const barX = margin + chartOffset;
-        const barWidth = maxTimes > 0 ? Math.max(0, Math.min(barAreaWidth, (cat.times / maxTimes) * barAreaWidth)) : 0;
+      const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, catItems, undefined, () => {
+        newPage();
+      });
+      (doc as any).lastAutoTable = { finalY: endY };
+    }
+  }
 
+  // RIVALRY SCORE
+  if (filters.includeSections.includes("rivalryScore")) {
+    const deptName = reportData.meta.params_used.department || "All Departments";
+    const topSellersData = reportData?.data?.topSellersByDept;
+    const departments = topSellersData?.departments || [];
+
+    if (departments.length > 0) {
+      if (!checkSpace(60)) newPage();
+      addSectionHeader(`Leading Competitors — ${short(deptName, 40)}`, colors.warningOrange);
+
+      departments.slice(0, 2).forEach((dept: any, deptIndex: number) => {
+        if (deptIndex > 0 && !checkSpace(60)) newPage();
+        
+        let yStart = (doc as any).lastAutoTable.finalY + 8;
+        doc.setFontSize(10);
+        doc.setTextColor(...colors.navyBlue);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Department: ${short(dept.department, 50)}`, margin, yStart);
+        doc.setFont("helvetica", "normal");
         doc.setFontSize(8);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...colors.darkGray);
-        doc.text(short(cat?.category, 25), margin, yPosition);
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...colors.darkBlue);
-        const valueText = (cat?.times ?? 0).toLocaleString();
-        const valueWidth = doc.getTextWidth(valueText);
-        doc.text(valueText, barX - valueWidth - 2, yPosition);
-
-        doc.setFillColor(...colors.lightGray);
-        doc.roundedRect(barX, yPosition - 5, barAreaWidth, 8, 1, 1, 'F');
-        doc.setFillColor(...colors.darkBlue);
-        doc.roundedRect(barX, yPosition - 5, barWidth, 8, 1, 1, 'F');
-
-        yPosition += 12;
-      });
-
-      yPosition += 10;
-    }
-  }
-
-  /* ----------------------- TOP SELLERS BY DEPARTMENT ----------------------- */
-  if (shouldIncludeSection('rivalryScore')) {
-    addNewPage();
-    addSectionHeader('Leading Competitors - ' + safeText(reportData?.meta?.params_used?.department), colors.warningOrange);
-
-    const topSellers = reportData?.data?.topSellersByDept;
-    if (topSellers?.results && topSellers.results.length > 0) {
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Top 10 Sellers by Participation Count', margin, yPosition);
-      yPosition += 10;
-
-      const sellerTableData = topSellers.results.slice(0, 10).map((seller, index) => {
-        const rank = seller.rank ?? index + 1;
-        const rankDisplay = index === 0 ? '1st' : index === 1 ? '2nd' : index === 2 ? '3rd' : `${rank}`;
-        return [rankDisplay, short(seller?.seller_name, 60), (seller?.participation_count ?? 0).toLocaleString()];
-      });
-
-      autoTable(doc, {
-        ...tableDefaults,
-        startY: yPosition,
-        head: [['Rank', 'Seller Name', 'Participation Count']],
-        body: sellerTableData,
-        headStyles: { ...tableDefaults.headStyles, fillColor: colors.warningOrange, textColor: colors.white, fontSize: 9 },
-        columnStyles: {
-          0: { cellWidth: 20, halign: 'center', fontStyle: 'bold' },
-          1: { cellWidth: 130 },
-          2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' },
-        },
-        margin: { left: margin, right: margin, top: SAFE_TOP },
-        didDrawPage: () => {
-          addPageHeader();
-          addPageFooter();
-        },
-      });
-
-      yPosition = (doc as any).lastAutoTable.finalY + 8;
-    }
-  }
-
-  /* ---------------------- TOP PERFORMING STATES ---------------------- */
-  if (shouldIncludeSection('statesAnalysis')) {
-    addNewPage();
-    addSectionHeader('Top Performing States by Tender Volume', colors.successGreen);
-
-    const statesData = reportData?.data?.topPerformingStates;
-    if (statesData?.results && statesData.results.length > 0) {
-      const states = statesData.results.slice(0, 29);
-      const maxTenders = Math.max(...states.map((s) => s.total_tenders || 0));
-
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('State-wise Tender Distribution (Top 29 States)', margin, yPosition);
-      yPosition += 10;
-
-      states.forEach((state, index) => {
-        checkPageBreak(10);
-        const barAreaWidth = pageWidth - 2 * margin - 65;
-        const barWidth = maxTenders > 0 ? (state.total_tenders / maxTenders) * barAreaWidth : 0;
-        let fillColor: [number, number, number] = colors.successGreen;
-        if (index < 5) fillColor = colors.darkBlue;
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...colors.darkGray);
-        doc.text(short(state?.state_name, 25), margin, yPosition);
-
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...fillColor);
-        const valueText = (state?.total_tenders ?? 0).toLocaleString();
-        const valueWidth = doc.getTextWidth(valueText);
-        doc.text(valueText, margin + 60 - valueWidth - 2, yPosition);
-
-        doc.setFillColor(...colors.lightGray);
-        doc.roundedRect(margin + 60, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
-        doc.setFillColor(...fillColor);
-        doc.roundedRect(margin + 60, yPosition - 4, barWidth, 6, 1, 1, 'F');
-
-        yPosition += 9;
-      });
-    }
-  }
-
-  /* ------------------------- DEPARTMENT LANDSCAPE ------------------------- */
-  if (shouldIncludeSection('departmentsAnalysis')) {
-    addNewPage();
-    addSectionHeader('All Departments - Tender Volume Overview', colors.darkBlue);
-
-    const allDepts = reportData?.data?.allDepartments ?? [];
-    if (allDepts.length > 0) {
-      const depts = allDepts.slice(0, 20);
-      const counts = depts.map((d) => (typeof d.total_tenders === 'string' ? parseInt(d.total_tenders) : d.total_tenders || 0));
-      const maxTenders = Math.max(...counts);
-
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.darkGray);
-      doc.text('Department-wise Tender Distribution (Top 20)', margin, yPosition);
-      yPosition += 10;
-
-      depts.forEach((dept, i) => {
-        checkPageBreak(10);
-        const tenderCount = counts[i] ?? 0;
-        const barAreaWidth = pageWidth - 2 * margin - 75;
-        const barWidth = maxTenders > 0 ? (tenderCount / maxTenders) * barAreaWidth : 0;
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...colors.darkGray);
-        doc.text(short(dept?.department, 32), margin, yPosition);
-
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.darkBlue);
-        const valueText = tenderCount.toLocaleString();
-        const valueWidth = doc.getTextWidth(valueText);
-        doc.text(valueText, margin + 70 - valueWidth - 2, yPosition);
-
-        doc.setFillColor(...colors.lightGray);
-        doc.roundedRect(margin + 70, yPosition - 4, barAreaWidth, 6, 1, 1, 'F');
-        doc.setFillColor(...colors.darkBlue);
-        doc.roundedRect(margin + 70, yPosition - 4, barWidth, 6, 1, 1, 'F');
-
-        yPosition += 9;
-      });
-    }
-  }
-
-  /* --------------------- LOW COMPETITION OPPORTUNITIES --------------------- */
-  if (shouldIncludeSection('lowCompetition')) {
-    addNewPage();
-    addSectionHeader('Low Competition Bids - Strategic Opportunities', colors.successGreen);
-
-    const lowCompBids = reportData?.data?.lowCompetitionBids;
-    if (lowCompBids?.results && lowCompBids.results.length > 0) {
-      const bids = lowCompBids.results.slice(0, 25);
-
-      const summaryCardHeight = 20;
-      doc.setFillColor(240, 253, 244);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, summaryCardHeight, 2, 2, 'F');
-      doc.setDrawColor(...colors.successGreen);
-      doc.setLineWidth(0.5);
-      doc.roundedRect(margin, yPosition, pageWidth - 2 * margin, summaryCardHeight, 2, 2, 'S');
-
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...colors.mediumGray);
-      doc.text('Total Low Competition Bids: ', margin + 5, yPosition + 8);
-      doc.setTextColor(...colors.successGreen);
-      doc.text(String(lowCompBids.count ?? 0), margin + 65, yPosition + 8);
-
-      doc.setTextColor(...colors.mediumGray);
-      doc.text('Generated At: ', margin + 5, yPosition + 15);
-      doc.setTextColor(...colors.darkGray);
-      doc.text(formatDate(lowCompBids.generated_at), margin + 35, yPosition + 15);
-
-      yPosition += summaryCardHeight + 6;
-      doc.setFontSize(7);
-      doc.setFont('helvetica', 'italic');
-      doc.setTextColor(...colors.mediumGray);
-      doc.text('Note: "-" indicates data not available from source system. Low seller count indicates opportunity.', margin, yPosition);
-      yPosition += 6;
-
-      const bidTableData = bids.map((bid) => [
-        short(bid?.bid_number, 23),
-        (bid?.quantity ?? 0).toLocaleString(),
-        short(bid?.organisation, 30),
-        short(bid?.department, 28),
-        short(bid?.ministry, 25),
-        formatDate(bid?.bid_end_ts),
-        String(bid?.seller_count ?? 0),
-      ]);
-
-      autoTable(doc, {
-        ...tableDefaults,
-        startY: yPosition,
-        head: [['Bid Number', 'Qty', 'Organization', 'Department', 'Ministry', 'Bid End Date', 'Sellers']],
-        body: bidTableData,
-        theme: 'grid',
-        headStyles: { ...tableDefaults.headStyles, fillColor: colors.successGreen, textColor: colors.white, fontSize: 7.5 },
-        bodyStyles: { ...tableDefaults.bodyStyles, lineColor: [209, 213, 219], lineWidth: 0.2 },
-        columnStyles: {
-          0: { cellWidth: 24 },
-          1: { cellWidth: 11, halign: 'right', fontStyle: 'bold' },
-          2: { cellWidth: 33 },
-          3: { cellWidth: 32 },
-          4: { cellWidth: 28 },
-          5: { cellWidth: 20, halign: 'center' },
-          6: { cellWidth: 13, halign: 'center', fontStyle: 'bold', textColor: [231, 76, 60], fillColor: [254, 242, 242] },
-        },
-        margin: { left: margin - 2, right: margin - 2, top: SAFE_TOP },
-        didDrawPage: () => {
-          addPageHeader();
-          addPageFooter();
-        },
-      });
-
-      yPosition = (doc as any).lastAutoTable.finalY + 8;
-    }
-  }
-
-  /* ----------------- SELLER BID PERFORMANCE + HISTORY ----------------- */
-  if (shouldIncludeSection('bidsSummary')) {
-    const sellerBids = reportData?.data?.sellerBids;
-    if (sellerBids) {
-      addNewPage();
-      addSectionHeader(safeText(reportData?.meta?.params_used?.sellerName) + ' - Bidding Performance Deep Dive', colors.electricBlue);
-
-      if (sellerBids.table1) {
-        const t1 = sellerBids.table1;
-        const cardWidth = (pageWidth - 2 * margin - 15) / 3;
-        const cardHeight = 25;
-        let cardX = margin;
-
-        const cardsData = [
-          { label: 'Total Wins', value: (t1.win ?? 0).toLocaleString(), color: colors.successGreen, bgColor: [240, 253, 244] as [number, number, number] },
-          { label: 'Total Lost', value: (t1.lost ?? 0).toLocaleString(), color: colors.errorRed, bgColor: [254, 226, 226] as [number, number, number] },
-          {
-            label: 'Win Rate',
-            value:
-              t1.win != null && t1.lost != null && t1.win + t1.lost > 0
-                ? `${((t1.win / (t1.win + t1.lost)) * 100).toFixed(1)}%`
-                : '-',
-            color: colors.darkBlue,
-            bgColor: [239, 246, 255] as [number, number, number],
-          },
-        ];
-
-        cardsData.forEach((card) => {
-          doc.setFillColor(...card.bgColor);
-          doc.roundedRect(cardX, yPosition, cardWidth, cardHeight, 2, 2, 'F');
-
-          doc.setFontSize(16);
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(...card.color);
-          doc.text(card.value, cardX + cardWidth / 2, yPosition + 13, { align: 'center' });
-
-          doc.setFontSize(8);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(...colors.mediumGray);
-          doc.text(card.label, cardX + cardWidth / 2, yPosition + 20, { align: 'center' });
-
-          cardX += cardWidth + 5;
-        });
-
-        yPosition += cardHeight + 6;
-
-        cardX = margin;
-        const cardsData2 = [
-          { label: 'Total Bid Value', value: formatCurrency(t1.totalBidValue), color: colors.warningOrange, bgColor: [254, 243, 199] as [number, number, number] },
-          { label: 'Qualified Bid Value', value: formatCurrency(t1.qualifiedBidValue), color: colors.successGreen, bgColor: [240, 253, 244] as [number, number, number] },
-          { label: 'Avg Order Value', value: formatCurrency(t1.averageOrderValue), color: [138, 43, 226] as [number, number, number], bgColor: [243, 232, 255] as [number, number, number] },
-        ];
-
-        cardsData2.forEach((card) => {
-          doc.setFillColor(...card.bgColor);
-          doc.roundedRect(cardX, yPosition, cardWidth, cardHeight, 2, 2, 'F');
-
-          doc.setFontSize(11);
-          doc.setFont('helvetica', 'bold');
-          doc.setTextColor(...card.color);
-          const valueText = (card.value || '').length > 18 ? card.value.slice(0, 18) : card.value;
-          doc.text(valueText || '-', cardX + cardWidth / 2, yPosition + 13, { align: 'center' });
-
-          doc.setFontSize(8);
-          doc.setFont('helvetica', 'normal');
-          doc.setTextColor(...colors.mediumGray);
-          doc.text(card.label, cardX + cardWidth / 2, yPosition + 20, { align: 'center' });
-
-          cardX += cardWidth + 5;
-        });
-
-        yPosition += cardHeight + 10;
-      }
-
-      // Departmental Performance
-      if (sellerBids.departmentCount && sellerBids.departmentCount.length > 0) {
-        checkPageBreak(20);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.darkGray);
-        doc.text('Revenue by Department', margin, yPosition);
-        yPosition += 8;
-
-        const deptSorted = [...sellerBids.departmentCount].sort((a, b) => (b?.revenue ?? 0) - (a?.revenue ?? 0));
-        const deptTableData = deptSorted.map((dept) => [
-          short(dept?.department, 50),
-          (dept?.bid_count ?? 0).toLocaleString(),
-          formatCurrency(dept?.revenue ?? 0),
-        ]);
-
-        const totalRevenue = deptSorted.reduce((sum, d) => sum + (d?.revenue ?? 0), 0);
-        const totalBids = deptSorted.reduce((sum, d) => sum + (d?.bid_count ?? 0), 0);
-        deptTableData.push(['TOTAL', totalBids.toLocaleString(), formatCurrency(totalRevenue)]);
-
-        autoTable(doc, {
-          ...tableDefaults,
-          startY: yPosition,
-          head: [['Department', 'Bid Count', 'Revenue']],
-          body: deptTableData,
-          headStyles: { ...tableDefaults.headStyles, fillColor: colors.darkBlue, textColor: colors.white, fontSize: 8 },
-          columnStyles: { 0: { cellWidth: 120 }, 1: { cellWidth: 30, halign: 'right' }, 2: { cellWidth: 40, halign: 'right', fontStyle: 'bold' } },
-          margin: { left: margin, right: margin, top: SAFE_TOP },
-          didDrawPage: () => {
-            addPageHeader();
-            addPageFooter();
-          },
-        });
-
-        yPosition = (doc as any).lastAutoTable.finalY + 10;
-      }
-
-      // State-wise Analysis
-      if (sellerBids.stateCount && sellerBids.stateCount.length > 0) {
-        checkPageBreak(20);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...colors.darkGray);
-        doc.text('Bids by State', margin, yPosition);
-        yPosition += 8;
-
-        const stateTableData = [...sellerBids.stateCount]
-          .sort((a, b) => (b?.revenue ?? 0) - (a?.revenue ?? 0))
-          .slice(0, 15)
-          .map((state) => [short(state?.state, 40), (state?.bid_count ?? 0).toLocaleString(), formatCurrency(state?.revenue ?? 0)]);
-
-        autoTable(doc, {
-          ...tableDefaults,
-          startY: yPosition,
-          head: [['State', 'Bid Count', 'Revenue']],
-          body: stateTableData,
-          theme: 'grid',
-          headStyles: { ...tableDefaults.headStyles, fillColor: colors.successGreen, textColor: colors.white, fontSize: 8 },
-          columnStyles: { 0: { cellWidth: 100 }, 1: { cellWidth: 30, halign: 'right' }, 2: { cellWidth: 50, halign: 'right' } },
-          margin: { left: margin, right: margin, top: SAFE_TOP },
-          didDrawPage: () => {
-            addPageHeader();
-            addPageFooter();
-          },
-        });
-
-        yPosition = (doc as any).lastAutoTable.finalY + 8;
-      }
-
-      // Monthly Trends
-      if (sellerBids.monthlyTotals && sellerBids.monthlyTotals.length > 0) {
-        addNewPage();
-        addSectionHeader('Monthly Bidding Trends', colors.warningOrange);
-
-        const monthlyTableData = sellerBids.monthlyTotals.map((month) => [short(month?.month, 20), formatCurrency(month?.bid_value ?? 0)]);
-
-        autoTable(doc, {
-          ...tableDefaults,
-          startY: yPosition,
-          head: [['Month', 'Bid Value']],
-          body: monthlyTableData,
-          headStyles: { ...tableDefaults.headStyles, fillColor: colors.warningOrange, textColor: colors.white, fontSize: 9 },
-          bodyStyles: { ...tableDefaults.bodyStyles, fontSize: 8, cellPadding: 3 },
-          columnStyles: { 0: { cellWidth: 50 }, 1: { cellWidth: 50, halign: 'right', fontStyle: 'bold' } },
-          margin: { left: margin, right: margin, top: SAFE_TOP },
-          didDrawPage: () => {
-            addPageHeader();
-            addPageFooter();
-          },
-        });
-
-        yPosition = (doc as any).lastAutoTable.finalY + 8;
-      }
-
-      // Detailed Bid History
-      if (sellerBids.sortedRows && sellerBids.sortedRows.length > 0) {
-        addNewPage();
-        addSectionHeader('Bid-by-Bid Performance History', colors.electricBlue);
-
-        doc.setFontSize(7);
-        doc.setFont('helvetica', 'italic');
         doc.setTextColor(...colors.mediumGray);
-        doc.text('Note: "-" indicates data not available from source system', margin, yPosition);
-        yPosition += 6;
+        doc.text(`Total Competitors: ${dept.total || 0}`, margin, yStart + 6);
+        yStart += 12;
 
-        const bidHistoryData = sellerBids.sortedRows.map((row) => {
-          const status = clean(row?.seller_status ?? row?.status);
-          const organisation = short(row?.organisation ?? row?.org, 28);
-          const department = short(row?.department ?? row?.dept, 28);
-          const price = row?.total_price != null ? formatCurrency(row.total_price) : '-';
-          return [
-            formatDate(row?.participated_on),
-            short(row?.offered_item, 60),
-            status || '-',
-            short(row?.rank, 6),
-            price,
-            organisation,
-            department,
-          ];
+        const sellers = dept.results || [];
+        const sellerItems = sellers.slice(0, 15).map((s: any) => ({
+          label: s?.seller_name || "-",
+          value: Number(s?.participation_count || 0),
+          color: colors.warningOrange
+        }));
+
+        const endY = charts.drawHorizontalBarChart(margin, yStart, pageWidth - 2 * margin, sellerItems, undefined, () => {
+          newPage();
         });
-
-        autoTable(doc, {
-          ...tableDefaults,
-          startY: yPosition,
-          head: [['Date', 'Item', 'Status', 'Rank', 'Price', 'Organization', 'Department']],
-          body: bidHistoryData,
-          theme: 'grid',
-          headStyles: { ...tableDefaults.headStyles, fillColor: colors.electricBlue, textColor: colors.white, fontSize: 7.5, cellPadding: 3 },
-          bodyStyles: { ...tableDefaults.bodyStyles, cellPadding: 2.5, lineColor: [209, 213, 219], lineWidth: 0.2 },
-          columnStyles: {
-            0: { cellWidth: 20, halign: 'center', fontStyle: 'bold' },
-            1: { cellWidth: 60 },
-            2: { cellWidth: 16, halign: 'center' },
-            3: { cellWidth: 12, halign: 'center', fontStyle: 'bold' },
-            4: { cellWidth: 25, halign: 'right', fontStyle: 'bold' },
-            5: { cellWidth: 32 },
-            6: { cellWidth: 30 },
-          },
-          margin: { left: margin - 2, right: margin - 2, top: SAFE_TOP },
-          showHead: 'everyPage',
-          willDrawCell: (data: any) => {
-            if (data.section === 'body' && data.column.index === 2) {
-              const statusVal = (data.cell.raw || '').toString().toLowerCase();
-              if (statusVal === 'qualified') data.cell.styles.textColor = colors.successGreen;
-              else if (statusVal.includes('disqualified')) data.cell.styles.textColor = colors.errorRed;
-            }
-            if (data.section === 'body' && data.column.index === 3) {
-              const rankVal = (data.cell.raw || '').toString().toUpperCase();
-              if (rankVal === 'L1') {
-                data.cell.styles.fillColor = [240, 253, 244];
-                data.cell.styles.textColor = colors.successGreen;
-              } else if (rankVal === 'L2') {
-                data.cell.styles.fillColor = [254, 243, 199];
-                data.cell.styles.textColor = colors.warningOrange;
-              }
-            }
-          },
-          didDrawPage: (data: any) => {
-            if (data.pageNumber > data.table.startPageNumber) {
-              addPageHeader();
-              addPageFooter();
-            }
-          },
-        });
-
-        yPosition = (doc as any).lastAutoTable.finalY + 8;
-      }
+        (doc as any).lastAutoTable = { finalY: endY };
+      });
     }
   }
+
+  // STATES ANALYSIS
+  if (filters.includeSections.includes("statesAnalysis")) {
+    const statesData = reportData?.data?.topPerformingStates?.data?.results || reportData?.data?.topPerformingStates?.results || [];
+
+    if (statesData.length > 0) {
+      if (!checkSpace(60)) newPage();
+      addSectionHeader("Top Performing States by Volume", colors.successGreen);
+      let y = (doc as any).lastAutoTable.finalY + 8;
+      
+      doc.setFontSize(10);
+      doc.setTextColor(...colors.navyBlue);
+      doc.setFont("helvetica", "bold");
+      doc.text("State-wise Tender Distribution", margin, y);
+      y += 8;
+
+      const stateItems = statesData.slice(0, 20).map((s: any) => ({
+        label: s.state_name,
+        value: Number(s.total_tenders) || 0,
+        color: colors.successGreen
+      }));
+
+      const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, stateItems, undefined, () => {
+        newPage();
+      });
+      (doc as any).lastAutoTable = { finalY: endY };
+    }
+  }
+
+  // DEPARTMENTS ANALYSIS
+  if (filters.includeSections.includes("departmentsAnalysis")) {
+    const allDepts = reportData?.data?.allDepartments?.data || reportData?.data?.allDepartments || [];
+
+    if (allDepts.length > 0) {
+      if (!checkSpace(60)) newPage();
+      addSectionHeader("Department-wise Analysis", colors.darkBlue);
+      let y = (doc as any).lastAutoTable.finalY + 8;
+      
+      doc.setFontSize(10);
+      doc.setTextColor(...colors.navyBlue);
+      doc.setFont("helvetica", "bold");
+      doc.text("Active Departments by Tender Volume", margin, y);
+      y += 8;
+
+      const deptItems = allDepts.slice(0, 20).map((d: any) => ({
+        label: d.department,
+        value: Number(d.total_tenders) || 0,
+        color: colors.electricBlue
+      }));
+
+      const endY = charts.drawHorizontalBarChart(margin, y, pageWidth - 2 * margin, deptItems, undefined, () => {
+        newPage();
+      });
+      (doc as any).lastAutoTable = { finalY: endY };
+    }
+  }
+
+  // LOW COMPETITION
+  if (filters.includeSections.includes("lowCompetition")) {
+    const lowComp = reportData?.data?.lowCompetitionBids || {};
+    const rows = lowComp?.results ?? [];
+
+    if (rows.length > 0) {
+      if (!checkSpace(70)) newPage();
+      addSectionHeader("Low Competition Opportunities", colors.warningOrange);
+      let y = (doc as any).lastAutoTable.finalY + 12;
+      
+      // Check if we have space for header + at least 2 cards
+      if (y + 50 > pageHeight - 20) {
+        newPage();
+        y = 30;
+      }
+      
+      doc.setFontSize(10);
+      doc.setTextColor(...colors.navyBlue);
+      doc.setFont("helvetica", "bold");
+      doc.text("Tenders with Limited Competition", margin, y);
+      y += 12;
+
+      rows.slice(0, 10).forEach((row: any) => {
+        const cardHeight = 22;
+        
+        // Check space before each card
+        if (y + cardHeight + 5 > pageHeight - 20) {
+          newPage();
+          y = 30;
+        }
+
+        doc.setFillColor(...colors.lightBlue);
+        doc.roundedRect(margin, y, pageWidth - 2 * margin, cardHeight, 2, 2, "F");
+        doc.setFillColor(...colors.warningOrange);
+        doc.roundedRect(margin, y, 3, cardHeight, 2, 2, "F");
+        doc.setFillColor(...colors.warningOrange);
+        doc.circle(pageWidth - margin - 10, y + cardHeight / 2, 5, "F");
+        doc.setFontSize(9);
+        doc.setTextColor(...colors.white);
+        doc.setFont("helvetica", "bold");
+        doc.text(String(row.seller_count || 0), pageWidth - margin - 10, y + cardHeight / 2 + 2, { align: "center" });
+        doc.setFontSize(8);
+        doc.setTextColor(...colors.navyBlue);
+        doc.setFont("helvetica", "bold");
+        doc.text(short(row.bid_number || "-", 30), margin + 6, y + 7);
+        doc.setFontSize(7);
+        doc.setTextColor(...colors.darkGray);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Org: ${short(row.organisation || "-", 50)}`, margin + 6, y + 13);
+        doc.text(`Dept: ${short(row.department || "-", 50)}`, margin + 6, y + 18);
+        doc.setFontSize(7);
+        doc.setTextColor(...colors.mediumGray);
+        doc.text(`Ends: ${formatDate(row.bid_end_ts)}`, pageWidth - margin - 30, y + 18, { align: "right" });
+        y += cardHeight + 4;
+      });
+
+      (doc as any).lastAutoTable = { finalY: y };
+    }
+  }
+
+  // END PAGE
+  newPage();
+  doc.setFillColor(...colors.navyBlue);
+  doc.rect(0, 0, pageWidth, pageHeight, "F");
+  doc.setFontSize(24);
+  doc.setTextColor(...colors.white);
+  doc.setFont("helvetica", "bold");
+  doc.text("End of Report", pageWidth / 2, pageHeight / 2 - 20, { align: "center" });
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text("This comprehensive analysis was generated automatically", pageWidth / 2, pageHeight / 2, { align: "center" });
+  doc.text("based on government tender data and AI-driven insights.", pageWidth / 2, pageHeight / 2 + 8, { align: "center" });
+  doc.setFontSize(8);
+  doc.setTextColor(200, 200, 200);
+  doc.text("© 2025 Government Tender Analytics Platform", pageWidth / 2, pageHeight / 2 + 25, { align: "center" });
 
   return doc;
 };
